@@ -1,0 +1,56 @@
+CREATE TABLE Destino (
+	
+	Pais VARCHAR(30),
+	Cidade VARCHAR(30),
+	Descricao TEXT,
+	Idioma VARCHAR(30) NOT NULL,
+	Clima VARCHAR(30),
+	
+	CONSTRAINT PK_Destino PRIMARY KEY(Pais, Cidade)
+	
+)
+
+CREATE TABLE DestinoTags (
+	
+	Pais VARCHAR(30),
+	Cidade VARCHAR(30),
+	Tag VARCHAR(30),
+	
+	CONSTRAINT PK_DestinoTag PRIMARY KEY(Pais, Cidade, Tag),
+	CONSTRAINT FK_DestinoTag FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE
+	
+)
+
+CREATE TABLE Aeroporto (
+	
+	ID SERIAL,
+	Pais VARCHAR(30) NOT NULL,
+	Cidade VARCHAR(30) NOT NULL,
+	Bairro VARCHAR(30) NOT NULL,
+	Rua VARCHAR(30) NOT NULL,
+	Numero VARCHAR(30) NOT NULL,
+	CEP VARCHAR(30) NOT NULL,
+	Nome VARCHAR(30) NOT NULL,
+	
+	CONSTRAINT PK_Aeroporto PRIMARY KEY(ID),
+	CONSTRAINT UC_Aeroporto UNIQUE(Pais, Cidade, Bairro, Rua, Numero),
+	CONSTRAINT FK_AeroportoDestino FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE
+	
+)
+
+CREATE TABLE Voo (
+	
+	Nro INT,
+	Aeroporto_Origem INT	NOT NULL,
+	Aeroporto_Destino INT NOT NULL,
+	Data_Partida TIMESTAMP NOT NULL,
+	Data_Chegada TIMESTAMP NOT NULL,
+	Portao_Embarque VARCHAR(30) NOT NULL,
+	Portao_Desembarque VARCHAR(30) NOT NULL,
+	
+	CONSTRAINT PK_Voo PRIMARY KEY(Nro),
+	CONSTRAINT FK_VooOrigem FOREIGN KEY (Aeroporto_Origem) REFERENCES Aeroporto(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_VooDestino FOREIGN KEY (Aeroporto_Destino) REFERENCES Aeroporto(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT CK_Data CHECK (Data_Partida < Data_Chegada)
+	
+)
