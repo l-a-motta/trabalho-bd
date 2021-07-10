@@ -200,6 +200,35 @@ CREATE TABLE IF NOT EXISTS Embarque (
 
 );
 
+/* 	Criando tabela Estadia
+	PK = Unica
+		ID
+
+	FKs = 0
+
+	UNIQUEs = 1
+		(Pais, Cidade, Bairro, Rua, Numero, Complemento)
+*/
+CREATE TABLE IF NOT EXISTS Estadia (
+	/*    ATRIBUTOS    */
+	ID SERIAL,
+	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Cidade VARCHAR(30) NOT NULL,
+	Bairro VARCHAR(30) NOT NULL,
+	Rua VARCHAR(30) NOT NULL,
+	Numero VARCHAR(30) NOT NULL,
+	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
+	Nome VARCHAR(30) NOT NULL,
+	Nro_Quartos INT,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Estadia PRIMARY KEY(ID),
+	CONSTRAINT UC_Estadia UNIQUE(Pais, Cidade, Bairro, Rua, Numero)
+	-- A chave secundária vale para diferenciarmos os locais das Estadias, uma vez que não existem duas Estadias diferentes no mesmo exato local
+	/*    CHECKS    */
+
+);
+
 /* 	Criando tabela Voo
 	PK = Unica
 
