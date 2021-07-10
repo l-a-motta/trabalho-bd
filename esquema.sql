@@ -388,9 +388,9 @@ CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
 	/*    KEYS    */
 	-- Vale notar que AvaliacaoEvento esta conectada a Participacao, e nao a Evento
 	CONSTRAINT PK_AvaliacaoEvento PRIMARY KEY(LocalT, Data_Inicio, DataA, Cliente),
-	CONSTRAINT FK_AvaliacaoEventoParticipacao FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Participacao(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Se participacao poder ficar NULL, vai dar conflito de semantica aqui visto q precisamos remover a avaliacao se perdermos a participacao
+	CONSTRAINT FK_AvaliacaoEventoParticipacao FOREIGN KEY (Cliente, LocalT, Data_Inicio) REFERENCES Participacao(Cliente, LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Se participacao poder ficar NULL, vai dar conflito de semantica aqui visto q precisamos remover a avaliacao se perdermos a participacao
 	-- Se a participacao for removida, nao iremos guardar a avaliacao, para manter tudo justo
-	CONSTRAINT FK_AvaliacaoEventoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_AvaliacaoEventoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se um cliente for removido, a mesma logica segue
 	
 	/*    CHECKS    */
