@@ -98,6 +98,11 @@ INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','Bauru','Geisel','Rua 1','1
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','654','17033-693','Holland Stay', 120);
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','655','17033-693','Holland Beach Hotel', 120);
 
+-- Inserts de Hospedagem
+INSERT INTO public.Hospedagem VALUES (1, '111.222.333-45', 'B12', '12399.99','2017-03-15','2017-03-17');
+INSERT INTO public.Hospedagem VALUES (1, '111.222.333-47', 'A01', '58999.99','2017-03-15','2017-03-25');
+
+
 -- Inserts de LocalT
 ALTER SEQUENCE LocalT_id_seq RESTART WITH 1;
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','1','17033691','Pousada do Canário');
@@ -108,4 +113,3 @@ INSERT INTO public.LocalT VALUES (DEFAULT, 'Alemanha','Frankfurt','Hauptbahnhof'
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 5','789','','17033694','Casa dos Representantes');
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 178','144','3','17033621','Casa do Ministro');
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 44','115','7','17022-694','Casa dos Representantes');
---! TERMINE DE INSERIR MAIS LOCAIS
