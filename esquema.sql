@@ -1,7 +1,8 @@
 -- AVISOS:
 -- Consideramos que strings pequenas possuem no maximo 30 caracteres, medias 50 e grandes 180 (um tweet) 
 
-
+-- SOMENTE DESCOMENTE SE quiser o codigo SQL para dropar todas as tabelas. Basta executar numa query dentro do banco correto
+-- select 'drop table if exists "' || tablename || '" cascade;' from pg_tables where schemaname = 'public';
 
 
 
@@ -13,7 +14,7 @@
 
 	UNIQUEs = 0
 */
-CREATE TABLE Destino (
+CREATE TABLE IF NOT EXISTS Destino (
 	
 	/*    ATRIBUTOS    */
 	Pais VARCHAR(30),
@@ -38,7 +39,7 @@ CREATE TABLE Destino (
 
 	UNIQUEs = 0
 */
-CREATE TABLE DestinoTags (
+CREATE TABLE IF NOT EXISTS DestinoTags (
 	
 	/*    ATRIBUTOS    */
 	Pais VARCHAR(30),
@@ -63,7 +64,7 @@ CREATE TABLE DestinoTags (
 
 	UNIQUEs = 0
 */
-CREATE TABLE Aeroporto (
+CREATE TABLE IF NOT EXISTS Aeroporto (
 	
 	/*    ATRIBUTOS    */
 	CodIATA INT,
@@ -71,7 +72,7 @@ CREATE TABLE Aeroporto (
 	Cidade VARCHAR(30) NOT NULL,
 	Bairro VARCHAR(30) NOT NULL,
 	Rua VARCHAR(30) NOT NULL,
-	Numero VARCHAR(30) NOT NULL,
+	Numero INT NOT NULL,
 	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
 	Nome VARCHAR(30) NOT NULL,
 	
@@ -94,7 +95,7 @@ CREATE TABLE Aeroporto (
 
 	UNIQUEs = 0
 */
-CREATE TABLE Voo (
+CREATE TABLE IF NOT EXISTS Voo (
 	
 	/*    ATRIBUTOS    */
 	Nro INT,
@@ -128,7 +129,7 @@ CREATE TABLE Voo (
 
 	UNIQUEs = 0
 */
-CREATE TABLE VooAssentos (
+CREATE TABLE IF NOT EXISTS VooAssentos (
 
 	/*    ATRIBUTOS    */
 	Voo INT,
@@ -151,7 +152,7 @@ CREATE TABLE VooAssentos (
 
 	UNIQUEs = 0
 */
-CREATE TABLE Cliente (
+CREATE TABLE IF NOT EXISTS Cliente (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Tipo VARCHAR(30) NOT NULL,
@@ -182,7 +183,7 @@ CREATE TABLE Cliente (
 
 	UNIQUEs = 0
 */
-CREATE TABLE Embarque (
+CREATE TABLE IF NOT EXISTS Embarque (
 	/*    ATRIBUTOS    */
 	Voo INT,
 	Cliente CHAR(14),
@@ -206,7 +207,7 @@ CREATE TABLE Embarque (
 
 	UNIQUEs = 0
 */
--- CREATE TABLE tabela (
+-- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
 
 	
