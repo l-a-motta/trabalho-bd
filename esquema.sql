@@ -135,6 +135,13 @@ CREATE TABLE VooAssentos (
 
 )
 
+/* 	Criando tabela Voo
+	PKs = 0
+
+	FKs = 0
+
+	UNIQUEs = 0
+*/
 -- CREATE TABLE tabela (
 -- 	/*    ATRIBUTOS    */
 	
