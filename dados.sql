@@ -18,12 +18,12 @@ INSERT INTO public.DestinoTags VALUES ('França','Paris','Metrópole');
 
 -- Inserts de Aeroporto
 -- PK CodIATA INT, FK Pais VARCHAR(30) NOT NULL, FK Cidade VARCHAR(30) NOT NULL, Bairro VARCHAR(30) NOT NULL, Rua VARCHAR(30) NOT NULL, Numero VARCHAR(30) NOT NULL, CEP CHAR(9) NOT NULL, Nome VARCHAR(30) NOT NULL
-INSERT INTO public.Aeroporto VALUES (111, 'Brasil','Bauru','Geisel','Rua 1',123,'17033690','Aeroporto do Geisel');
-INSERT INTO public.Aeroporto VALUES (222, 'Brasil','São Paulo','Centro ','Rua 2',321,'17033691','Aeroporto do Centro');
-INSERT INTO public.Aeroporto VALUES (333, 'Inglaterra','Londres','Greenwich','Rua 3',456,'17033-692','Aeroporto de Greenwich');
-INSERT INTO public.Aeroporto VALUES (444, 'Inglaterra','Londres','Holland Park','Rua 4',654,'17033-693','Aeroporto de Holland Park');
-INSERT INTO public.Aeroporto VALUES (555, 'Inglaterra','Londres','Westminster','Rua 5',789,17033694,'Aeroporto de Westminster');
-INSERT INTO public.Aeroporto VALUES (666, 'Alemanha','Frankfurt','Hauptbahnhof','Rua 6',987,17033695,'Aeroporto de Hauptbahnhof');
+INSERT INTO public.Aeroporto VALUES (111, 'Brasil','Bauru','Geisel','Rua 1','123','17033690','Aeroporto do Geisel');
+INSERT INTO public.Aeroporto VALUES (222, 'Brasil','São Paulo','Centro ','Rua 2','321','17033691','Aeroporto do Centro');
+INSERT INTO public.Aeroporto VALUES (333, 'Inglaterra','Londres','Greenwich','Rua 3','456','17033-692','Aeroporto de Greenwich');
+INSERT INTO public.Aeroporto VALUES (444, 'Inglaterra','Londres','Holland Park','Rua 4','654','17033-693','Aeroporto de Holland Park');
+INSERT INTO public.Aeroporto VALUES (555, 'Inglaterra','Londres','Westminster','Rua 5','789','17033694','Aeroporto de Westminster');
+INSERT INTO public.Aeroporto VALUES (666, 'Alemanha','Frankfurt','Hauptbahnhof','Rua 6','987','17033695','Aeroporto de Hauptbahnhof');
 
 -- Inserts de Voo
 -- PK Nro INT, FK Aeroporto_Origem INT NOT NULL, FK Aeroporto_Destino INT NOT NULL, Data_Partida TIMESTAMP NOT NULL, Data_Chegada TIMESTAMP NOT NULL, Portao_Embarque VARCHAR(30) NOT NULL, Portao_Desembarque VARCHAR(30) NOT NULL
@@ -67,3 +67,13 @@ INSERT INTO public.VooAssentos VALUES (602, 100);
 --
 INSERT INTO public.VooAssentos VALUES (603, 'A');
 INSERT INTO public.VooAssentos VALUES (603, 'B');
+
+-- Inserts de Cliente
+-- CPF CHAR(14), Tipo VARCHAR(30) NOT NULL, Nome VARCHAR(30) NOT NULL, Email VARCHAR(30) NOT NULL, Telefone VARCHAR(30) NOT NULL, Pais VARCHAR(30) NOT NULL, Cidade VARCHAR(30) NOT NULL, Bairro VARCHAR(30) NOT NULL, Rua VARCHAR(30) NOT NULL, Numero VARCHAR(30) NOT NULL, CEP CHAR(9) NOT NULL, Genero VARCHAR(30) NOT NULL, Religiao VARCHAR(30) NOT NULL, MBTI CHAR(4) NOT NULL,
+INSERT INTO public.Cliente VALUES ('111.222.333-45', 'Normal', 'Fulano de Tal', 'email@email.com', '55 14 991234561', 'Brasil', 'Bauru', 'Geisel', 'Rua 1', '123-10', '123456-22', 'Masc', 'Judeu', 'ENTJ');
+INSERT INTO public.Cliente VALUES ('111.222.333-46', 'Normal', 'Ciclano de Tal', 'email2@email.com', '55 12 991234562', 'Brasil', 'Bauru', 'Geisel', 'Rua 1', '123-20', '123456-11', 'Masc', 'Judeu', 'INTJ');
+INSERT INTO public.Cliente VALUES ('111.222.333-47', 'Normal', 'Fulano de Acolá', 'email3@email.com', '55 12 99123-4563', 'Inglaterra','Londres','Westminster','Rua 5', '999-0', '123456-72', 'Fem', 'Agnostico', 'ENTP');
+INSERT INTO public.Cliente VALUES ('111.222.333-48', 'Premium', 'Ciclano de Acolá', 'email4@email.com', '55 13 99123-4564', 'Inglaterra','Londres','Westminster','Rua 5', '999-0', '123456-71', 'Fem', 'Ateu', 'ENTJ');
+INSERT INTO public.Cliente VALUES ('111.222.333-49', 'Premium', 'José Silva', 'email5@email.com', '55 13 99123-4565', 'Brasil', 'São Paulo', 'Centro', 'Rua 2', '321','17033691', 'Masc', 'Ateu', 'INTJ');
+INSERT INTO public.Cliente VALUES ('111.222.333-50', 'Premium', 'Maria Silva', 'email5@email.com', '55 15 99123-4566', 'Brasil', 'São Paulo', 'Centro', 'Rua 2', '321','17033691', 'Fem', 'Crista', 'ENTP');
+
