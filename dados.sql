@@ -138,9 +138,14 @@ INSERT INTO PontoTransporte VALUES (799, 2, '2017-03-15 18:00:00');-- Onibus 799
 INSERT INTO PontoTransporte VALUES (576, 1, '2017-03-15 15:30:00');-- Onibus 576 chegando no ponto 1
 
 -- Inserts de Organizador
+INSERT INTO public.Organizador VALUES ('111.222.334-11', '11.222.333/0001-01', 'Pequeno Porte', 'Alberto de Tal', 'email@emailpessoal.com', '55 16 991235432', 'Brasil', 'Bauru', 'São Paulo', 'Rua 645', '12-10', '123456-33', 'Empresa Top', '00 16 991235432', 'email@emailempresa.com');
+INSERT INTO public.Organizador VALUES ('111.222.334-22', '11.222.333/0001-02', 'Medio Porte', 'John Doe', 'John@emailpessoal.com', '55 16 991238654', 'Inglaterra','Londres','Greenwich','Rua 12','423','17033-333', 'Best Company', '00 16 991235486', 'Best@emailempresa.com');
+INSERT INTO public.Organizador VALUES ('111.222.334-33', '11.222.333/0001-03', 'Grande Porte', 'Heinz Doofenshmirtz', 'Heinz@emailpessoal.com', '55 16 991235274', 'Alemanha','Frankfurt','Hauptbahnhof','Rua 6','987','17033695', 'Sieg Heinz', '00 16 991235125', 'Sieg@emailempresa.com');
+
 
 -- Inserts de OrganizadorTiposAtuacao
 
 -- Inserts de OrganizadorRecomendacao
 
 -- Inserts de Evento
+INSERT INTO Evento VALUES (1, '2017-03-15 13:01:00', '2017-03-15 14:01:00', );-- Onibus 394 chegando no ponto 1
