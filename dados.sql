@@ -79,6 +79,10 @@ INSERT INTO public.Cliente VALUES ('111.222.333-48', 'Premium', 'Ciclano de Acol
 INSERT INTO public.Cliente VALUES ('111.222.333-49', 'Premium', 'José Silva', 'email5@email.com', '55 13 99123-4565', 'Brasil', 'São Paulo', 'Centro', 'Rua 2', '321','17033691', 'Masc', 'Ateu', 'INTJ');
 INSERT INTO public.Cliente VALUES ('111.222.333-50', 'Premium', 'Maria Silva', 'email5@email.com', '55 15 99123-4566', 'Brasil', 'São Paulo', 'Centro', 'Rua 2', '321','17033691', 'Fem', 'Crista', 'ENTP');
 
+-- Inserts de ClienteCondicoesMedicas
+INSERT INTO public.ClienteCondicoesMedicas VALUES ('111.222.333-45', 'Artroscopia, histeroscopia e lamparoscopia');
+INSERT INTO public.ClienteCondicoesMedicas VALUES ('111.222.333-46', 'Deverão viajar acompanhados pelo equipe de saúde ou de uma pessoa conhecedora da doença, previamente avaliada por médico de saúde.');
+
 -- Inserts de Embarque
 -- Voo INT,	Cliente CHAR(14),Assento INT,
 INSERT INTO public.Embarque VALUES (101, 1, '111.222.333-45');
@@ -113,3 +117,21 @@ INSERT INTO public.LocalT VALUES (DEFAULT, 'Alemanha','Frankfurt','Hauptbahnhof'
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 5','789','','17033694','Casa dos Representantes');
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 178','144','3','17033621','Casa do Ministro');
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 44','115','7','17022-694','Casa dos Representantes');
+
+-- Inserts de LocalTipo
+INSERT INTO public.LocalTipo VALUES (1, 'Pousada');
+INSERT INTO public.LocalTipo VALUES (1, 'Casa Grande');
+INSERT INTO public.LocalTipo VALUES (1, 'Muito Bonito');
+INSERT INTO public.LocalTipo VALUES (2, 'Rock');
+INSERT INTO public.LocalTipo VALUES (3, 'Bar');
+INSERT INTO public.LocalTipo VALUES (4, 'Turismo');
+
+-- Inserts de Transporte
+INSERT INTO public.Transporte VALUES (384, 'Onibus', 1, 1, '2017-03-15 12:30:00', '2017-03-15 13:00:00');
+INSERT INTO public.Transporte VALUES (799, 'Onibus Turismo', 1, 2, '2017-03-15 17:30:00', '2017-03-15 18:00:00');
+INSERT INTO public.Transporte VALUES (576, 'Limousine', 3, 1, '2017-03-15 14:30:00', '2017-03-15 15:30:00');
+
+--  Inserts de PontoTransporte
+INSERT INTO PontoTransporte VALUES (384, 1, '2017-03-15 13:00:00');-- Onibus 394 chegando no ponto 1
+INSERT INTO PontoTransporte VALUES (799, 2, '2017-03-15 18:00:00');-- Onibus 799 chegando no ponto 2
+INSERT INTO PontoTransporte VALUES (576, 1, '2017-03-15 15:30:00');-- Onibus 576 chegando no ponto 1

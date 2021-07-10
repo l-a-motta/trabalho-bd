@@ -115,11 +115,22 @@ CREATE TABLE IF NOT EXISTS Cliente (
 	Numero VARCHAR(30) NOT NULL,
 	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
 	Genero VARCHAR(30) NOT NULL,
-	Religiao VARCHAR(30) NOT NULL,
-	MBTI CHAR(4) NOT NULL,-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
+	Religiao VARCHAR(30),
+	MBTI CHAR(4),-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
 
 	/*    KEYS    */
 	CONSTRAINT PK_Cliente PRIMARY KEY(CPF)
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS ClienteCondicoesMedicas (
+	/*    ATRIBUTOS    */
+	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	CondicoesMedicas VARCHAR(180),
+	/*    KEYS    */
+	CONSTRAINT PK_ClienteCondicoesMedicas PRIMARY KEY(Cliente, CondicoesMedicas)
 
 	/*    CHECKS    */
 
@@ -200,6 +211,56 @@ CREATE TABLE IF NOT EXISTS LocalT (
 	-- Um Local nao pode existir independente de um destino, ele precisa estar fixado em um local geografico
 	CONSTRAINT UC_Local UNIQUE(Pais, Cidade, Bairro, Rua, Numero, Complemento)
 	-- A chave secundária vale para diferenciarmos os Locais, uma vez que não existem dois Locais exatamente iguais
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS LocalTipo (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Tipo VARCHAR(30),
+	
+	/*    KEYS    */
+	CONSTRAINT PK_LocalTipo PRIMARY KEY(LocalT, Tipo),
+	CONSTRAINT FK_LocalTipoLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Um Tipo de um Local nao pode existir independente de um Local
+	
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS Transporte (
+	/*    ATRIBUTOS    */
+	Cod_Linha VARCHAR(30),
+	Tipo VARCHAR(30) NOT NULL,
+	Local_Origem INT NOT NULL,-- Foreign Keys em SERIAL sao na verdade INTs
+	Local_Destino INT NOT NULL,
+	Horario_Ida TIMESTAMP NOT NULL,
+	Horario_Chegada TIMESTAMP NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Transporte PRIMARY KEY(Cod_Linha),
+	CONSTRAINT FK_TransporteOrigem FOREIGN KEY (Local_Origem) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_TransporteDestino FOREIGN KEY (Local_Destino) REFERENCES LocalT(ID) ON DELETE SET NULL ON UPDATE CASCADE,
+	-- Um transporte sempre demanda uma origem (ele nao existe num void), mas o destino pode ficar marcado sem um local exato
+	CONSTRAINT UC_Transporte UNIQUE(Local_Origem, Local_Destino, Horario_Ida, Horario_Chegada)
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS PontoTransporte (
+	/*    ATRIBUTOS    */
+	Transporte VARCHAR(30),
+	LocalT INT NOT NULL,-- Foreign Keys em SERIAL sao na verdade INTs
+	Horario TIMESTAMP NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_PontoTransporte PRIMARY KEY(Transporte, LocalT),
+	CONSTRAINT FK_PontoTransporteTransporte FOREIGN KEY (Transporte) REFERENCES Transporte(Cod_linha) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_PontoTransporteLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE
 
 	/*    CHECKS    */
 
