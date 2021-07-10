@@ -139,12 +139,13 @@ CREATE TABLE IF NOT EXISTS ClienteCondicoesMedicas (
 CREATE TABLE IF NOT EXISTS Embarque (
 	/*    ATRIBUTOS    */
 	Voo INT,
-	Assentos VARCHAR(4),
+	Assento VARCHAR(4),
 	Cliente CHAR(14),
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Embarque PRIMARY KEY(Voo, Assentos, Cliente),
-	CONSTRAINT FK_EmbarqueVooAssentos FOREIGN KEY(Voo, Assentos) REFERENCES VooAssentos(Voo, Assentos) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Falar com a monitora se e valido ter foreign key de foreign key
+	-- Vale notar que Embarque esta conectado a VooAssentos, e nao a Voo em si
+	CONSTRAINT PK_Embarque PRIMARY KEY(Voo, Assento, Cliente),
+	CONSTRAINT FK_EmbarqueVooAssentos FOREIGN KEY(Voo, Assento) REFERENCES VooAssentos(Voo, Assentos) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Falar com a monitora se e valido ter foreign key de foreign key
 	CONSTRAINT FK_EmbarqueCliente FOREIGN KEY(Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Para que ocorra um embarque, tanto um Voo quanto um Cliente precisam necessariamente existir
 
@@ -364,11 +365,34 @@ CREATE TABLE IF NOT EXISTS Participacao (
 
 	/*    KEYS    */
 	CONSTRAINT PK_Participacao PRIMARY KEY(Cliente, LocalT, Data_Inicio),
-	CONSTRAINT FK_ParticipacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE SET NULL ON UPDATE CASCADE,--TODO Checar se esse SET NULL faz sentido
+	CONSTRAINT FK_ParticipacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE SET NULL ON UPDATE CASCADE,--TODO Checar se colocar um SET NULL faria sentido
 	-- Pode ser util guardar as participacoes, mesmo se perdemos os dados de um cliente
+	-- Atualmente, se perdermos os dados de um cliente, removeremos a participacao dele
 	CONSTRAINT FK_ParticipacaoEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Nao seria util, no entanto, guardar as participacoes de um local que nao esta mais conosco
 
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	DataA TIMESTAMP,--TODO O que diferencia essa data da de cima? E a data que a avaliacao foi feita?
+	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Estrelas CHAR(1) NOT NULL,-- So precisamos de um numero de estrelas, considerando que o total e 5
+	Descricao VARCHAR(180),
+	
+
+	/*    KEYS    */
+	-- Vale notar que AvaliacaoEvento esta conectada a Participacao, e nao a Evento
+	CONSTRAINT PK_AvaliacaoEvento PRIMARY KEY(LocalT, Data_Inicio, DataA, Cliente),
+	CONSTRAINT FK_AvaliacaoEventoParticipacao FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Participacao(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Se participacao poder ficar NULL, vai dar conflito de semantica aqui visto q precisamos remover a avaliacao se perdermos a participacao
+	-- Se a participacao for removida, nao iremos guardar a avaliacao, para manter tudo justo
+	CONSTRAINT FK_AvaliacaoEventoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
+	-- Se um cliente for removido, a mesma logica segue
+	
 	/*    CHECKS    */
 
 );

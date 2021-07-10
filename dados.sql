@@ -84,7 +84,7 @@ INSERT INTO public.ClienteCondicoesMedicas VALUES ('111.222.333-45', 'Artroscopi
 INSERT INTO public.ClienteCondicoesMedicas VALUES ('111.222.333-46', 'Deverão viajar acompanhados pelo equipe de saúde ou de uma pessoa conhecedora da doença, previamente avaliada por médico de saúde.');
 
 -- Inserts de Embarque
--- Voo INT,	Cliente CHAR(14),Assento INT,
+-- Voo INT,	Cliente CHAR(14), Assento INT,
 INSERT INTO public.Embarque VALUES (101, 1, '111.222.333-45');
 INSERT INTO public.Embarque VALUES (101, 2, '111.222.333-45');-- Mesmo cliente comprando dois assentos em seu nome
 INSERT INTO public.Embarque VALUES (101, 3, '111.222.333-47');
@@ -95,7 +95,7 @@ INSERT INTO public.Embarque VALUES (601, '1A', '111.222.333-49');
 INSERT INTO public.Embarque VALUES (601, '1B', '111.222.333-50');
 
 -- Inserts de Estadia
--- ! AVISO: Eu estou parando de comentar igual acima, com cada atributo, seu tipo, e se e PK ou FK. Pega muito tempo e nao oferece muita informação util
+-- ! AVISO: Eu estou parando de comentar igual acima, com cada atributo, seu tipo, e se eh PK ou FK. Pega muito tempo e nao oferece muita informação util
 ALTER SEQUENCE Estadia_id_seq RESTART WITH 1;
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','17033691','Pousada do Canário', 20);
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','Bauru','Geisel','Rua 1','123','17033690','Casa do José', 2);
@@ -173,3 +173,5 @@ INSERT INTO EventoCategoria VALUES (3, '2017-03-17 13:01:00', 'Categoria 3');-- 
 INSERT INTO Participacao VALUES ('111.222.333-45', 1, '2017-03-15 13:01:00');-- Categoria de Evento no Brasil
 INSERT INTO Participacao VALUES ('111.222.333-46', 4, '2017-03-16 13:01:00');-- Categoria de Evento na Inglaterra
 INSERT INTO Participacao VALUES ('111.222.333-47', 3, '2017-03-17 13:01:00');-- Categoria de Evento na Alemanha
+
+-- Inserts de AvaliacaoEvento
