@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS Voo (
 	
 );
 
-/* 	Criando tabela Voo
+/* 	Criando tabela VooAssentos
 	PK = Composta
 		(Voo, Assentos)
 
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS VooAssentos (
 
 	/*    ATRIBUTOS    */
 	Voo INT,
-	Assentos INT,
+	Assentos VARCHAR(30),
 	-- TODO O que significa Assentos? E um INT mesmo?
 
 	/*    KEYS    */
