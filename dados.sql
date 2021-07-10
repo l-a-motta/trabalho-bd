@@ -92,13 +92,15 @@ INSERT INTO public.Embarque VALUES (601, '111.222.333-50', '1B');
 
 -- Inserts de Estadia
 -- ! AVISO: Eu estou parando de comentar igual acima, com cada atributo, seu tipo, e se e PK ou FK. Pega muito tempo e nao oferece muita informação util
+ALTER SEQUENCE Estadia_id_seq RESTART WITH 1;
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','17033691','Pousada do Canário', 20);
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','Bauru','Geisel','Rua 1','123','17033690','Casa do José', 2);
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','654','17033-693','Holland Stay', 120);
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','655','17033-693','Holland Beach Hotel', 120);
 
--- Inserts de Local_
-INSERT INTO public.Local_ VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','1','17033691','Pousada do Canário');
-INSERT INTO public.Local_ VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','325','2','17033692','Palco Livre do Centrao');
-INSERT INTO public.Local_ VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 99','452','','17033603','Bar do Nóia');
+-- Inserts de LocalT
+ALTER SEQUENCE LocalT_id_seq RESTART WITH 1;
+INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','1','17033691','Pousada do Canário');
+INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','325','2','17033692','Palco Livre do Centrao');
+INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 99','452','','17033603','Bar do Nóia');
 --! TERMINE DE INSERIR MAIS LOCAIS

@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS Estadia (
 
 --! CRIA OUTRAS TABELAS ASSOCIADAS A ESTADIA NO MR AQUI
 
-/* 	Criando tabela Local_
+/* 	Criando tabela LocalT
 	PK = Unica
 		ID
 
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS Estadia (
 	UNIQUEs = 1
 		(Pais, Cidade, Bairro, Rua, Numero, Complemento)
 */
-CREATE TABLE IF NOT EXISTS Local_ (
+CREATE TABLE IF NOT EXISTS LocalT (
 	/*    ATRIBUTOS    */
 	ID SERIAL,
 	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
