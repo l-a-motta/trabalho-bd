@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS Hospedagem (
 	Estadia INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Cliente CHAR(14),
 	Quarto VARCHAR(4) NOT NULL,-- Apesar do total de quartos estar marcado em INT, o quarto em si pode ter letras na sua designacao ('B12','B13')
-	Valor NUMERIC(11,2) NOT NULL,-- Aceitamos numeros com duas casas decimais de precisao, num maximo de preço igual a 999 999 999,99
+	Valor NUMERIC(11,3) NOT NULL,-- Aceitamos numeros com tres casas decimais de precisao, num maximo de preço igual a 999 999 999,999, por ser internacional algumas entidades usam a terceira casa decimal para centavos
 	Data_Inicio TIMESTAMP NOT NULL,
 	Data_Fim TIMESTAMP NOT NULL,
 	
