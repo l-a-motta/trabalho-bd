@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS Embarque (
 	/*    ATRIBUTOS    */
 	Voo INT,
 	Cliente CHAR(14),
-	Assento INT,-- O assento pode ser NULL para Voos que nao delineam assentos especificos
+	Assento VARCHAR(30),-- O assento pode ser NULL para Voos que nao delineam assentos especificos
 	-- TODO Existe uma tabela para Assentos, deveria usar ela aqui? Mais uma FK?
 	
 	/*    KEYS    */

@@ -77,3 +77,13 @@ INSERT INTO public.Cliente VALUES ('111.222.333-48', 'Premium', 'Ciclano de Acol
 INSERT INTO public.Cliente VALUES ('111.222.333-49', 'Premium', 'José Silva', 'email5@email.com', '55 13 99123-4565', 'Brasil', 'São Paulo', 'Centro', 'Rua 2', '321','17033691', 'Masc', 'Ateu', 'INTJ');
 INSERT INTO public.Cliente VALUES ('111.222.333-50', 'Premium', 'Maria Silva', 'email5@email.com', '55 15 99123-4566', 'Brasil', 'São Paulo', 'Centro', 'Rua 2', '321','17033691', 'Fem', 'Crista', 'ENTP');
 
+-- Inserts de Embarque
+-- Voo INT,	Cliente CHAR(14),Assento INT,
+INSERT INTO public.Embarque VALUES (101, '111.222.333-45', 1);
+INSERT INTO public.Embarque VALUES (101, '111.222.333-46', 2);
+INSERT INTO public.Embarque VALUES (101, '111.222.333-47', 3);
+--
+INSERT INTO public.Embarque VALUES (201, '111.222.333-48', 1);
+--
+INSERT INTO public.Embarque VALUES (601, '111.222.333-49', '1A');
+INSERT INTO public.Embarque VALUES (601, '111.222.333-50', '1B');
