@@ -294,6 +294,34 @@ CREATE TABLE IF NOT EXISTS Organizador (
 
 );
 
+CREATE TABLE IF NOT EXISTS OrganizadorTiposAtuacao (
+	/*    ATRIBUTOS    */
+	Organizador CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	TiposAtuacao VARCHAR(30),
+	
+	/*    KEYS    */
+	CONSTRAINT PK_OrganizadorTiposAtuacao PRIMARY KEY(Organizador, TiposAtuacao),
+	CONSTRAINT FK_OrganizadorTiposAtuacao FOREIGN KEY (Organizador) REFERENCES Organizador(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS OrganizadorRecomendacao (
+	/*    ATRIBUTOS    */
+	Organizador CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Recomendacao VARCHAR(30),
+	
+	/*    KEYS    */
+	CONSTRAINT PK_OrganizadorRecomendacao PRIMARY KEY(Organizador, Recomendacao),
+	CONSTRAINT FK_OrganizadorRecomendacao FOREIGN KEY (Organizador) REFERENCES Organizador(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	
+
+	/*    CHECKS    */
+
+);
+
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
 
