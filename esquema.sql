@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS VooAssentos (
 	/*    ATRIBUTOS    */
 	Voo INT,
 	Assentos INT,
-	-- TODO O que significa Assentos? E um INT mesmo? N e composto isso aqui nao?
+	-- TODO O que significa Assentos? E um INT mesmo?
 
 	/*    KEYS    */
 	CONSTRAINT PK_VooAssentos PRIMARY KEY(Voo, Assentos),
