@@ -25,6 +25,8 @@ CREATE TABLE Destino (
 	/*    KEYS    */
 	CONSTRAINT PK_Destino PRIMARY KEY(Pais, Cidade)
 	
+	/*    CHECKS    */
+
 )
 
 /* 	Criando tabela DestinoTags
@@ -47,6 +49,9 @@ CREATE TABLE DestinoTags (
 	CONSTRAINT PK_DestinoTag PRIMARY KEY(Pais, Cidade, Tag),
 	CONSTRAINT FK_DestinoTag FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se o destino for deletado, nao faz sentido manter as associações das tags dele
+
+	/*    CHECKS    */
+
 )
 
 /* 	Criando tabela Aeroporto
@@ -75,6 +80,8 @@ CREATE TABLE Aeroporto (
 	CONSTRAINT FK_AeroportoDestino FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Um aeroporto nao pode existir independente de um destino, ele precisa estar fixado em um local geografico
 	
+	/*    CHECKS    */
+
 )
 
 /* 	Criando tabela Voo
@@ -104,7 +111,6 @@ CREATE TABLE Voo (
 	-- A FK de origem deve ser deletada se o aeroporto for deletado, ja que um voo depende necessariamente do aeroporto que o planejou
 	CONSTRAINT FK_VooDestino FOREIGN KEY (Aeroporto_Destino) REFERENCES Aeroporto(CodIATA) ON DELETE CASCADE ON UPDATE CASCADE,
     -- A FK de destino deve ser deletada se o aeroporto for deletado, ja que um voo depende necessariamente do aeroporto que o recebera
-	-- TODO Discutir se nao vale a pena deixar ON DELETE SET NULL, ja que um novo destino pode ser marcado
 
 	/*    CHECKS    */
 	CONSTRAINT CK_Data CHECK (Data_Partida < Data_Chegada)
@@ -133,6 +139,39 @@ CREATE TABLE VooAssentos (
 	CONSTRAINT PK_VooAssentos PRIMARY KEY(Voo, Assentos),
 	CONSTRAINT FK_VooAssentos FOREIGN KEY(Voo) REFERENCES Voo(Nro) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- E impossivel existirem assentos nao associados a um voo
+	
+	/*    CHECKS    */
+
+)
+
+/* 	Criando tabela Cliente
+	PK = Unica
+		CPF
+	FKs = 0
+
+	UNIQUEs = 0
+*/
+CREATE TABLE Cliente (
+	/*    ATRIBUTOS    */
+	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Tipo VARCHAR(30) NOT NULL,
+	Nome VARCHAR(30) NOT NULL,
+	Email VARCHAR(30) NOT NULL,
+	Telefone VARCHAR(30) NOT NULL,
+	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Cidade VARCHAR(30) NOT NULL,
+	Bairro VARCHAR(30) NOT NULL,
+	Rua VARCHAR(30) NOT NULL,
+	Numero VARCHAR(30) NOT NULL,
+	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
+	Genero VARCHAR(30) NOT NULL,
+	Religiao VARCHAR(30) NOT NULL,
+	MBTI CHAR(4) NOT NULL,-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
+
+	/*    KEYS    */
+	CONSTRAINT PK_Cliente PRIMARY KEY(CPF),
+
+	/*    CHECKS    */
 
 )
 
@@ -145,8 +184,11 @@ CREATE TABLE VooAssentos (
 */
 -- CREATE TABLE tabela (
 -- 	/*    ATRIBUTOS    */
+
 	
 -- 	/*    KEYS    */
 
+
 -- 	/*    CHECKS    */
+
 -- )
