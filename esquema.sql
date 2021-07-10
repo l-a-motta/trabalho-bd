@@ -1,8 +1,12 @@
 -- AVISOS:
 -- Consideramos que strings pequenas possuem no maximo 30 caracteres, medias 50 e grandes 180 (um tweet) 
 
+
+
+
+
 /* 	Criando tabela Destino
-	PKs = 1
+	PK = Composta
 		(Pais, Cidade)
 
 	FKs = 0
@@ -24,7 +28,7 @@ CREATE TABLE Destino (
 )
 
 /* 	Criando tabela DestinoTags
-	PKs = 1
+	PK = Composta
 		(Pais, Cidade, Tag)
 
 	FKs = 1
@@ -46,19 +50,18 @@ CREATE TABLE DestinoTags (
 )
 
 /* 	Criando tabela Aeroporto
-	PKs = 1
-		ID
+	PK = Unica
+		CodIATA
 
 	FKs = 1
 		(Pais, Cidade)->Destino
 
-	UNIQUEs = 1
-		(Pais, Cidade, Bairro, Rua, Numero)
+	UNIQUEs = 0
 */
 CREATE TABLE Aeroporto (
 	
 	/*    ATRIBUTOS    */
-	ID SERIAL,
+	CodIATA INT,
 	Pais VARCHAR(30) NOT NULL,
 	Cidade VARCHAR(30) NOT NULL,
 	Bairro VARCHAR(30) NOT NULL,
@@ -68,16 +71,14 @@ CREATE TABLE Aeroporto (
 	Nome VARCHAR(30) NOT NULL,
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Aeroporto PRIMARY KEY(ID),
-	CONSTRAINT UC_Aeroporto UNIQUE(Pais, Cidade, Bairro, Rua, Numero),
-	-- A chave secundária vale para diferenciarmos os locais dos aeroportos, uma vez que não existem dois aeroportos no mesmo exato local
+	CONSTRAINT PK_Aeroporto PRIMARY KEY(CodIATA),
 	CONSTRAINT FK_AeroportoDestino FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE
-	-- Se excluirmos os dados de um destino, nao faz sentido manter os dados dos aeroportos nesse destino
+	-- Um aeroporto nao pode existir independente de um destino, ele precisa estar fixado em um local geografico
 	
 )
 
 /* 	Criando tabela Voo
-	PKs = 1
+	PK = Unica
 		Nro
 
 	FKs = 2
@@ -99,10 +100,10 @@ CREATE TABLE Voo (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Voo PRIMARY KEY(Nro),
-	CONSTRAINT FK_VooOrigem FOREIGN KEY (Aeroporto_Origem) REFERENCES Aeroporto(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_VooOrigem FOREIGN KEY (Aeroporto_Origem) REFERENCES Aeroporto(CodIATA) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- A FK de origem deve ser deletada se o aeroporto for deletado, ja que um voo depende necessariamente do aeroporto que o planejou
-	CONSTRAINT FK_VooDestino FOREIGN KEY (Aeroporto_Destino) REFERENCES Aeroporto(ID) ON DELETE CASCADE ON UPDATE CASCADE,
-    -- A FK de destino deve ser deletada se o aeroporto for deletado, ja que um voo depende necessariamente do aeroporto que o planejou
+	CONSTRAINT FK_VooDestino FOREIGN KEY (Aeroporto_Destino) REFERENCES Aeroporto(CodIATA) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- A FK de destino deve ser deletada se o aeroporto for deletado, ja que um voo depende necessariamente do aeroporto que o recebera
 	-- TODO Discutir se nao vale a pena deixar ON DELETE SET NULL, ja que um novo destino pode ser marcado
 
 	/*    CHECKS    */
@@ -113,7 +114,7 @@ CREATE TABLE Voo (
 )
 
 /* 	Criando tabela Voo
-	PKs = 1
+	PK = Composta
 		(Voo, Assentos)
 
 	FKs = 1
@@ -136,7 +137,7 @@ CREATE TABLE VooAssentos (
 )
 
 /* 	Criando tabela Voo
-	PKs = 0
+	PK = Unica
 
 	FKs = 0
 
