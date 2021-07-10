@@ -97,3 +97,8 @@ INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','Bauru','Geisel','Rua 1','1
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','654','17033-693','Holland Stay', 120);
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','655','17033-693','Holland Beach Hotel', 120);
 
+-- Inserts de Local_
+INSERT INTO public.Local_ VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','1','17033691','Pousada do Canário');
+INSERT INTO public.Local_ VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','325','2','17033692','Palco Livre do Centrao');
+INSERT INTO public.Local_ VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 99','452','','17033603','Bar do Nóia');
+--! TERMINE DE INSERIR MAIS LOCAIS
