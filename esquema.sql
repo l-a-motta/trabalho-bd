@@ -175,6 +175,29 @@ CREATE TABLE Cliente (
 
 )
 
+/* 	Criando tabela Embarque
+	PK = Unica
+
+	FKs = 0
+
+	UNIQUEs = 0
+*/
+CREATE TABLE Embarque (
+	/*    ATRIBUTOS    */
+	Voo INT,
+	Cliente CHAR(14),
+	Assento INT,-- O assento pode ser NULL para Voos que nao delineam assentos especificos
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Embarque PRIMARY KEY(Voo, Cliente),
+	CONSTRAINT FK_EmbarqueVoo FOREIGN KEY(Voo) REFERENCES Voo(Nro) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_EmbarqueCliente FOREIGN KEY(Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
+	-- Para que ocorra um embarque, tanto um Voo quanto um Cliente precisam necessariamente existir
+
+	/*    CHECKS    */
+
+)
+
 /* 	Criando tabela Voo
 	PK = Unica
 
