@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS Transporte (
 	/*    KEYS    */
 	CONSTRAINT PK_Transporte PRIMARY KEY(Cod_Linha),
 	CONSTRAINT FK_TransporteOrigem FOREIGN KEY (Local_Origem) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_TransporteDestino FOREIGN KEY (Local_Destino) REFERENCES LocalT(ID) ON DELETE SET NULL ON UPDATE CASCADE,
+	CONSTRAINT FK_TransporteDestino FOREIGN KEY (Local_Destino) REFERENCES LocalT(ID) ON DELETE SET NULL ON UPDATE CASCADE,--TODO Checar se esse SET NULL faz sentido
 	-- Um transporte sempre demanda uma origem (ele nao existe num void), mas o destino pode ficar marcado sem um local exato
 	CONSTRAINT UC_Transporte UNIQUE(Local_Origem, Local_Destino, Horario_Ida, Horario_Chegada),
 
@@ -341,7 +341,23 @@ CREATE TABLE IF NOT EXISTS Evento (
 
 );
 
--- ! FAZER EVENTO AQUI
+CREATE TABLE IF NOT EXISTS EventoCategoria (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Categoria VARCHAR(30),
+
+	/*    KEYS    */
+	CONSTRAINT PK_Participacao PRIMARY KEY(LocalT, Data_Inicio, Categoria),
+	CONSTRAINT FK_EventoCategoriaEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Nao faz sentido guardar a categoria de um local que nao existe mais, CASCADE
+
+	/*    CHECKS    */
+
+);
+
+
+
 
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
