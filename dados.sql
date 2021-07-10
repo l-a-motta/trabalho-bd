@@ -104,6 +104,7 @@ INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park
 
 -- Inserts de Hospedagem
 INSERT INTO public.Hospedagem VALUES (1, '111.222.333-45', 'B12', '12399.99','2017-03-15','2017-03-17');
+INSERT INTO public.Hospedagem VALUES (1, '111.222.333-45', 'B13', '10199.99','2017-03-15','2017-03-17');-- Mesmo cliente comprando dois quartos diferentes, valor de cada deve ser um SUM para achar o valor total
 INSERT INTO public.Hospedagem VALUES (1, '111.222.333-47', 'A01', '58999.99','2017-03-15','2017-03-25');
 
 
@@ -127,9 +128,9 @@ INSERT INTO public.LocalTipo VALUES (3, 'Bar');
 INSERT INTO public.LocalTipo VALUES (4, 'Turismo');
 
 -- Inserts de Transporte
-INSERT INTO public.Transporte VALUES (384, 'Onibus', 1, 1, '2017-03-15 12:30:00', '2017-03-15 13:00:00');
-INSERT INTO public.Transporte VALUES (799, 'Onibus Turismo', 1, 2, '2017-03-15 17:30:00', '2017-03-15 18:00:00');
-INSERT INTO public.Transporte VALUES (576, 'Limousine', 3, 1, '2017-03-15 14:30:00', '2017-03-15 15:30:00');
+INSERT INTO public.Transporte VALUES (384, 'Onibus', 1, 1, '2017-03-15 12:30:00', '2017-03-15 13:00:00');-- Caminho de local 1 para local 1
+INSERT INTO public.Transporte VALUES (799, 'Onibus Turismo', 1, 2, '2017-03-15 17:30:00', '2017-03-15 18:00:00');-- Caminho de local 1 para local 2
+INSERT INTO public.Transporte VALUES (576, 'Limousine', 3, 1, '2017-03-15 14:30:00', '2017-03-15 15:30:00');-- Caminho de local 3 para local 1
 
 --  Inserts de PontoTransporte
 INSERT INTO PontoTransporte VALUES (384, 1, '2017-03-15 13:00:00');-- Onibus 394 chegando no ponto 1
@@ -137,3 +138,9 @@ INSERT INTO PontoTransporte VALUES (799, 2, '2017-03-15 18:00:00');-- Onibus 799
 INSERT INTO PontoTransporte VALUES (576, 1, '2017-03-15 15:30:00');-- Onibus 576 chegando no ponto 1
 
 -- Inserts de Organizador
+
+-- Inserts de OrganizadorTiposAtuacao
+
+-- Inserts de OrganizadorRecomendacao
+
+-- Inserts de Evento

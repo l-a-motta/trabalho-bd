@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS Hospedagem (
 	Data_Fim TIMESTAMP NOT NULL,
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Hospedagem PRIMARY KEY(Estadia, Cliente),
+	CONSTRAINT PK_Hospedagem PRIMARY KEY(Estadia, Cliente, Quarto),
 	CONSTRAINT FK_HospedagemEstadia FOREIGN KEY (Estadia) REFERENCES Estadia(ID) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT FK_HospedagemCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Uma Hospedagem nao pode existir sem termos tanto Estadia quanto Cliente, logo CASCADE ao perder ou autalizar qualquer um
@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS Transporte (
 	CONSTRAINT FK_TransporteOrigem FOREIGN KEY (Local_Origem) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT FK_TransporteDestino FOREIGN KEY (Local_Destino) REFERENCES LocalT(ID) ON DELETE SET NULL ON UPDATE CASCADE,
 	-- Um transporte sempre demanda uma origem (ele nao existe num void), mas o destino pode ficar marcado sem um local exato
-	CONSTRAINT UC_Transporte UNIQUE(Local_Origem, Local_Destino, Horario_Ida, Horario_Chegada)
+	CONSTRAINT UC_Transporte UNIQUE(Local_Origem, Local_Destino, Horario_Ida, Horario_Chegada),
 
 	/*    CHECKS    */
 	CONSTRAINT CK_DataTransporte CHECK (Horario_Ida < Horario_Chegada)
@@ -287,7 +287,7 @@ CREATE TABLE IF NOT EXISTS Organizador (
 	Email_Empresa VARCHAR(30),
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Organizador PRIMARY KEY(CPF)
+	CONSTRAINT PK_Organizador PRIMARY KEY(CPF),
 	CONSTRAINT UC_Organizador UNIQUE(CNPJ)
 
 	/*    CHECKS    */
@@ -321,6 +321,8 @@ CREATE TABLE IF NOT EXISTS OrganizadorRecomendacao (
 	/*    CHECKS    */
 
 );
+
+-- ! FAZER EVENTO AQUI
 
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
