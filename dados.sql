@@ -81,14 +81,14 @@ INSERT INTO public.Cliente VALUES ('111.222.333-50', 'Premium', 'Maria Silva', '
 
 -- Inserts de Embarque
 -- Voo INT,	Cliente CHAR(14),Assento INT,
-INSERT INTO public.Embarque VALUES (101, '111.222.333-45', 1);
-INSERT INTO public.Embarque VALUES (101, '111.222.333-46', 2);
-INSERT INTO public.Embarque VALUES (101, '111.222.333-47', 3);
+INSERT INTO public.Embarque VALUES (101, 1, '111.222.333-45');
+INSERT INTO public.Embarque VALUES (101, 2, '111.222.333-45');-- Mesmo cliente comprando dois assentos em seu nome
+INSERT INTO public.Embarque VALUES (101, 3, '111.222.333-47');
 --
-INSERT INTO public.Embarque VALUES (201, '111.222.333-48', 1);
+INSERT INTO public.Embarque VALUES (201, 1, '111.222.333-48');
 --
-INSERT INTO public.Embarque VALUES (601, '111.222.333-49', '1A');
-INSERT INTO public.Embarque VALUES (601, '111.222.333-50', '1B');
+INSERT INTO public.Embarque VALUES (601, '1A', '111.222.333-49');
+INSERT INTO public.Embarque VALUES (601, '1B', '111.222.333-50');
 
 -- Inserts de Estadia
 -- ! AVISO: Eu estou parando de comentar igual acima, com cada atributo, seu tipo, e se e PK ou FK. Pega muito tempo e nao oferece muita informação util
@@ -103,4 +103,9 @@ ALTER SEQUENCE LocalT_id_seq RESTART WITH 1;
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','1','17033691','Pousada do Canário');
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','325','2','17033692','Palco Livre do Centrao');
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 99','452','','17033603','Bar do Nóia');
+INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Greenwich','Rua 3','456','12','17033-692','Ponte de Londres');
+INSERT INTO public.LocalT VALUES (DEFAULT, 'Alemanha','Frankfurt','Hauptbahnhof','Rua 6','987','1','17033695','Arco de Berlim');
+INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 5','789','','17033694','Casa dos Representantes');
+INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 178','144','3','17033621','Casa do Ministro');
+INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster','Rua 44','115','7','17022-694','Casa dos Representantes');
 --! TERMINE DE INSERIR MAIS LOCAIS

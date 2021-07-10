@@ -78,9 +78,11 @@ CREATE TABLE IF NOT EXISTS Aeroporto (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Aeroporto PRIMARY KEY(CodIATA),
-	CONSTRAINT FK_AeroportoDestino FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_AeroportoDestino FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- Um aeroporto nao pode existir independente de um destino, ele precisa estar fixado em um local geografico
-	
+	CONSTRAINT UC_Aeroporto UNIQUE(Pais, Cidade, Bairro, Rua, Numero)
+	-- A chave secundária vale para diferenciarmos os Aeroportos, uma vez que não existem dois Aeroportos no mesmo exato local
+
 	/*    CHECKS    */
 
 );
@@ -133,7 +135,7 @@ CREATE TABLE IF NOT EXISTS VooAssentos (
 
 	/*    ATRIBUTOS    */
 	Voo INT,-- TODO Deveria ser SERIAL?
-	Assentos VARCHAR(30),-- TODO O que significa Assentos? E um INT mesmo?
+	Assentos VARCHAR(4),-- Nao achamos viavel um Aviao com mais de 9999 assentos
 
 	/*    KEYS    */
 	CONSTRAINT PK_VooAssentos PRIMARY KEY(Voo, Assentos),
@@ -185,13 +187,12 @@ CREATE TABLE IF NOT EXISTS Cliente (
 CREATE TABLE IF NOT EXISTS Embarque (
 	/*    ATRIBUTOS    */
 	Voo INT,
+	Assentos VARCHAR(4),
 	Cliente CHAR(14),
-	Assento VARCHAR(30),-- O assento pode ser NULL para Voos que nao delineam assentos especificos
-	-- TODO Existe uma tabela para Assentos, deveria usar ela aqui? Mais uma FK?
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Embarque PRIMARY KEY(Voo, Cliente),
-	CONSTRAINT FK_EmbarqueVoo FOREIGN KEY(Voo) REFERENCES Voo(Nro) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT PK_Embarque PRIMARY KEY(Voo, Assentos, Cliente),
+	CONSTRAINT FK_EmbarqueVooAssentos FOREIGN KEY(Voo, Assentos) REFERENCES VooAssentos(Voo, Assentos) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Falar com a monitora se e valido ter foreign key de foreign key
 	CONSTRAINT FK_EmbarqueCliente FOREIGN KEY(Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Para que ocorra um embarque, tanto um Voo quanto um Cliente precisam necessariamente existir
 
