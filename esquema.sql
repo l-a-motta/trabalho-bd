@@ -203,7 +203,8 @@ CREATE TABLE IF NOT EXISTS Embarque (
 	PK = Unica
 		ID
 
-	FKs = 0
+	FKs = 1
+		(Pais, Cidade)->Destino
 
 	UNIQUEs = 1
 		(Pais, Cidade, Bairro, Rua, Numero)
@@ -222,17 +223,20 @@ CREATE TABLE IF NOT EXISTS Estadia (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Estadia PRIMARY KEY(ID),
+	CONSTRAINT FK_EstadiaDestino FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Uma Estadia nao pode existir independente de um destino, ela precisa estar fixada em um local geografico
 	CONSTRAINT UC_Estadia UNIQUE(Pais, Cidade, Bairro, Rua, Numero)
 	-- A chave secundária vale para diferenciarmos os locais das Estadias, uma vez que não existem duas Estadias diferentes no mesmo exato local
 	/*    CHECKS    */
 
 );
 
-/* 	Criando tabela Estadia
+/* 	Criando tabela Local_
 	PK = Unica
 		ID
 
-	FKs = 0
+	FKs = 1
+		(Pais, Cidade)->Destino
 
 	UNIQUEs = 1
 		(Pais, Cidade, Bairro, Rua, Numero, Complemento)
@@ -251,6 +255,8 @@ CREATE TABLE IF NOT EXISTS Local_ (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Local PRIMARY KEY(ID),
+	CONSTRAINT FK_LocalDestino FOREIGN KEY (Pais, Cidade) REFERENCES Destino(Pais, Cidade) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Um Local nao pode existir independente de um destino, ele precisa estar fixado em um local geografico
 	CONSTRAINT UC_Local UNIQUE(Pais, Cidade, Bairro, Rua, Numero, Complemento)
 	-- A chave secundária vale para diferenciarmos os Locais, uma vez que não existem dois Locais exatamente iguais
 
