@@ -148,4 +148,6 @@ INSERT INTO public.Organizador VALUES ('111.222.334-33', '11.222.333/0001-03', '
 -- Inserts de OrganizadorRecomendacao
 
 -- Inserts de Evento
-INSERT INTO Evento VALUES (1, '2017-03-15 13:01:00', '2017-03-15 14:01:00', );-- Onibus 394 chegando no ponto 1
+INSERT INTO Evento VALUES (1, '2017-03-15 13:01:00', '2017-03-15 14:01:00', '111.222.334-11', 'Um belo evento em Brasil, organizado por Empresa Top');-- Evento no Brasil
+INSERT INTO Evento VALUES (4, '2017-03-16 13:01:00', '2017-03-17 14:01:00', '111.222.334-22', 'Um belo evento em Inglaterra, organizado por Best Company');-- Evento na Inglaterra
+INSERT INTO Evento VALUES (3, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento em Alemanha, organizado por Sieg Heinz');-- Evento na Alemanha
