@@ -135,3 +135,5 @@ INSERT INTO public.Transporte VALUES (576, 'Limousine', 3, 1, '2017-03-15 14:30:
 INSERT INTO PontoTransporte VALUES (384, 1, '2017-03-15 13:00:00');-- Onibus 394 chegando no ponto 1
 INSERT INTO PontoTransporte VALUES (799, 2, '2017-03-15 18:00:00');-- Onibus 799 chegando no ponto 2
 INSERT INTO PontoTransporte VALUES (576, 1, '2017-03-15 15:30:00');-- Onibus 576 chegando no ponto 1
+
+-- Inserts de Organizador

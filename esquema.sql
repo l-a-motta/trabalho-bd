@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS VooAssentos (
 CREATE TABLE IF NOT EXISTS Cliente (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Tipo VARCHAR(30) NOT NULL,
+	Tipo VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
 	Telefone VARCHAR(30) NOT NULL,
@@ -248,19 +248,47 @@ CREATE TABLE IF NOT EXISTS Transporte (
 	CONSTRAINT UC_Transporte UNIQUE(Local_Origem, Local_Destino, Horario_Ida, Horario_Chegada)
 
 	/*    CHECKS    */
-
+	CONSTRAINT CK_DataTransporte CHECK (Horario_Ida < Horario_Chegada)
+	-- E impossivel a data de chegada ser antes da de ida
+	
 );
 
 CREATE TABLE IF NOT EXISTS PontoTransporte (
 	/*    ATRIBUTOS    */
 	Transporte VARCHAR(30),
-	LocalT INT NOT NULL,-- Foreign Keys em SERIAL sao na verdade INTs
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Horario TIMESTAMP NOT NULL,
 	
 	/*    KEYS    */
 	CONSTRAINT PK_PontoTransporte PRIMARY KEY(Transporte, LocalT),
 	CONSTRAINT FK_PontoTransporteTransporte FOREIGN KEY (Transporte) REFERENCES Transporte(Cod_linha) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT FK_PontoTransporteLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS Organizador (
+	/*    ATRIBUTOS    */
+	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	CNPJ CHAR(18),-- Um CNPJ tem no maximo 14 caracteres (XX.XXX.XXX/0001-XX)
+	Tipo VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
+	Nome VARCHAR(30) NOT NULL,
+	Email VARCHAR(30) NOT NULL,
+	Telefone VARCHAR(30) NOT NULL,
+	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Cidade VARCHAR(30) NOT NULL,
+	Bairro VARCHAR(30) NOT NULL,
+	Rua VARCHAR(30) NOT NULL,
+	Numero VARCHAR(30) NOT NULL,
+	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
+	Nome_Social VARCHAR(30),
+	Telefone_Empresa VARCHAR(30),-- Existe muita variacao de telefone no mundo para especificarmos um numero menor
+	Email_Empresa VARCHAR(30),
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Organizador PRIMARY KEY(CPF)
+	CONSTRAINT UC_Organizador UNIQUE(CNPJ)
 
 	/*    CHECKS    */
 
