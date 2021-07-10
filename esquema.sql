@@ -6,14 +6,6 @@
 
 -- ! PERGUNTA PARA PROF SE VALE A PENA FAZER OS ENDERECOS NUMA TABELA E USAR FK NOS TODOS QUE ESTAO POR AE
 
-/* 	Criando tabela Destino
-	PK = Composta
-		(Pais, Cidade)
-
-	FKs = 0
-
-	UNIQUEs = 0
-*/
 CREATE TABLE IF NOT EXISTS Destino (
 	
 	/*    ATRIBUTOS    */
@@ -30,15 +22,6 @@ CREATE TABLE IF NOT EXISTS Destino (
 
 );
 
-/* 	Criando tabela DestinoTags
-	PK = Composta
-		(Pais, Cidade, Tag)
-
-	FKs = 1
-		(Pais, Cidade)->Destino
-
-	UNIQUEs = 0
-*/
 CREATE TABLE IF NOT EXISTS DestinoTags (
 	
 	/*    ATRIBUTOS    */
@@ -55,15 +38,6 @@ CREATE TABLE IF NOT EXISTS DestinoTags (
 
 );
 
-/* 	Criando tabela Aeroporto
-	PK = Unica
-		CodIATA
-
-	FKs = 1
-		(Pais, Cidade)->Destino
-
-	UNIQUEs = 0
-*/
 CREATE TABLE IF NOT EXISTS Aeroporto (
 	
 	/*    ATRIBUTOS    */
@@ -87,16 +61,6 @@ CREATE TABLE IF NOT EXISTS Aeroporto (
 
 );
 
-/* 	Criando tabela Voo
-	PK = Unica
-		Nro
-
-	FKs = 2
-		Aeroporto_Origem->Aeroporto
-		Aeroporto_Destino->Aeroporto
-
-	UNIQUEs = 0
-*/
 CREATE TABLE IF NOT EXISTS Voo (
 	
 	/*    ATRIBUTOS    */
@@ -122,15 +86,6 @@ CREATE TABLE IF NOT EXISTS Voo (
 	
 );
 
-/* 	Criando tabela VooAssentos
-	PK = Composta
-		(Voo, Assentos)
-
-	FKs = 1
-		Voo->Voo
-
-	UNIQUEs = 0
-*/
 CREATE TABLE IF NOT EXISTS VooAssentos (
 
 	/*    ATRIBUTOS    */
@@ -146,13 +101,6 @@ CREATE TABLE IF NOT EXISTS VooAssentos (
 
 );
 
-/* 	Criando tabela Cliente
-	PK = Unica
-		CPF
-	FKs = 0
-
-	UNIQUEs = 0
-*/
 CREATE TABLE IF NOT EXISTS Cliente (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
@@ -177,13 +125,6 @@ CREATE TABLE IF NOT EXISTS Cliente (
 
 );
 
-/* 	Criando tabela Embarque
-	PK = Unica
-
-	FKs = 0
-
-	UNIQUEs = 0
-*/
 CREATE TABLE IF NOT EXISTS Embarque (
 	/*    ATRIBUTOS    */
 	Voo INT,
@@ -200,16 +141,6 @@ CREATE TABLE IF NOT EXISTS Embarque (
 
 );
 
-/* 	Criando tabela Estadia
-	PK = Unica
-		ID
-
-	FKs = 1
-		(Pais, Cidade)->Destino
-
-	UNIQUEs = 1
-		(Pais, Cidade, Bairro, Rua, Numero)
-*/
 CREATE TABLE IF NOT EXISTS Estadia (
 	/*    ATRIBUTOS    */
 	ID SERIAL,
@@ -232,18 +163,25 @@ CREATE TABLE IF NOT EXISTS Estadia (
 
 );
 
---! CRIA OUTRAS TABELAS ASSOCIADAS A ESTADIA NO MR AQUI
+CREATE TABLE IF NOT EXISTS Hospedagem (
+	/*    ATRIBUTOS    */
+	Estadia INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Cliente CHAR(14),
+	Quarto VARCHAR(4) NOT NULL,-- Apesar do total de quartos estar marcado em INT, o quarto em si pode ter letras na sua designacao ('B12','B13')
+	Valor NUMERIC(11,2) NOT NULL,-- Aceitamos numeros com duas casas decimais de precisao, num maximo de preço igual a 999 999 999,99
+	Data_Inicio TIMESTAMP NOT NULL,
+	Data_Fim TIMESTAMP NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Hospedagem PRIMARY KEY(Estadia, Cliente),
+	CONSTRAINT FK_HospedagemEstadia FOREIGN KEY (Estadia) REFERENCES Estadia(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_HospedagemCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Uma Hospedagem nao pode existir sem termos tanto Estadia quanto Cliente, logo CASCADE ao perder ou autalizar qualquer um
+	
+	/*    CHECKS    */
 
-/* 	Criando tabela LocalT
-	PK = Unica
-		ID
+);
 
-	FKs = 1
-		(Pais, Cidade)->Destino
-
-	UNIQUEs = 1
-		(Pais, Cidade, Bairro, Rua, Numero, Complemento)
-*/
 CREATE TABLE IF NOT EXISTS LocalT (
 	/*    ATRIBUTOS    */
 	ID SERIAL,
@@ -267,13 +205,6 @@ CREATE TABLE IF NOT EXISTS LocalT (
 
 );
 
-/* 	Criando tabela Voo
-	PK = Unica
-
-	FKs = 0
-
-	UNIQUEs = 0
-*/
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
 
