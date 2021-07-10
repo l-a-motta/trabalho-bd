@@ -30,8 +30,10 @@ INSERT INTO public.Aeroporto VALUES (666, 'Alemanha','Frankfurt','Hauptbahnhof',
 INSERT INTO public.Voo VALUES (101, 111, 222, '2017-03-14', '2017-03-15', 'E126', 'S213');
 INSERT INTO public.Voo VALUES (102, 111, 222, '2017-03-14', '2017-03-15', 'E526', 'S432');
 INSERT INTO public.Voo VALUES (103, 111, 555, '2017-03-14', '2017-03-16', 'E625', 'S251');
+--
 INSERT INTO public.Voo VALUES (201, 222, 111, '2017-03-15', '2017-03-17', 'E413', 'S281');
 INSERT INTO public.Voo VALUES (202, 222, 666, '2017-03-15', '2017-04-10', 'E272', 'S453');
+--
 INSERT INTO public.Voo VALUES (601, 666, 444, '2021-01-04', '2021-01-15', 'E192', 'S261');
 INSERT INTO public.Voo VALUES (602, 666, 444, '2021-01-04', '2021-01-15', 'E272', 'S675');
 INSERT INTO public.Voo VALUES (603, 666, 444, '2021-01-21', '2021-01-22', 'E635', 'S291');
@@ -87,3 +89,11 @@ INSERT INTO public.Embarque VALUES (201, '111.222.333-48', 1);
 --
 INSERT INTO public.Embarque VALUES (601, '111.222.333-49', '1A');
 INSERT INTO public.Embarque VALUES (601, '111.222.333-50', '1B');
+
+-- Inserts de Estadia
+-- ! AVISO: Eu estou parando de comentar igual acima, com cada atributo, seu tipo, e se e PK ou FK. Pega muito tempo e nao oferece muita informação util
+INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','17033691','Pousada do Canário', 20);
+INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','Bauru','Geisel','Rua 1','123','17033690','Casa do José', 2);
+INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','654','17033-693','Holland Stay', 120);
+INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','655','17033-693','Holland Beach Hotel', 120);
+
