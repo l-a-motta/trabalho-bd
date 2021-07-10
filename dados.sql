@@ -35,3 +35,35 @@ INSERT INTO public.Voo VALUES (202, 222, 666, '2017-03-15', '2017-04-10', 'E272'
 INSERT INTO public.Voo VALUES (601, 666, 444, '2021-01-04', '2021-01-15', 'E192', 'S261');
 INSERT INTO public.Voo VALUES (602, 666, 444, '2021-01-04', '2021-01-15', 'E272', 'S675');
 INSERT INTO public.Voo VALUES (603, 666, 444, '2021-01-21', '2021-01-22', 'E635', 'S291');
+
+-- Inserts de VooAssentos
+-- PK FK Voo INT, PK Assentos VARCHAR(30)
+INSERT INTO public.VooAssentos VALUES (101, 1);
+INSERT INTO public.VooAssentos VALUES (101, 2);
+INSERT INTO public.VooAssentos VALUES (101, 3);
+--
+INSERT INTO public.VooAssentos VALUES (102, 1);
+INSERT INTO public.VooAssentos VALUES (102, 2);
+INSERT INTO public.VooAssentos VALUES (102, 3);
+--
+INSERT INTO public.VooAssentos VALUES (103, 1);
+INSERT INTO public.VooAssentos VALUES (103, 2);
+INSERT INTO public.VooAssentos VALUES (103, 3);
+--
+INSERT INTO public.VooAssentos VALUES (201, 1);
+INSERT INTO public.VooAssentos VALUES (201, 2);
+INSERT INTO public.VooAssentos VALUES (201, 3);
+--
+INSERT INTO public.VooAssentos VALUES (202, 1);
+INSERT INTO public.VooAssentos VALUES (202, 2);
+INSERT INTO public.VooAssentos VALUES (202, 3);
+--
+INSERT INTO public.VooAssentos VALUES (601, '1A');
+INSERT INTO public.VooAssentos VALUES (601, '1B');
+INSERT INTO public.VooAssentos VALUES (601, '2B');
+--
+INSERT INTO public.VooAssentos VALUES (602, 99);
+INSERT INTO public.VooAssentos VALUES (602, 100);
+--
+INSERT INTO public.VooAssentos VALUES (603, 'A');
+INSERT INTO public.VooAssentos VALUES (603, 'B');
