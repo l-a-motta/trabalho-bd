@@ -4,7 +4,7 @@
 -- SOMENTE DESCOMENTE SE quiser o codigo SQL para dropar todas as tabelas. Basta executar numa query dentro do banco correto
 -- select 'drop table if exists "' || tablename || '" cascade;' from pg_tables where schemaname = 'public';
 
-
+-- ! PERGUNTA PARA PROF SE VALE A PENA FAZER OS ENDERECOS NUMA TABELA E USAR FK NOS TODOS QUE ESTAO POR AE
 
 /* 	Criando tabela Destino
 	PK = Composta
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS Aeroporto (
 CREATE TABLE IF NOT EXISTS Voo (
 	
 	/*    ATRIBUTOS    */
-	Nro INT,
+	Nro INT,-- TODO Deveria ser SERIAL?
 	Aeroporto_Origem INT NOT NULL,
 	Aeroporto_Destino INT NOT NULL,
 	Data_Partida TIMESTAMP NOT NULL,
@@ -132,9 +132,8 @@ CREATE TABLE IF NOT EXISTS Voo (
 CREATE TABLE IF NOT EXISTS VooAssentos (
 
 	/*    ATRIBUTOS    */
-	Voo INT,
-	Assentos VARCHAR(30),
-	-- TODO O que significa Assentos? E um INT mesmo?
+	Voo INT,-- TODO Deveria ser SERIAL?
+	Assentos VARCHAR(30),-- TODO O que significa Assentos? E um INT mesmo?
 
 	/*    KEYS    */
 	CONSTRAINT PK_VooAssentos PRIMARY KEY(Voo, Assentos),
@@ -207,7 +206,7 @@ CREATE TABLE IF NOT EXISTS Embarque (
 	FKs = 0
 
 	UNIQUEs = 1
-		(Pais, Cidade, Bairro, Rua, Numero, Complemento)
+		(Pais, Cidade, Bairro, Rua, Numero)
 */
 CREATE TABLE IF NOT EXISTS Estadia (
 	/*    ATRIBUTOS    */
@@ -219,7 +218,7 @@ CREATE TABLE IF NOT EXISTS Estadia (
 	Numero VARCHAR(30) NOT NULL,
 	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
 	Nome VARCHAR(30) NOT NULL,
-	Nro_Quartos INT,
+	Nro_Quartos INT,-- TODO O que e exatamente isso? Quantos quartos tem no total? Quantos quartos tem disponivel?
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Estadia PRIMARY KEY(ID),
@@ -251,8 +250,8 @@ CREATE TABLE IF NOT EXISTS Local_ (
 	Nome VARCHAR(30) NOT NULL,
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Estadia PRIMARY KEY(ID),
-	CONSTRAINT UC_Estadia UNIQUE(Pais, Cidade, Bairro, Rua, Numero, Complemento)
+	CONSTRAINT PK_Local PRIMARY KEY(ID),
+	CONSTRAINT UC_Local UNIQUE(Pais, Cidade, Bairro, Rua, Numero, Complemento)
 	-- A chave secundária vale para diferenciarmos os Locais, uma vez que não existem dois Locais exatamente iguais
 
 	/*    CHECKS    */
