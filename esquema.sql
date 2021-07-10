@@ -322,6 +322,25 @@ CREATE TABLE IF NOT EXISTS OrganizadorRecomendacao (
 
 );
 
+CREATE TABLE IF NOT EXISTS Evento (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Data_Fim TIMESTAMP NOT NULL,
+	Organizador CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	-- TODO Certeza que organizador pode ser NULL?
+	Descricao VARCHAR(180),
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Evento PRIMARY KEY(Organizador, Data_Inicio),
+	CONSTRAINT FK_EventoLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Nao existe evento se nao tivermos um local para ele, logo CASCADE
+	
+
+	/*    CHECKS    */
+
+);
+
 -- ! FAZER EVENTO AQUI
 
 -- CREATE TABLE IF NOT EXISTS tabela (
