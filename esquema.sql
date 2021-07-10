@@ -356,7 +356,22 @@ CREATE TABLE IF NOT EXISTS EventoCategoria (
 
 );
 
+CREATE TABLE IF NOT EXISTS Participacao (
+	/*    ATRIBUTOS    */
+	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
 
+	/*    KEYS    */
+	CONSTRAINT PK_Participacao PRIMARY KEY(Cliente, LocalT, Data_Inicio),
+	CONSTRAINT FK_ParticipacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE SET NULL ON UPDATE CASCADE--TODO Checar se esse SET NULL faz sentido
+	-- Pode ser util guardar as participacoes, mesmo se perdemos os dados de um cliente
+	CONSTRAINT FK_ParticipacaoEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Nao seria util, no entanto, guardar as participacoes de um local que nao esta mais conosco
+
+	/*    CHECKS    */
+
+);
 
 
 -- CREATE TABLE IF NOT EXISTS tabela (
