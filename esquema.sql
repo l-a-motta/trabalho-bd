@@ -332,7 +332,7 @@ CREATE TABLE IF NOT EXISTS Evento (
 	Descricao VARCHAR(180),
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Evento PRIMARY KEY(Organizador, Data_Inicio),
+	CONSTRAINT PK_Evento PRIMARY KEY(LocalT, Data_Inicio),
 	CONSTRAINT FK_EventoLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Nao existe evento se nao tivermos um local para ele, logo CASCADE
 	
@@ -348,7 +348,7 @@ CREATE TABLE IF NOT EXISTS EventoCategoria (
 	Categoria VARCHAR(30),
 
 	/*    KEYS    */
-	CONSTRAINT PK_Participacao PRIMARY KEY(LocalT, Data_Inicio, Categoria),
+	CONSTRAINT PK_EventoCategoria PRIMARY KEY(LocalT, Data_Inicio, Categoria),
 	CONSTRAINT FK_EventoCategoriaEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Nao faz sentido guardar a categoria de um local que nao existe mais, CASCADE
 
@@ -364,7 +364,7 @@ CREATE TABLE IF NOT EXISTS Participacao (
 
 	/*    KEYS    */
 	CONSTRAINT PK_Participacao PRIMARY KEY(Cliente, LocalT, Data_Inicio),
-	CONSTRAINT FK_ParticipacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE SET NULL ON UPDATE CASCADE--TODO Checar se esse SET NULL faz sentido
+	CONSTRAINT FK_ParticipacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE SET NULL ON UPDATE CASCADE,--TODO Checar se esse SET NULL faz sentido
 	-- Pode ser util guardar as participacoes, mesmo se perdemos os dados de um cliente
 	CONSTRAINT FK_ParticipacaoEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Nao seria util, no entanto, guardar as participacoes de um local que nao esta mais conosco

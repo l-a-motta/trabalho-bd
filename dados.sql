@@ -165,11 +165,11 @@ INSERT INTO Evento VALUES (4, '2017-03-16 13:01:00', '2017-03-17 14:01:00', '111
 INSERT INTO Evento VALUES (3, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento em Alemanha, organizado por Sieg Heinz');-- Evento na Alemanha
 
 -- Inserts de EventoCategoria
-INSERT INTO Evento VALUES (1, '2017-03-15 13:01:00', 'Categoria 1');-- Categoria de Evento no Brasil
-INSERT INTO Evento VALUES (4, '2017-03-16 13:01:00', 'Categoria 2');-- Categoria de Evento na Inglaterra
-INSERT INTO Evento VALUES (3, '2017-03-17 13:01:00', 'Categoria 3');-- Categoria de Evento na Alemanha
+INSERT INTO EventoCategoria VALUES (1, '2017-03-15 13:01:00', 'Categoria 1');-- Categoria de Evento no Brasil
+INSERT INTO EventoCategoria VALUES (4, '2017-03-16 13:01:00', 'Categoria 2');-- Categoria de Evento na Inglaterra
+INSERT INTO EventoCategoria VALUES (3, '2017-03-17 13:01:00', 'Categoria 3');-- Categoria de Evento na Alemanha
 
 -- Inserts de Participacao
-INSERT INTO Evento VALUES ('111.222.333-45', 1, '2017-03-15 13:01:00');-- Categoria de Evento no Brasil
-INSERT INTO Evento VALUES ('111.222.333-46', 4, '2017-03-16 13:01:00');-- Categoria de Evento na Inglaterra
-INSERT INTO Evento VALUES ('111.222.333-47', 3, '2017-03-17 13:01:00');-- Categoria de Evento na Alemanha
+INSERT INTO Participacao VALUES ('111.222.333-45', 1, '2017-03-15 13:01:00');-- Categoria de Evento no Brasil
+INSERT INTO Participacao VALUES ('111.222.333-46', 4, '2017-03-16 13:01:00');-- Categoria de Evento na Inglaterra
+INSERT INTO Participacao VALUES ('111.222.333-47', 3, '2017-03-17 13:01:00');-- Categoria de Evento na Alemanha
