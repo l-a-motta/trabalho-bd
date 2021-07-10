@@ -229,6 +229,36 @@ CREATE TABLE IF NOT EXISTS Estadia (
 
 );
 
+/* 	Criando tabela Estadia
+	PK = Unica
+		ID
+
+	FKs = 0
+
+	UNIQUEs = 1
+		(Pais, Cidade, Bairro, Rua, Numero, Complemento)
+*/
+CREATE TABLE IF NOT EXISTS Local_ (
+	/*    ATRIBUTOS    */
+	ID SERIAL,
+	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Cidade VARCHAR(30) NOT NULL,
+	Bairro VARCHAR(30) NOT NULL,
+	Rua VARCHAR(30) NOT NULL,
+	Numero VARCHAR(30) NOT NULL,
+	Complemento VARCHAR(30),-- Nao e obrigatorio um complemento
+	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
+	Nome VARCHAR(30) NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Estadia PRIMARY KEY(ID),
+	CONSTRAINT UC_Estadia UNIQUE(Pais, Cidade, Bairro, Rua, Numero, Complemento)
+	-- A chave secundária vale para diferenciarmos os Locais, uma vez que não existem dois Locais exatamente iguais
+
+	/*    CHECKS    */
+
+);
+
 /* 	Criando tabela Voo
 	PK = Unica
 
