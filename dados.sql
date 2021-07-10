@@ -144,8 +144,20 @@ INSERT INTO public.Organizador VALUES ('111.222.334-33', '11.222.333/0001-03', '
 
 
 -- Inserts de OrganizadorTiposAtuacao
+INSERT INTO public.OrganizadorTiposAtuacao VALUES ('111.222.334-11', 'Turismo Brasileiro');
+INSERT INTO public.OrganizadorTiposAtuacao VALUES ('111.222.334-11', 'Radical');
+INSERT INTO public.OrganizadorTiposAtuacao VALUES ('111.222.334-11', 'Alcool');
+INSERT INTO public.OrganizadorTiposAtuacao VALUES ('111.222.334-11', 'Passesios no mar');
+INSERT INTO public.OrganizadorTiposAtuacao VALUES ('111.222.334-22', 'Turismo Britanico');
+INSERT INTO public.OrganizadorTiposAtuacao VALUES ('111.222.334-33', 'Turismo Alemão');
 
 -- Inserts de OrganizadorRecomendacao
+INSERT INTO public.OrganizadorRecomendacao VALUES ('111.222.334-11', 'Muito bom, turismo perfeito');
+INSERT INTO public.OrganizadorRecomendacao VALUES ('111.222.334-11', 'Gostei da gentileza e cortesia');
+INSERT INTO public.OrganizadorRecomendacao VALUES ('111.222.334-22', 'Bons drinks');
+INSERT INTO public.OrganizadorRecomendacao VALUES ('111.222.334-22', 'Nao recomendo, muito ruim');
+INSERT INTO public.OrganizadorRecomendacao VALUES ('111.222.334-33', 'Ate que foi dahorinha');
+
 
 -- Inserts de Evento
 INSERT INTO Evento VALUES (1, '2017-03-15 13:01:00', '2017-03-15 14:01:00', '111.222.334-11', 'Um belo evento em Brasil, organizado por Empresa Top');-- Evento no Brasil
