@@ -27,7 +27,7 @@ CREATE TABLE Destino (
 	
 	/*    CHECKS    */
 
-)
+);
 
 /* 	Criando tabela DestinoTags
 	PK = Composta
@@ -52,7 +52,7 @@ CREATE TABLE DestinoTags (
 
 	/*    CHECKS    */
 
-)
+);
 
 /* 	Criando tabela Aeroporto
 	PK = Unica
@@ -82,7 +82,7 @@ CREATE TABLE Aeroporto (
 	
 	/*    CHECKS    */
 
-)
+);
 
 /* 	Criando tabela Voo
 	PK = Unica
@@ -117,7 +117,7 @@ CREATE TABLE Voo (
 	-- E impossivel a data de chegada ser antes da de partida
 	-- TODO Na verdade e possivel sim, se ele pegar um voo e for contra os fuso horarios. Discutir isso 
 	
-)
+);
 
 /* 	Criando tabela Voo
 	PK = Composta
@@ -137,12 +137,12 @@ CREATE TABLE VooAssentos (
 
 	/*    KEYS    */
 	CONSTRAINT PK_VooAssentos PRIMARY KEY(Voo, Assentos),
-	CONSTRAINT FK_VooAssentos FOREIGN KEY(Voo) REFERENCES Voo(Nro) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_VooAssentos FOREIGN KEY(Voo) REFERENCES Voo(Nro) ON DELETE CASCADE ON UPDATE CASCADE
 	-- E impossivel existirem assentos nao associados a um voo
 	
 	/*    CHECKS    */
 
-)
+);
 
 /* 	Criando tabela Cliente
 	PK = Unica
@@ -169,11 +169,11 @@ CREATE TABLE Cliente (
 	MBTI CHAR(4) NOT NULL,-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
 
 	/*    KEYS    */
-	CONSTRAINT PK_Cliente PRIMARY KEY(CPF),
+	CONSTRAINT PK_Cliente PRIMARY KEY(CPF)
 
 	/*    CHECKS    */
 
-)
+);
 
 /* 	Criando tabela Embarque
 	PK = Unica
@@ -187,16 +187,17 @@ CREATE TABLE Embarque (
 	Voo INT,
 	Cliente CHAR(14),
 	Assento INT,-- O assento pode ser NULL para Voos que nao delineam assentos especificos
+	-- TODO Existe uma tabela para Assentos, deveria usar ela aqui? Mais uma FK?
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Embarque PRIMARY KEY(Voo, Cliente),
 	CONSTRAINT FK_EmbarqueVoo FOREIGN KEY(Voo) REFERENCES Voo(Nro) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_EmbarqueCliente FOREIGN KEY(Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_EmbarqueCliente FOREIGN KEY(Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Para que ocorra um embarque, tanto um Voo quanto um Cliente precisam necessariamente existir
 
 	/*    CHECKS    */
 
-)
+);
 
 /* 	Criando tabela Voo
 	PK = Unica
@@ -214,4 +215,4 @@ CREATE TABLE Embarque (
 
 -- 	/*    CHECKS    */
 
--- )
+-- );
