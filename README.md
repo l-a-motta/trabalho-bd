@@ -59,8 +59,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="images/cliente.png" alt="Tabela de Cliente" width="120" height="120">
-<img src="images/destino.png" alt="Tabela de Destino" width="120" height="120">
+<img src="images/cliente.png" alt="Tabela de Cliente">
+<img src="images/destino.png" alt="Tabela de Destino">
 
 <!-- GETTING STARTED -->
 ## Getting Started
