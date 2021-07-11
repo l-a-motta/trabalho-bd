@@ -531,7 +531,7 @@ CREATE TABLE IF NOT EXISTS ShowArtistas (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_ShowArtistas PRIMARY KEY(LocalT, Data_Inicio, Artista),-- TODO Vale a pena deixar artista como PK tambem? E se quiser mais de um artista?
-	CONSTRAINT FK_ShowArtistasShow FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Showt(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_ShowArtistasShowt FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Showt(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o show, nao faz sentido termos uma tupla de show artista, CASCADE
 	
 
@@ -624,7 +624,57 @@ CREATE TABLE IF NOT EXISTS FilmeAtores (
 
 );
 
+CREATE TABLE IF NOT EXISTS ExposicaoArte (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Nome VARCHAR(180) NOT NULL,
+	Tema VARCHAR(180) NOT NULL,
+	
+	
+	/*    KEYS    */
+	CONSTRAINT PK_ExposicaoArte PRIMARY KEY(LocalT, Data_Inicio),
+	CONSTRAINT FK_ExposicaoArte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	
 
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS ExposicaoArtistas (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Artista VARCHAR(180) NOT NULL,-- A ideia e termos somente os Artista mais prominentes (normalmente tres) escritos por extenso, nada muito complexo
+	
+	/*    KEYS    */
+	CONSTRAINT PK_ExposicaoArteArtista PRIMARY KEY(LocalT, Data_Inicio, Artista),-- TODO Vale a pena deixar Artista como PK tambem? E se quiser mais de um Artista?
+	CONSTRAINT FK_ExposicaoArteArtistaExposicaoArte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES ExposicaoArte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o ExposicaoArte, nao faz sentido termos uma tupla de ExposicaoArte Artista, CASCADE
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS ExpoGuia (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	
+	/*    KEYS    */
+	CONSTRAINT PK_ExpoGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
+	CONSTRAINT FK_ExpoGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o festival, nao faz sentido termos uma tupla de guia para esse festival, CASCADE
+
+	/*    CHECKS    */
+
+);
+
+-- TODO Percebi que essas tabelas ExpoGuia e GastorGuia podem ser simplificadas com uma tabela so, EventoGuia, e colocar os eventos la. 
+-- TODO So precisaria de LocalT e Data_Inicio entao acho valido que qualquer evento tecnicamente pode ter um guia. 
+-- TODO Vale notar que perderiamos a informacao de qual parte do evento (filme, festa, esporte, etc) exatamente o Guia estaria guiando, so saberiamos o Evento em si que o Guia esta guiando
 
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
