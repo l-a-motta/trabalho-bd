@@ -273,6 +273,7 @@ CREATE TABLE IF NOT EXISTS Organizador (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	CNPJ CHAR(18),-- Um CNPJ tem no maximo 14 caracteres (XX.XXX.XXX/0001-XX)
+	-- TODO Acho possivel usar CNPJ como PK tambem, ja que uma pessoa fisica pode possuir varios CNPJs, mas ai teria que mudar os inserts e as FKs aqui tambem
 	Tipo VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
@@ -483,7 +484,7 @@ CREATE TABLE IF NOT EXISTS FestivalGastronomico (
 	Tipo_Comida_Bebida VARCHAR(180) NOT NULL,
 	
 	/*    KEYS    */
-	CONSTRAINT PK_FestivalGastronomico PRIMARY KEY(LocalT, Data_Inicio)
+	CONSTRAINT PK_FestivalGastronomico PRIMARY KEY(LocalT, Data_Inicio),
 	CONSTRAINT FK_FestivalGastronomicoEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
 
@@ -513,7 +514,7 @@ CREATE TABLE IF NOT EXISTS Showt (
 	Genero_Musical VARCHAR(180) NOT NULL,
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Showt PRIMARY KEY(LocalT, Data_Inicio)
+	CONSTRAINT PK_Showt PRIMARY KEY(LocalT, Data_Inicio),
 	CONSTRAINT FK_ShowtEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
 	
@@ -545,7 +546,7 @@ CREATE TABLE IF NOT EXISTS Festa (
 	Tipo VARCHAR(180) NOT NULL,
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Festa PRIMARY KEY(LocalT, Data_Inicio)
+	CONSTRAINT PK_Festa PRIMARY KEY(LocalT, Data_Inicio),
 	CONSTRAINT FK_FestaEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
 
