@@ -711,6 +711,38 @@ CREATE TABLE IF NOT EXISTS EspetaculoArtistas (
 
 );
 
+CREATE TABLE IF NOT EXISTS CelebracaoReligiosa (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Religiao VARCHAR(180) NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_CelebracaoReligiosa PRIMARY KEY(LocalT, Data_Inicio),
+	CONSTRAINT FK_CelebracaoReligiosaEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS ReligioGuia (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	
+	/*    KEYS    */
+	CONSTRAINT PK_ReligioGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
+	CONSTRAINT FK_ReligioGuiaCelebracaoReligiosa FOREIGN KEY (LocalT, Data_Inicio) REFERENCES CelebracaoReligiosa(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_ReligioGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais a celebracao religio, nao faz sentido termos uma tupla de guia para essa religio, CASCADE
+
+	/*    CHECKS    */
+
+);
+
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
 	-- LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
