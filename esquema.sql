@@ -587,6 +587,45 @@ CREATE TABLE IF NOT EXISTS EsporteParticipantes (
 
 );
 
+-- ! FALTOU PASSEIO TURISTICO TOUR AQUI
+
+CREATE TABLE IF NOT EXISTS Filme (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Titulo VARCHAR(180) NOT NULL,
+	Genero VARCHAR(50) NOT NULL,
+	Ano_Lancamento TIMESTAMP NOT NULL,
+	Duracao TIME NOT NULL,-- Usamos TIME somente para as horas do filme, nao precisa de dia aqui
+	
+	
+	/*    KEYS    */
+	CONSTRAINT PK_ PRIMARY KEY(LocalT, Data_Inicio),
+	CONSTRAINT FK_ FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS FilmeAtores (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Ator VARCHAR(180) NOT NULL,-- A ideia e termos somente os atores mais prominentes (normalmente tres) escritos por extenso, nada muito complexo
+	
+	/*    KEYS    */
+	CONSTRAINT PK_FilmeAtores PRIMARY KEY(LocalT, Data_Inicio, Ator),-- TODO Vale a pena deixar Ator como PK tambem? E se quiser mais de um Ator?
+	CONSTRAINT FK_FilmeAtoresFilme FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Filmes(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o Filme, nao faz sentido termos uma tupla de Filme Ator, CASCADE
+
+	/*    CHECKS    */
+
+);
+
+
+
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
 	-- LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
