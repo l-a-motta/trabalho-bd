@@ -554,6 +554,39 @@ CREATE TABLE IF NOT EXISTS Festa (
 
 );
 
+CREATE TABLE IF NOT EXISTS Esportes (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Tipo VARCHAR(180) NOT NULL,
+	
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Esportes PRIMARY KEY(LocalT, Data_Inicio),
+	CONSTRAINT FK_EsportesEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS EsporteParticipantes (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Participantes VARCHAR(50) NOT NULL,
+	
+	
+	/*    KEYS    */
+	CONSTRAINT PK_EsporteParticipantes PRIMARY KEY(LocalT, Data_Inicio, Participantes),-- TODO Vale a pena deixar Participantes como PK tambem? E se quiser mais de um Participantes?
+	CONSTRAINT FK_EsporteParticipantesEsporte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Esportes(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o esporte, nao faz sentido termos uma tupla de esporte Participantes, CASCADE
+
+	/*    CHECKS    */
+
+);
+
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
 	-- LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
