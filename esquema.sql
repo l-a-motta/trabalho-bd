@@ -464,8 +464,8 @@ CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
 	
 	/*    KEYS    */
 	-- Vale notar que AvaliacaoGuia esta conectada a Orientacao, e nao diretamente a Guia
-	CONSTRAINT PK_Orientacao PRIMARY KEY(DataA, Guia, Cliente),
-	CONSTRAINT FK_AvaliacaoGuiaOrientacao FOREIGN KEY (Guia, Cliente) REFERENCES Orientacao(Guia, Cliente) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT PK_AvaliacaoGuia PRIMARY KEY(DataA, Guia, Cliente),
+	CONSTRAINT FK_AvaliacaoGuiaOrientacao FOREIGN KEY (Guia, Cliente) REFERENCES Orientacao(Guia, Cliente) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais a orientacao, a avalicao do guia deve ser removida, CASCADE
 	
 	/*    CHECKS    */
