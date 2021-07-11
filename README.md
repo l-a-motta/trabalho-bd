@@ -1,31 +1,9 @@
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
-***
-***
-***
-*** To avoid retyping too much info. Do a search and replace for the following:
-*** l-a-motta, trabalho-bd, @DaAntonetti, l.a.motta@usp.br, Banco de Dados - Turismo Internacional, Esse repositorio tem como principal objetivo guardar os arquivos SQL para criacao de um banco de dados de uma empresa fantasia de turismo internacional. O foco dessa empresa seria os eventos de cada localidade que ela oferece uma viagem para.
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][https://github.com/l-a-motta/trabalho-bd/graphs/contributors]
-[![Forks][forks-shield]][https://github.com/l-a-motta/trabalho-bd/network/members]
-[![Stargazers][stars-shield]][https://github.com/l-a-motta/trabalho-bd/stargazers]
-[![Issues][issues-shield]][https://github.com/l-a-motta/trabalho-bd/issues]
-[![MIT License][license-shield]][https://github.com/l-a-motta/trabalho-bd/blob/main/LICENSE]
-[![LinkedIn][linkedin-shield]][https://www.linkedin.com/in/l-a-motta/]
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -167,6 +145,7 @@ Project Link: [https://github.com/l-a-motta/trabalho-bd](https://github.com/l-a-
 [issues-shield]: https://img.shields.io/github/issues/l-a-motta/repo.svg?style=for-the-badge
 [issues-url]: https://github.com/l-a-motta/repo/issues
 [license-shield]: https://img.shields.io/github/license/l-a-motta/repo.svg?style=for-the-badge
-[https://github.com/l-a-motta/trabalho-bd/blob/main/LICENSE]: https://github.com/l-a-motta/repo/blob/master/LICENSE.txt
+[license-url]: https://github.com/l-a-motta/repo/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/l-a-motta
+
