@@ -107,7 +107,6 @@ INSERT INTO public.Hospedagem VALUES (1, '111.222.333-45', 'B12', '12399.99','20
 INSERT INTO public.Hospedagem VALUES (1, '111.222.333-45', 'B13', '10199.99','2017-03-15','2017-03-17');-- Mesmo cliente comprando dois quartos diferentes, valor de cada deve ser um SUM para achar o valor total
 INSERT INTO public.Hospedagem VALUES (1, '111.222.333-47', 'A01', '58999.99','2017-03-15','2017-03-25');
 
-
 -- Inserts de LocalT
 ALTER SEQUENCE LocalT_id_seq RESTART WITH 1;
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','1','17033691','Pousada do Canário');
@@ -267,3 +266,11 @@ INSERT INTO public.Espetaculo VALUES (6, '2017-03-18 13:01:00', 'Der Ring des Ni
 -- Inserts de EspetaculoArtistas
 INSERT INTO public.EspetaculoArtistas VALUES (5, '2017-03-18 13:01:00', 'Conglomerado de artistas de teatro');
 INSERT INTO public.EspetaculoArtistas VALUES (6, '2017-03-18 13:01:00', 'Conglomerado de artistas de teatro 2');
+
+
+-- Inserts de CelebracaoReligiosa
+INSERT INTO public.CelebracaoReligiosa VALUES (7, '2017-03-18 13:01:00', 'Cristianismo');
+INSERT INTO public.CelebracaoReligiosa VALUES (8, '2017-03-18 13:01:00', 'Judaismo');
+-- Inserts de ReligioGuia
+INSERT INTO public.ReligioGuia VALUES (7, '2017-03-18 13:01:00', '111.222.374-97');-- Guia 3 no evento 7 do prox dia
+INSERT INTO public.ReligioGuia VALUES (8, '2017-03-18 13:01:00', '111.222.234-28');-- Guia 2 tambem no evento 8 do prox dia
