@@ -30,7 +30,8 @@ drop table if exists ShowArtistas cascade;
 drop table if exists Festa cascade;
 drop table if exists Esporte cascade;
 drop table if exists EsporteParticipantes cascade;
--- ! OUTRA TABELA AQUI
+drop table if exists PasseioTuristicoTour cascade;
+drop table if exists PasseioRota cascade;
 drop table if exists Filme cascade;
 drop table if exists FilmeAtores cascade;
 drop table if exists ExposicaoArte cascade;
