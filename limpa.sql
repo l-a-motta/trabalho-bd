@@ -23,3 +23,8 @@ drop table if exists guia cascade;
 drop table if exists guiatiposatuacao cascade;
 drop table if exists orientacao cascade;
 drop table if exists avaliacaoguia cascade;
+drop table if exists FestivalGastronomico cascade;
+drop table if exists GastroGuia cascade;
+drop table if exists Showt cascade;
+drop table if exists ShowArtistas cascade;
+drop table if exists Festa cascade;
