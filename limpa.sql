@@ -38,3 +38,5 @@ drop table if exists ExposicaoArtistas cascade;
 drop table if exists ExpoGuia cascade;
 drop table if exists Espetaculo cascade;
 drop table if exists EspetaculoArtistas cascade;
+drop table if exists CelebracaoReligiosa cascade;
+drop table if exists ReligioGuia cascade;
