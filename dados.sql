@@ -227,3 +227,10 @@ INSERT INTO public.ShowArtistas VALUES (4, '2017-03-16 13:01:00', 'Um bossa novi
 INSERT INTO public.Festa VALUES (1, '2017-03-15 13:01:00', 'Pos-party de rock e salgados');-- O Evento 1 vai ter tanto um festival gastronomico e show, quanto uma festa
 INSERT INTO public.Festa VALUES (4, '2017-03-16 13:01:00', 'Pos-party de bossa nova e doces');-- O Evento 4 vai ter tanto um festival gastronomico e show, quanto uma festa
 
+-- Insert de Esporte
+INSERT INTO public.Esporte VALUES (2, '2017-03-17 13:01:00', 'Jogo de futebol');
+INSERT INTO public.Esporte VALUES (3, '2017-03-17 13:01:00', 'Jogo de basquete');
+
+-- Insert de EsporteParticipante
+INSERT INTO public.EsporteParticipante VALUES (2, '2017-03-17 13:01:00', 'Manchester United e Barcelona');
+INSERT INTO public.EsporteParticipante VALUES (3, '2017-03-17 13:01:00', 'Time basquete1 e Time basquete2');
