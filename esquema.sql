@@ -500,7 +500,8 @@ CREATE TABLE IF NOT EXISTS GastroGuia (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_GastroGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
-	CONSTRAINT FK_GastroGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_GastroGuiaFestivalGastronomico FOREIGN KEY (LocalT, Data_Inicio) REFERENCES FestivalGastronomico(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_GastroGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o festival, nao faz sentido termos uma tupla de guia para esse festival, CASCADE
 
 	/*    CHECKS    */
@@ -617,7 +618,7 @@ CREATE TABLE IF NOT EXISTS FilmeAtores (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_FilmeAtores PRIMARY KEY(LocalT, Data_Inicio, Ator),-- TODO Vale a pena deixar Ator como PK tambem? E se quiser mais de um Ator?
-	CONSTRAINT FK_FilmeAtoresFilme FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Filmes(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_FilmeAtoresFilme FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Filme(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o Filme, nao faz sentido termos uma tupla de Filme Ator, CASCADE
 
 	/*    CHECKS    */
@@ -665,8 +666,9 @@ CREATE TABLE IF NOT EXISTS ExpoGuia (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_ExpoGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
-	CONSTRAINT FK_ExpoGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
-	-- Se nao tem mais o festival, nao faz sentido termos uma tupla de guia para esse festival, CASCADE
+	CONSTRAINT FK_ExpoGuiaExposicaoArte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES ExposicaoArte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_ExpoGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
+	-- Se nao tem mais o expo, nao faz sentido termos uma tupla de guia para esse expo, CASCADE
 
 	/*    CHECKS    */
 
