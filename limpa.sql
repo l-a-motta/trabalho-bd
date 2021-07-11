@@ -28,3 +28,13 @@ drop table if exists GastroGuia cascade;
 drop table if exists Showt cascade;
 drop table if exists ShowArtistas cascade;
 drop table if exists Festa cascade;
+drop table if exists Esportes cascade;
+drop table if exists EsporteParticipantes cascade;
+-- ! OUTRA TABELA AQUI
+drop table if exists Filme cascade;
+drop table if exists FilmeAtores cascade;
+drop table if exists ExposicaoArte cascade;
+drop table if exists ExposicaoArtistas cascade;
+drop table if exists ExpoGuia cascade;
+drop table if exists Espetaculo cascade;
+drop table if exists EspetaculoArtistas cascade;
