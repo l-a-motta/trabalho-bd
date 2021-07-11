@@ -480,11 +480,12 @@ CREATE TABLE IF NOT EXISTS FestivalGastronomico (
 	/*    ATRIBUTOS    */
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
-	Tipo_Comida_Bebida VARCHAR(50) NOT NULL,
+	Tipo_Comida_Bebida VARCHAR(180) NOT NULL,
 	
 	/*    KEYS    */
 	CONSTRAINT PK_FestivalGastronomico PRIMARY KEY(LocalT, Data_Inicio)
-
+	CONSTRAINT FK_FestivalGastronomicoEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
 
 	/*    CHECKS    */
 
@@ -509,12 +510,13 @@ CREATE TABLE IF NOT EXISTS Showt (
 	/*    ATRIBUTOS    */
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
-	Genero_Musical VARCHAR(50) NOT NULL,
+	Genero_Musical VARCHAR(180) NOT NULL,
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Showt PRIMARY KEY(LocalT, Data_Inicio)
-
-
+	CONSTRAINT FK_ShowtEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	
 	/*    CHECKS    */
 
 );
@@ -523,7 +525,7 @@ CREATE TABLE IF NOT EXISTS ShowArtistas (
 	/*    ATRIBUTOS    */
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
-	Artista VARCHAR(30) NOT NULL,
+	Artista VARCHAR(50) NOT NULL,
 	
 	
 	/*    KEYS    */
@@ -540,11 +542,12 @@ CREATE TABLE IF NOT EXISTS Festa (
 	/*    ATRIBUTOS    */
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
-	Tipo VARCHAR(50) NOT NULL,
+	Tipo VARCHAR(180) NOT NULL,
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Festa PRIMARY KEY(LocalT, Data_Inicio)
-
+	CONSTRAINT FK_FestaEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
 
 	/*    CHECKS    */
 
@@ -558,7 +561,9 @@ CREATE TABLE IF NOT EXISTS Festa (
 	
 -- 	/*    KEYS    */
 	-- CONSTRAINT PK_ PRIMARY KEY(LocalT, Data_Inicio),
-
+	-- CONSTRAINT FK_ FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- -- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	
 
 -- 	/*    CHECKS    */
 
