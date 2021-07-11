@@ -505,7 +505,36 @@ CREATE TABLE IF NOT EXISTS GastroGuia (
 
 );
 
+CREATE TABLE IF NOT EXISTS Show (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Genero_Musical VARCHAR(50) NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Show PRIMARY KEY(LocalT, Data_Inicio),
 
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS ShowArtistas (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Artista VARCHAR(30) NOT NULL,
+	
+	
+	/*    KEYS    */
+	CONSTRAINT PK_ShowArtistas PRIMARY KEY(LocalT, Data_Inicio, Artista),-- TODO Vale a pena deixar artista como PK tambem? E se quiser mais de um artista?
+	CONSTRAINT FK_ShowArtistasShow FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Show(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o show, nao faz sentido termos uma tupla de show artista, CASCADE
+	
+
+	/*    CHECKS    */
+
+);
 
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
