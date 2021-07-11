@@ -412,7 +412,7 @@ CREATE TABLE IF NOT EXISTS Guia (
 	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
 	Naturalidade VARCHAR(30) NOT NULL,
 	Descricao VARCHAR(30),-- Existe muita variacao de telefone no mundo para especificarmos um numero menor
-	Formacao VARCHAR(30),
+	Formacao VARCHAR(30) NOT NULL,
 	Pagamento NUMERIC(11,3) NOT NULL,-- Aceitamos numeros com tres casas decimais de precisao, num maximo de preço igual a 999 999 999,999, por ser internacional algumas entidades usam a terceira casa decimal para centavos 
 	MBTI CHAR(4),-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
 
@@ -441,9 +441,10 @@ CREATE TABLE IF NOT EXISTS Orientacao (
 	/*    ATRIBUTOS    */
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Data_Orientacao TIMESTAMP,
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Orientacao PRIMARY KEY(Guia, Cliente),
+	CONSTRAINT PK_Orientacao PRIMARY KEY(Guia, Cliente, Data_Orientacao),
 	CONSTRAINT FK_OrientacaoGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- Se nao tem mais o guia, a orientacao deve ser removida, CASCADE
 	CONSTRAINT FK_OrientacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
@@ -455,7 +456,7 @@ CREATE TABLE IF NOT EXISTS Orientacao (
 
 CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
 	/*    ATRIBUTOS    */
-	DataA TIMESTAMP,
+	Data_Avaliacao TIMESTAMP,
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
@@ -464,7 +465,7 @@ CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
 	
 	/*    KEYS    */
 	-- Vale notar que AvaliacaoGuia esta conectada a Orientacao, e nao diretamente a Guia
-	CONSTRAINT PK_AvaliacaoGuia PRIMARY KEY(DataA, Guia, Cliente),
+	CONSTRAINT PK_AvaliacaoGuia PRIMARY KEY(Data_Avaliacao, Guia, Cliente),
 	CONSTRAINT FK_AvaliacaoGuiaOrientacao FOREIGN KEY (Guia, Cliente) REFERENCES Orientacao(Guia, Cliente) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais a orientacao, a avalicao do guia deve ser removida, CASCADE
 	
