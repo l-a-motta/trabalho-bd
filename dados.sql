@@ -239,7 +239,12 @@ INSERT INTO public.EsporteParticipantes VALUES (2, '2017-03-17 13:01:00', 'Manch
 INSERT INTO public.EsporteParticipantes VALUES (3, '2017-03-17 13:01:00', 'Time basquete1 e Time basquete2');
 
 
--- ! INSERT FALTANDO AQUI com evento 5 e 6
+-- Inserts de PasseioTuristicoTour
+INSERT INTO public.PasseioTuristicoTour VALUES (5, '2017-03-17 13:01:00', 'Passeio de onibus');
+INSERT INTO public.PasseioTuristicoTour VALUES (6, '2017-03-17 13:01:00', 'Passeio de Limousine');
+-- Inserts de PasseioRota
+INSERT INTO public.PasseioRota VALUES (5, '2017-03-17 13:01:00', 6, '13:01:00');-- O passeio vai do local 5 para o 6
+INSERT INTO public.PasseioRota VALUES (6, '2017-03-17 13:01:00', 5, '13:01:00');-- O passeio vai do local 6 para o 5
 
 
 -- Inserts de Filme
