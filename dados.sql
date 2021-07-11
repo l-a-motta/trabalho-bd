@@ -170,8 +170,33 @@ INSERT INTO EventoCategoria VALUES (4, '2017-03-16 13:01:00', 'Categoria 2');-- 
 INSERT INTO EventoCategoria VALUES (3, '2017-03-17 13:01:00', 'Categoria 3');-- Categoria de Evento na Alemanha
 
 -- Inserts de Participacao
-INSERT INTO Participacao VALUES ('111.222.333-45', 1, '2017-03-15 13:01:00');-- Categoria de Evento no Brasil
-INSERT INTO Participacao VALUES ('111.222.333-46', 4, '2017-03-16 13:01:00');-- Categoria de Evento na Inglaterra
-INSERT INTO Participacao VALUES ('111.222.333-47', 3, '2017-03-17 13:01:00');-- Categoria de Evento na Alemanha
+INSERT INTO Participacao VALUES ('111.222.333-45', 1, '2017-03-15 13:01:00');
+INSERT INTO Participacao VALUES ('111.222.333-46', 4, '2017-03-16 13:01:00');
+INSERT INTO Participacao VALUES ('111.222.333-47', 3, '2017-03-17 13:01:00');
 
 -- Inserts de AvaliacaoEvento
+INSERT INTO AvaliacaoEvento VALUES (1, '2017-03-15 13:01:00', '2017-03-15 13:31:21', '111.222.333-45', 4, 'Muito bom evento, gostei bastante');
+INSERT INTO AvaliacaoEvento VALUES (4, '2017-03-15 13:01:00', '2017-03-15 13:31:11', '111.222.333-46', 1, 'Não foi la essas coisas. Precisava de mais musica');
+INSERT INTO AvaliacaoEvento VALUES (3, '2017-03-15 13:01:00', '2017-03-15 13:31:43', '111.222.333-47', 5, 'Evento mais perfeito da minha vida');
+
+-- Inserts de Guia
+INSERT INTO public.Guia VALUES ('111.222.374-53', 'Turismo Internacional', 'Josefrina de Jesus', 'Josefrina@emailpessoal.com', '55 16 991235875', 'Brasil', 'Bauru', 'São Paulo', 'Rua 645', '12-10', '123456-33', 'Brasileiro', 'Um guia namoral e bacana', 'Formado em Turismo Internacional', 'Dinheiro ou Cartao', 'ENFJ');-- Guia 1
+INSERT INTO public.Guia VALUES ('111.222.234-28', 'Turismo Local', 'Bob McKenzie', 'Bob@emailpessoal.com', '15 13 991235511', 'Inglaterra','Londres','Greenwich','Rua 56','422','17033-321', 'Ingles', 'Aqui seguimos a tour à risca', 'Formado em Eventos Turisticos', 'Cartao', 'ENTP');-- Guia 2
+INSERT INTO public.Guia VALUES ('111.222.374-97', 'Qualquer Turismo', 'Finn Müller', 'Finn@emailpessoal.com', '22 16 991235523', 'Alemanha','Frankfurt','Hauptbahnhof','Rua 51','735','17033885', 'Alemão', 'Sem descricao detalhada', 'Formado em Administração', 'Dinheiro', 'ENFP');-- Guia 3
+
+-- Inserts de GuiaTiposAtuacao
+INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-53', 'Tipo 1');-- Guia 1
+INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-53', 'Tipo 2');-- Guia 1
+INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-53', 'Tipo 3');-- Guia 1
+INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.234-28', 'Tipo 2');-- Guia 2
+INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-97', 'Tipo 4');-- Guia 3
+
+-- Inserts de Orientacao
+INSERT INTO public.Orientacao VALUES ('111.222.374-53', '111.222.333-45', '2017-03-15 21:22:46');-- Guia com Cliente 1
+INSERT INTO public.Orientacao VALUES ('111.222.234-28', '111.222.333-45', '2017-03-16 22:21:32');-- Guia 2 com Cliente 1, outro horario
+INSERT INTO public.Orientacao VALUES ('111.222.374-97', '111.222.333-46', '2017-03-15 13:21:30');-- Guia 3 com Cliente 2
+
+-- Inserts de AvaliacaoGuia
+INSERT INTO public.AvaliacaoGuia VALUES ('2017-03-15 23:52:43', '111.222.374-53', '111.222.333-45', 3, 'Guia meio louco' );-- Guia com Cliente 1
+INSERT INTO public.AvaliacaoGuia VALUES ('2017-03-16 23:43:41', '111.222.234-28', '111.222.333-45', 4, 'Continua louco, mas nao nego que mostrou todos os lugares' );-- Guia com Cliente 1, outro horario
+INSERT INTO public.AvaliacaoGuia VALUES ('2017-03-15 23:22:46', '111.222.374-97', '111.222.333-46', 1, 'O guia apontou e fugiu' );-- Guia com Cliente 2
