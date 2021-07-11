@@ -588,7 +588,38 @@ CREATE TABLE IF NOT EXISTS EsporteParticipantes (
 
 );
 
--- ! FALTOU PASSEIO TURISTICO TOUR AQUI
+CREATE TABLE IF NOT EXISTS PasseioTuristicoTour (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Tipo VARCHAR(180) NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_PasseioTuristicoTour PRIMARY KEY(LocalT, Data_Inicio),
+	CONSTRAINT FK_PasseioTuristicoTour FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS PasseioRota (
+	/*    ATRIBUTOS    */
+	Local_Inicio INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Local_Final INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Horario TIME,-- Aceitamos nao ter horario fixo, pode ser rotacional
+	
+	/*    KEYS    */
+	CONSTRAINT PK_PasseioRota PRIMARY KEY(Local_Inicio, Data_Inicio, Local_Final),
+	CONSTRAINT FK_PasseioRotaPasseioTuristicoTour FOREIGN KEY (Local_Inicio, Data_Inicio) REFERENCES PasseioTuristicoTour(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	CONSTRAINT FK_PasseioRotaLocalFinal FOREIGN KEY (Local_Final) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Tambem deletamos a rota se o local final dela de repente sumir. Entao pedimos que insira uma nvoa rota
+
+	/*    CHECKS    */
+
+);
 
 CREATE TABLE IF NOT EXISTS Filme (
 	/*    ATRIBUTOS    */
@@ -742,19 +773,3 @@ CREATE TABLE IF NOT EXISTS ReligioGuia (
 	/*    CHECKS    */
 
 );
-
--- CREATE TABLE IF NOT EXISTS tabela (
--- 	/*    ATRIBUTOS    */
-	-- LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
-	-- Data_Inicio TIMESTAMP,
-	
-	
--- 	/*    KEYS    */
-	-- CONSTRAINT PK_ PRIMARY KEY(LocalT, Data_Inicio),
-	-- CONSTRAINT FK_ FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
-	-- -- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
-	
-
--- 	/*    CHECKS    */
-
--- );
