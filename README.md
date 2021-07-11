@@ -11,20 +11,20 @@
 <br />
 <p align="center">
   <a href="https://github.com/l-a-motta/trabalho-bd">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo" width="120" height="120">
   </a>
 
   <h3 align="center">Banco de Dados - Turismo Internacional</h3>
 
   <p align="center">
-    This repository is used to keep the SQL files for the creation of a database of a fantasy international tourism company. The focus of this company would be the events of each location that it offers a trip to. The language used for code comments is Brazilian Portuguese.
+    This trabalho-bdsitory is used to keep the SQL files for the creation of a database of a fantasy international tourism company. The focus of this company would be the events of each location that it offers a trip to. The language used for code comments is Brazilian Portuguese.
     <br />
     <a href="https://github.com/l-a-motta/trabalho-bd"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/l-a-motta/trabalho-bd">View Demo</a>
     ·
-    <a href="https://github.com/l-a-motta/trabalho-bd/issues">Report Bug</a>
+    <a href="https://github.com/l-a-motta/trabalho-bd/issues">trabalho-bdrt Bug</a>
     ·
     <a href="https://github.com/l-a-motta/trabalho-bd/issues">Request Feature</a>
   </p>
@@ -59,7 +59,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img src="images/cliente.png" alt="Tabela de Cliente" width="120" height="120">
+<img src="images/destino.png" alt="Tabela de Destino" width="120" height="120">
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -72,7 +73,7 @@ PostgreSQL 13.2 or newer, PGAdmin 4 or newer.
 
 ### Local Installation
 
-1. Clone the repo
+1. Clone the trabalho-bd
    ```sh
    git clone https://github.com/l-a-motta/trabalho-bd.git
    ```
@@ -94,10 +95,7 @@ PostgreSQL 13.2 or newer, PGAdmin 4 or newer.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+Use as you see fit. It's a prepared database with dummy data. We suggest you start trying to add some new tuples with INSERTs before trying anything more complex, like SELECTS.
 
 
 <!-- ROADMAP -->
@@ -136,16 +134,16 @@ Project Link: [https://github.com/l-a-motta/trabalho-bd](https://github.com/l-a-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/l-a-motta/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/l-a-motta/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/l-a-motta/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/l-a-motta/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/l-a-motta/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/l-a-motta/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/l-a-motta/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/l-a-motta/repo/issues
-[license-shield]: https://img.shields.io/github/license/l-a-motta/repo.svg?style=for-the-badge
-[license-url]: https://github.com/l-a-motta/repo/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/l-a-motta/trabalho-bd.svg?style=for-the-badge
+[contributors-url]: https://github.com/l-a-motta/trabalho-bd/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/l-a-motta/trabalho-bd.svg?style=for-the-badge
+[forks-url]: https://github.com/l-a-motta/trabalho-bd/network/members
+[stars-shield]: https://img.shields.io/github/stars/l-a-motta/trabalho-bd.svg?style=for-the-badge
+[stars-url]: https://github.com/l-a-motta/trabalho-bd/stargazers
+[issues-shield]: https://img.shields.io/github/issues/l-a-motta/trabalho-bd.svg?style=for-the-badge
+[issues-url]: https://github.com/l-a-motta/trabalho-bd/issues
+[license-shield]: https://img.shields.io/github/license/l-a-motta/trabalho-bd.svg?style=for-the-badge
+[license-url]: https://github.com/l-a-motta/trabalho-bd/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/l-a-motta
 
