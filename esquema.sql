@@ -411,9 +411,10 @@ CREATE TABLE IF NOT EXISTS Guia (
 	Numero VARCHAR(30) NOT NULL,
 	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
 	Naturalidade VARCHAR(30) NOT NULL,
-	Descricao VARCHAR(30),-- Existe muita variacao de telefone no mundo para especificarmos um numero menor
-	Formacao VARCHAR(30) NOT NULL,
-	Pagamento NUMERIC(11,3) NOT NULL,-- Aceitamos numeros com tres casas decimais de precisao, num maximo de preço igual a 999 999 999,999, por ser internacional algumas entidades usam a terceira casa decimal para centavos 
+	Descricao VARCHAR(180),-- Existe muita variacao de telefone no mundo para especificarmos um numero menor
+	Formacao VARCHAR(50) NOT NULL,
+	Pagamento VARCHAR(30) NOT NULL,
+	-- TODO Pagamento é a forma de pagamento, ou o preco estatico do guia? Preco estatico e esquisito
 	MBTI CHAR(4),-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
 
 	/*    KEYS    */
@@ -441,10 +442,10 @@ CREATE TABLE IF NOT EXISTS Orientacao (
 	/*    ATRIBUTOS    */
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Data_Orientacao TIMESTAMP,
+	-- TODO Temos um problema de que um Cliente pode spammar avaliacoes se nao tivermos outro dado para associar avaliacaoguia com orientacao, tipo uma data 
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Orientacao PRIMARY KEY(Guia, Cliente, Data_Orientacao),
+	CONSTRAINT PK_Orientacao PRIMARY KEY(Guia, Cliente),
 	CONSTRAINT FK_OrientacaoGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- Se nao tem mais o guia, a orientacao deve ser removida, CASCADE
 	CONSTRAINT FK_OrientacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
