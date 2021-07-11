@@ -1,7 +1,7 @@
 -- AVISOS:
--- Consideramos que strings pequenas possuem no maximo 30 caracteres, medias 50 e grandes 180 (um tweet) 
+-- Consideramos que strings pequenas possuem no maximo 30 caracteres, medias 50 e grandes 180 (o tamanho de um tweet) 
 
--- SOMENTE DESCOMENTE SE quiser o codigo SQL para dropar todas as tabelas. Basta executar numa query dentro do banco correto
+-- Use a linha comentada abaixo quiser o codigo SQL para dropar todas as tabelas. Basta executar numa query dentro do banco desejado
 -- select 'drop table if exists "' || tablename || '" cascade;' from pg_tables where schemaname = 'public';
 
 -- ! PERGUNTA PARA PROF SE VALE A PENA FAZER OS ENDERECOS NUMA TABELA E USAR FK NOS TODOS QUE ESTAO POR AE
