@@ -536,6 +536,20 @@ CREATE TABLE IF NOT EXISTS ShowArtistas (
 
 );
 
+CREATE TABLE IF NOT EXISTS Festa (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Tipo VARCHAR(50) NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Festa PRIMARY KEY(LocalT, Data_Inicio),
+
+
+	/*    CHECKS    */
+
+);
+
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
 	-- LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
