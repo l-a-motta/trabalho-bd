@@ -379,14 +379,14 @@ CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
 	/*    ATRIBUTOS    */
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
-	DataA TIMESTAMP,--TODO O que diferencia essa data da de cima? E a data que a avaliacao foi feita?
+	DataA TIMESTAMP,
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Estrelas CHAR(1) NOT NULL,-- So precisamos de um numero de estrelas, considerando que o total e 5
+	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
 	Descricao VARCHAR(180),
 	
 
 	/*    KEYS    */
-	-- Vale notar que AvaliacaoEvento esta conectada a Participacao, e nao a Evento
+	-- Vale notar que AvaliacaoEvento esta conectada a Participacao, e nao diretamente a Evento
 	CONSTRAINT PK_AvaliacaoEvento PRIMARY KEY(LocalT, Data_Inicio, DataA, Cliente),
 	CONSTRAINT FK_AvaliacaoEventoParticipacao FOREIGN KEY (Cliente, LocalT, Data_Inicio) REFERENCES Participacao(Cliente, LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Se participacao poder ficar NULL, vai dar conflito de semantica aqui visto q precisamos remover a avaliacao se perdermos a participacao
 	-- Se a participacao for removida, nao iremos guardar a avaliacao, para manter tudo justo
@@ -397,6 +397,82 @@ CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
 
 );
 
+CREATE TABLE IF NOT EXISTS Guia (
+	/*    ATRIBUTOS    */
+	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Tipo VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
+	Nome VARCHAR(30) NOT NULL,
+	Email VARCHAR(30) NOT NULL,
+	Telefone VARCHAR(30) NOT NULL,
+	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Cidade VARCHAR(30) NOT NULL,
+	Bairro VARCHAR(30) NOT NULL,
+	Rua VARCHAR(30) NOT NULL,
+	Numero VARCHAR(30) NOT NULL,
+	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
+	Naturalidade VARCHAR(30) NOT NULL,
+	Descricao VARCHAR(180),-- Existe muita variacao de telefone no mundo para especificarmos um numero menor
+	Formacao VARCHAR(50) NOT NULL,
+	Pagamento VARCHAR(30) NOT NULL,
+	-- TODO Pagamento é a forma de pagamento, ou o preco estatico do guia? Preco estatico e esquisito
+	MBTI CHAR(4),-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
+
+	/*    KEYS    */
+	CONSTRAINT PK_Guia PRIMARY KEY(CPF)
+	
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS GuiaTiposAtuacao (
+	/*    ATRIBUTOS    */
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	TiposAtuacao VARCHAR(30),
+	
+	/*    KEYS    */
+	CONSTRAINT PK_GuiaTiposAtuacao PRIMARY KEY(Guia, TiposAtuacao),
+	CONSTRAINT FK_GuiaTiposAtuacaoGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem guia, nao tem os tipos de atuacao dele, CASCADE
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS Orientacao (
+	/*    ATRIBUTOS    */
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	-- TODO Temos um problema de que um Cliente pode spammar avaliacoes se nao tivermos outro dado para associar avaliacaoguia com orientacao, tipo uma data 
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Orientacao PRIMARY KEY(Guia, Cliente),
+	CONSTRAINT FK_OrientacaoGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
+	-- Se nao tem mais o guia, a orientacao deve ser removida, CASCADE
+	CONSTRAINT FK_OrientacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o cliente, a orientacao deve ser removida, CASCADE
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
+	/*    ATRIBUTOS    */
+	Data_Avaliacao TIMESTAMP,
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
+	Descricao VARCHAR(180),
+	
+	
+	/*    KEYS    */
+	-- Vale notar que AvaliacaoGuia esta conectada a Orientacao, e nao diretamente a Guia
+	CONSTRAINT PK_AvaliacaoGuia PRIMARY KEY(Data_Avaliacao, Guia, Cliente),
+	CONSTRAINT FK_AvaliacaoGuiaOrientacao FOREIGN KEY (Guia, Cliente) REFERENCES Orientacao(Guia, Cliente) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais a orientacao, a avalicao do guia deve ser removida, CASCADE
+	
+	/*    CHECKS    */
+
+);
 
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
