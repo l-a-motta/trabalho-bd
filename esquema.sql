@@ -676,6 +676,39 @@ CREATE TABLE IF NOT EXISTS ExpoGuia (
 -- TODO So precisaria de LocalT e Data_Inicio entao acho valido que qualquer evento tecnicamente pode ter um guia. 
 -- TODO Vale notar que perderiamos a informacao de qual parte do evento (filme, festa, esporte, etc) exatamente o Guia estaria guiando, so saberiamos o Evento em si que o Guia esta guiando
 
+CREATE TABLE IF NOT EXISTS Espetaculo (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Titulo VARCHAR(180) NOT NULL,
+	Genero VARCHAR(180) NOT NULL,
+	Duracao TIME NOT NULL,-- Usamos TIME somente para as horas do filme, nao precisa de dia aqui
+	
+	/*    KEYS    */
+	CONSTRAINT PK_Espetaculo PRIMARY KEY(LocalT, Data_Inicio),
+	CONSTRAINT FK_Espetaculo FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS EspetaculoArtistas (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Artista VARCHAR(180) NOT NULL,-- A ideia e termos somente os Artista mais prominentes (normalmente tres) escritos por extenso, nada muito complexo
+	
+	/*    KEYS    */
+	CONSTRAINT PK_EspetaculoArtista PRIMARY KEY(LocalT, Data_Inicio, Artista),-- TODO Vale a pena deixar Artista como PK tambem? E se quiser mais de um Artista?
+	CONSTRAINT FK_EspetaculoArtistaEspetaculo FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Espetaculo(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o Espetaculo, nao faz sentido termos uma tupla de Espetaculo Artista, CASCADE
+
+	/*    CHECKS    */
+
+);
+
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
 	-- LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
