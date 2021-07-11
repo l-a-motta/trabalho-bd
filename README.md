@@ -1,9 +1,31 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Thanks again! Now go create something AMAZING! :D
+***
+***
+***
+*** To avoid retyping too much info. Do a search and replace for the following:
+*** l-a-motta, trabalho-bd, @DaAntonetti, l.a.motta@usp.br, Banco de Dados - Turismo Internacional, Esse repositorio tem como principal objetivo guardar os arquivos SQL para criacao de um banco de dados de uma empresa fantasia de turismo internacional. O foco dessa empresa seria os eventos de cada localidade que ela oferece uma viagem para.
+-->
+
+
+
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][https://github.com/l-a-motta/trabalho-bd/graphs/contributors]
+[![Forks][forks-shield]][https://github.com/l-a-motta/trabalho-bd/network/members]
+[![Stargazers][stars-shield]][https://github.com/l-a-motta/trabalho-bd/stargazers]
+[![Issues][issues-shield]][https://github.com/l-a-motta/trabalho-bd/issues]
+[![MIT License][license-shield]][https://github.com/l-a-motta/trabalho-bd/blob/main/LICENSE]
+[![LinkedIn][linkedin-shield]][https://www.linkedin.com/in/l-a-motta/]
 
 
 
@@ -38,15 +60,12 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#installation">Local Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -54,7 +73,6 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -84,7 +102,11 @@ PostgreSQL 13.2 or newer, PGAdmin 4 or newer.
    
 3. Create a local database to run our .sql files, then open up the Query Tool inside that database
 
-4. Execute our .sql scripts, in the following order: limpa.sql | esquema.sql | dados.sql
+4. Execute our .sql scripts, in the following order: 
+    ```limpa.sql 
+    esquema.sql
+    dados.sql
+    ```
 
 5. Now you have a fully populated database! Make sure to always run limpa.sql before the others, so you don't run the risk of leaving some table behind when recreating
 
@@ -130,7 +152,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Leonardo Antonetti da Motta - [@@DaAntonetti](https://twitter.com/@DaAntonetti) - l.a.motta@usp.br
+Leonardo Antonetti da Motta - [@DaAntonetti](https://twitter.com/@DaAntonetti) - l.a.motta@usp.br
 
 Project Link: [https://github.com/l-a-motta/trabalho-bd](https://github.com/l-a-motta/trabalho-bd)
 
@@ -145,6 +167,6 @@ Project Link: [https://github.com/l-a-motta/trabalho-bd](https://github.com/l-a-
 [issues-shield]: https://img.shields.io/github/issues/l-a-motta/repo.svg?style=for-the-badge
 [issues-url]: https://github.com/l-a-motta/repo/issues
 [license-shield]: https://img.shields.io/github/license/l-a-motta/repo.svg?style=for-the-badge
-[license-url]: https://github.com/l-a-motta/repo/blob/master/LICENSE.txt
+[https://github.com/l-a-motta/trabalho-bd/blob/main/LICENSE]: https://github.com/l-a-motta/repo/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/l-a-motta
