@@ -59,6 +59,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+<a href="https://app.diagrams.net/#G1cmGM3G4dt-Ci_I8Xf3_cWyz8cWcEQT5G">
+    Check out our Draw.io with the Relational Model!
+</a>
+
 <img src="images/cliente.png" alt="Tabela de Cliente">
 <img src="images/destino.png" alt="Tabela de Destino">
 
