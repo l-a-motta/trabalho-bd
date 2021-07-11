@@ -474,11 +474,47 @@ CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
 
 );
 
+-- ! TABELAS DE ESPECIALIZACAO DE EVENTO
+
+CREATE TABLE IF NOT EXISTS FestivalGastronomico (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Tipo_Comida_Bebida VARCHAR(50) NOT NULL,
+	
+	/*    KEYS    */
+	CONSTRAINT PK_FestivalGastronomico PRIMARY KEY(LocalT, Data_Inicio)
+
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS GastroGuia (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	
+	/*    KEYS    */
+	CONSTRAINT PK_GastroGuia PRIMARY KEY(LocalT, Data_Inicio, Guia)-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
+	CONSTRAINT FK_GastroGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o festival, nao faz sentido termos uma tupla de guia para esse festival, CASCADE
+
+	/*    CHECKS    */
+
+);
+
+
+
 -- CREATE TABLE IF NOT EXISTS tabela (
 -- 	/*    ATRIBUTOS    */
-
+	-- LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	-- Data_Inicio TIMESTAMP,
+	
 	
 -- 	/*    KEYS    */
+	-- CONSTRAINT PK_ PRIMARY KEY(LocalT, Data_Inicio),
 
 
 -- 	/*    CHECKS    */
