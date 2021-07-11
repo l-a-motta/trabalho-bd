@@ -500,7 +500,7 @@ CREATE TABLE IF NOT EXISTS GastroGuia (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_GastroGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
-	CONSTRAINT FK_GastroGuiaFestivalGastronomico FOREIGN KEY (LocalT, Data_Inicio) REFERENCES FestivalGastronomico(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_GastroGuiaFestivalGastronomico FOREIGN KEY (LocalT, Data_Inicio) REFERENCES FestivalGastronomico(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT FK_GastroGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o festival, nao faz sentido termos uma tupla de guia para esse festival, CASCADE
 
@@ -555,7 +555,7 @@ CREATE TABLE IF NOT EXISTS Festa (
 
 );
 
-CREATE TABLE IF NOT EXISTS Esportes (
+CREATE TABLE IF NOT EXISTS Esporte (
 	/*    ATRIBUTOS    */
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
@@ -563,8 +563,8 @@ CREATE TABLE IF NOT EXISTS Esportes (
 	
 	
 	/*    KEYS    */
-	CONSTRAINT PK_Esportes PRIMARY KEY(LocalT, Data_Inicio),
-	CONSTRAINT FK_EsportesEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT PK_Esporte PRIMARY KEY(LocalT, Data_Inicio),
+	CONSTRAINT FK_EsporteEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
 	
 
@@ -581,7 +581,7 @@ CREATE TABLE IF NOT EXISTS EsporteParticipantes (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_EsporteParticipantes PRIMARY KEY(LocalT, Data_Inicio, Participantes),-- TODO Vale a pena deixar Participantes como PK tambem? E se quiser mais de um Participantes?
-	CONSTRAINT FK_EsporteParticipantesEsporte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Esportes(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_EsporteParticipantesEsporte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Esporte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o esporte, nao faz sentido termos uma tupla de esporte Participantes, CASCADE
 
 	/*    CHECKS    */
@@ -601,8 +601,8 @@ CREATE TABLE IF NOT EXISTS Filme (
 	
 	
 	/*    KEYS    */
-	CONSTRAINT PK_ PRIMARY KEY(LocalT, Data_Inicio),
-	CONSTRAINT FK_ FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT PK_Filme PRIMARY KEY(LocalT, Data_Inicio),
+	CONSTRAINT FK_FilmeEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
 	
 
@@ -650,8 +650,8 @@ CREATE TABLE IF NOT EXISTS ExposicaoArtistas (
 	Artista VARCHAR(180) NOT NULL,-- A ideia e termos somente os Artista mais prominentes (normalmente tres) escritos por extenso, nada muito complexo
 	
 	/*    KEYS    */
-	CONSTRAINT PK_ExposicaoArteArtista PRIMARY KEY(LocalT, Data_Inicio, Artista),-- TODO Vale a pena deixar Artista como PK tambem? E se quiser mais de um Artista?
-	CONSTRAINT FK_ExposicaoArteArtistaExposicaoArte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES ExposicaoArte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT PK_ExposicaoArtistas PRIMARY KEY(LocalT, Data_Inicio, Artista),-- TODO Vale a pena deixar Artista como PK tambem? E se quiser mais de um Artista?
+	CONSTRAINT FK_ExposicaoArtistasExposicaoArte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES ExposicaoArte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o ExposicaoArte, nao faz sentido termos uma tupla de ExposicaoArte Artista, CASCADE
 
 	/*    CHECKS    */
@@ -666,8 +666,8 @@ CREATE TABLE IF NOT EXISTS ExpoGuia (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_ExpoGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
-	CONSTRAINT FK_ExpoGuiaExposicaoArte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES ExposicaoArte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
-	CONSTRAINT FK_ExpoGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_ExpoGuiaExposicaoArte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES ExposicaoArte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_ExpoGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o expo, nao faz sentido termos uma tupla de guia para esse expo, CASCADE
 
 	/*    CHECKS    */
