@@ -107,7 +107,6 @@ INSERT INTO public.Hospedagem VALUES (1, '111.222.333-45', 'B12', '12399.99','20
 INSERT INTO public.Hospedagem VALUES (1, '111.222.333-45', 'B13', '10199.99','2017-03-15','2017-03-17');-- Mesmo cliente comprando dois quartos diferentes, valor de cada deve ser um SUM para achar o valor total
 INSERT INTO public.Hospedagem VALUES (1, '111.222.333-47', 'A01', '58999.99','2017-03-15','2017-03-25');
 
-
 -- Inserts de LocalT
 ALTER SEQUENCE LocalT_id_seq RESTART WITH 1;
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','1','17033691','Pousada do Canário');
@@ -142,7 +141,6 @@ INSERT INTO public.Organizador VALUES ('111.222.334-11', '11.222.333/0001-01', '
 INSERT INTO public.Organizador VALUES ('111.222.334-22', '11.222.333/0001-02', 'Medio Porte', 'John Doe', 'John@emailpessoal.com', '55 16 991238654', 'Inglaterra','Londres','Greenwich','Rua 12','423','17033-333', 'Best Company', '00 16 991235486', 'Best@emailempresa.com');
 INSERT INTO public.Organizador VALUES ('111.222.334-33', '11.222.333/0001-03', 'Grande Porte', 'Heinz Doofenshmirtz', 'Heinz@emailpessoal.com', '55 16 991235274', 'Alemanha','Frankfurt','Hauptbahnhof','Rua 6','987','17033695', 'Sieg Heinz', '00 16 991235125', 'Sieg@emailempresa.com');
 
-
 -- Inserts de OrganizadorTiposAtuacao
 INSERT INTO public.OrganizadorTiposAtuacao VALUES ('111.222.334-11', 'Turismo Brasileiro');
 INSERT INTO public.OrganizadorTiposAtuacao VALUES ('111.222.334-11', 'Radical');
@@ -158,16 +156,25 @@ INSERT INTO public.OrganizadorRecomendacao VALUES ('111.222.334-22', 'Bons drink
 INSERT INTO public.OrganizadorRecomendacao VALUES ('111.222.334-22', 'Nao recomendo, muito ruim');
 INSERT INTO public.OrganizadorRecomendacao VALUES ('111.222.334-33', 'Ate que foi dahorinha');
 
-
 -- Inserts de Evento
 INSERT INTO Evento VALUES (1, '2017-03-15 13:01:00', '2017-03-15 14:01:00', '111.222.334-11', 'Um belo evento em Brasil, organizado por Empresa Top');-- Evento no Brasil
 INSERT INTO Evento VALUES (4, '2017-03-16 13:01:00', '2017-03-17 14:01:00', '111.222.334-22', 'Um belo evento em Inglaterra, organizado por Best Company');-- Evento na Inglaterra
 INSERT INTO Evento VALUES (3, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento em Alemanha, organizado por Sieg Heinz');-- Evento na Alemanha
+INSERT INTO Evento VALUES (2, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento2 em Alemanha, organizado por Sieg Heinz');-- A partir de aqui criamos mais eventos para usar nas especializacoes. O mesmo organizador esta em todas elas
+INSERT INTO Evento VALUES (5, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento3 em Alemanha, organizado por Sieg Heinz');
+INSERT INTO Evento VALUES (6, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento4 em Alemanha, organizado por Sieg Heinz');
+INSERT INTO Evento VALUES (7, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento5 em Alemanha, organizado por Sieg Heinz');
+INSERT INTO Evento VALUES (8, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');
+INSERT INTO Evento VALUES (5, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');-- Mesmo evento no local 5, mas no dia seguinte
+INSERT INTO Evento VALUES (6, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');-- Mesmo evento no local 6, mas no dia seguinte
+INSERT INTO Evento VALUES (7, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');-- Mesmo evento no local 7, mas no dia seguinte
+INSERT INTO Evento VALUES (8, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');-- Mesmo evento no local 8, mas no dia seguinte
 
 -- Inserts de EventoCategoria
 INSERT INTO EventoCategoria VALUES (1, '2017-03-15 13:01:00', 'Categoria 1');-- Categoria de Evento no Brasil
 INSERT INTO EventoCategoria VALUES (4, '2017-03-16 13:01:00', 'Categoria 2');-- Categoria de Evento na Inglaterra
 INSERT INTO EventoCategoria VALUES (3, '2017-03-17 13:01:00', 'Categoria 3');-- Categoria de Evento na Alemanha
+-- Como nao e obrigatorio que um evento tenha categoria, nao vamos adicionar os outros eventos do Organizador 'Sieg Heinz' aqui
 
 -- Inserts de Participacao
 INSERT INTO Participacao VALUES ('111.222.333-45', 1, '2017-03-15 13:01:00');
@@ -200,3 +207,75 @@ INSERT INTO public.Orientacao VALUES ('111.222.374-97', '111.222.333-47');-- Gui
 INSERT INTO public.AvaliacaoGuia VALUES ('2017-03-15 23:52:43', '111.222.374-53', '111.222.333-45', 3, 'Guia meio louco' );-- Guia com Cliente 1
 INSERT INTO public.AvaliacaoGuia VALUES ('2017-03-16 23:43:41', '111.222.234-28', '111.222.333-46', 4, 'Bom guia' );-- Guia com Cliente 2
 INSERT INTO public.AvaliacaoGuia VALUES ('2017-03-15 23:22:46', '111.222.374-97', '111.222.333-47', 1, 'O guia apontou e fugiu' );-- Guia com Cliente 3
+
+-- ! INSERTS DE ESPECIALIZACAO DE EVENTO
+
+-- Inserts de FestivalGastronomico
+INSERT INTO public.FestivalGastronomico VALUES (1, '2017-03-15 13:01:00', 'Comidas salgadas');
+INSERT INTO public.FestivalGastronomico VALUES (4, '2017-03-16 13:01:00', 'Comidas doces');
+-- Inserts de GastroGuia
+INSERT INTO public.GastroGuia VALUES (1, '2017-03-15 13:01:00', '111.222.374-53');-- Guia 1 no evento 1
+INSERT INTO public.GastroGuia VALUES (4, '2017-03-16 13:01:00', '111.222.234-28');-- Guia 2 no evento 4
+
+
+-- Inserts de Showt
+INSERT INTO public.Showt VALUES (1, '2017-03-15 13:01:00', 'Rock');-- O Evento 1 vai ter tanto um festival gastronomico quanto um show nele
+INSERT INTO public.Showt VALUES (4, '2017-03-16 13:01:00', 'Bossa nova');-- O Evento 4 vai ter tanto um festival gastronomico quanto um show nele
+-- Inserts de ShowArtistas
+INSERT INTO public.ShowArtistas VALUES (1, '2017-03-15 13:01:00', 'Um rockeiro qualquer');
+INSERT INTO public.ShowArtistas VALUES (4, '2017-03-16 13:01:00', 'Um bossa novista qualquer');
+
+
+-- Inserts de Festa
+INSERT INTO public.Festa VALUES (1, '2017-03-15 13:01:00', 'Pos-party de rock e salgados');-- O Evento 1 vai ter tanto um festival gastronomico e show, quanto uma festa
+INSERT INTO public.Festa VALUES (4, '2017-03-16 13:01:00', 'Pos-party de bossa nova e doces');-- O Evento 4 vai ter tanto um festival gastronomico e show, quanto uma festa
+
+
+-- Inserts de Esporte
+INSERT INTO public.Esporte VALUES (2, '2017-03-17 13:01:00', 'Jogo de futebol');
+INSERT INTO public.Esporte VALUES (3, '2017-03-17 13:01:00', 'Jogo de basquete');
+-- Inserts de EsporteParticipantes
+INSERT INTO public.EsporteParticipantes VALUES (2, '2017-03-17 13:01:00', 'Manchester United e Barcelona');
+INSERT INTO public.EsporteParticipantes VALUES (3, '2017-03-17 13:01:00', 'Time basquete1 e Time basquete2');
+
+
+-- Inserts de PasseioTuristicoTour
+INSERT INTO public.PasseioTuristicoTour VALUES (5, '2017-03-17 13:01:00', 'Passeio de onibus');
+INSERT INTO public.PasseioTuristicoTour VALUES (6, '2017-03-17 13:01:00', 'Passeio de Limousine');
+-- Inserts de PasseioRota
+INSERT INTO public.PasseioRota VALUES (5, '2017-03-17 13:01:00', 6, '13:01:00');-- O passeio vai do local 5 para o 6
+INSERT INTO public.PasseioRota VALUES (6, '2017-03-17 13:01:00', 5, '13:01:00');-- O passeio vai do local 6 para o 5
+
+
+-- Inserts de Filme
+INSERT INTO public.Filme VALUES (7, '2017-03-17 13:01:00', 'Robocop', 'SciFi', '2012-01-12', '01:30:00');
+INSERT INTO public.Filme VALUES (8, '2017-03-17 13:01:00', 'Exterminador do Futuro', 'Ação', '2014-05-21', '02:30:00');
+-- Inserts de FilmeAtores
+INSERT INTO public.FilmeAtores VALUES (7, '2017-03-17 13:01:00', 'José Padilha com Joel Kinnaman, Gary Oldman​, Michael Keaton, Abbie Cornish');
+INSERT INTO public.FilmeAtores VALUES (8, '2017-03-17 13:01:00', ' Tim Miller com Arnold Schwarzenegger, Linda Hamilton, Mackenzie Davis, Gabriel Luna');
+
+
+-- Inserts de ExposicaoArte
+INSERT INTO public.ExposicaoArte VALUES (7, '2017-03-17 13:01:00', 'Expo do Robocop', 'Tema de Robocop');-- O Evento 7 vai ter tanto um filme quanto uma expo
+INSERT INTO public.ExposicaoArte VALUES (8, '2017-03-17 13:01:00', 'Expo do Exterminador do Futuro', 'Tema de Exterminador');-- O Evento 8 vai ter tanto um filme quanto uma expo
+-- Inserts de ExposicaoArtistas
+INSERT INTO public.ExposicaoArtistas VALUES (7, '2017-03-17 13:01:00', 'Conglomerado de artistas');
+INSERT INTO public.ExposicaoArtistas VALUES (8, '2017-03-17 13:01:00', 'Conglomerado de artistas 2');
+-- Inserts de ExpoGuia
+INSERT INTO public.ExpoGuia VALUES (7, '2017-03-17 13:01:00', '111.222.374-53');-- Guia 1 tambem no evento 7
+INSERT INTO public.ExpoGuia VALUES (8, '2017-03-17 13:01:00', '111.222.234-28');-- Guia 2 tambem no evento 8
+
+-- Inserts de Espetaculo
+INSERT INTO public.Espetaculo VALUES (5, '2017-03-18 13:01:00', 'Romeu e Julieta', 'Teatro', '01:30:00');
+INSERT INTO public.Espetaculo VALUES (6, '2017-03-18 13:01:00', 'Der Ring des Nibelungen', 'Opera', '05:30:00');
+-- Inserts de EspetaculoArtistas
+INSERT INTO public.EspetaculoArtistas VALUES (5, '2017-03-18 13:01:00', 'Conglomerado de artistas de teatro');
+INSERT INTO public.EspetaculoArtistas VALUES (6, '2017-03-18 13:01:00', 'Conglomerado de artistas de teatro 2');
+
+
+-- Inserts de CelebracaoReligiosa
+INSERT INTO public.CelebracaoReligiosa VALUES (7, '2017-03-18 13:01:00', 'Cristianismo');
+INSERT INTO public.CelebracaoReligiosa VALUES (8, '2017-03-18 13:01:00', 'Judaismo');
+-- Inserts de ReligioGuia
+INSERT INTO public.ReligioGuia VALUES (7, '2017-03-18 13:01:00', '111.222.374-97');-- Guia 3 no evento 7 do prox dia
+INSERT INTO public.ReligioGuia VALUES (8, '2017-03-18 13:01:00', '111.222.234-28');-- Guia 2 tambem no evento 8 do prox dia
