@@ -1,6 +1,14 @@
 -- AVISOS:
 -- Consideramos que strings pequenas possuem no maximo 30 caracteres, medias 50 e grandes 180 (o tamanho de um tweet) 
 
+/*
+	Alguns comentarios estao marcados por tags. Segue a lista de tags:
+		TODO		Questoes a serem resolvidas
+		!			Avisos importantes
+		//			Questoes que ja foram resolvidas
+		?			Duvidas e outros
+*/
+
 -- Use a linha comentada abaixo quiser o codigo SQL para dropar todas as tabelas. Basta executar numa query dentro do banco desejado
 -- select 'drop table if exists "' || tablename || '" cascade;' from pg_tables where schemaname = 'public';
 
@@ -82,7 +90,8 @@ CREATE TABLE IF NOT EXISTS Voo (
 	/*    CHECKS    */
 	CONSTRAINT CK_Data CHECK (Data_Partida < Data_Chegada)
 	-- E impossivel a data de chegada ser antes da de partida
-	-- TODO Na verdade e possivel sim, se ele pegar um voo e for contra os fuso horarios. Discutir isso 
+	-- // Na verdade e possivel sim, se ele pegar um voo e for contra os fuso horarios. Discutir isso 
+	-- RESOLVIDO: Por ser um TIMESTAMP, mudancas de fuso horario ja sao tratadas, logo nao pode mesmo ter uma data inicial menor que a final
 	
 );
 
@@ -90,8 +99,8 @@ CREATE TABLE IF NOT EXISTS VooAssentos (
 
 	/*    ATRIBUTOS    */
 	Voo INT,-- TODO Deveria ser SERIAL?
-	Assentos VARCHAR(4),-- Nao achamos viavel um Aviao com mais de 9999 assentos
-
+	Assentos VARCHAR(4),-- Nome identificador do assento. Nao achamos viavel um Aviao com mais de 9999 assentos
+	
 	/*    KEYS    */
 	CONSTRAINT PK_VooAssentos PRIMARY KEY(Voo, Assentos),
 	CONSTRAINT FK_VooAssentos FOREIGN KEY(Voo) REFERENCES Voo(Nro) ON DELETE CASCADE ON UPDATE CASCADE
@@ -171,6 +180,7 @@ CREATE TABLE IF NOT EXISTS Estadia (
 	-- Uma Estadia nao pode existir independente de um destino, ela precisa estar fixada em um local geografico
 	CONSTRAINT UC_Estadia UNIQUE(Pais, Cidade, Bairro, Rua, Numero)
 	-- A chave secundária vale para diferenciarmos os locais das Estadias, uma vez que não existem duas Estadias diferentes no mesmo exato local
+	
 	/*    CHECKS    */
 
 );
@@ -181,17 +191,19 @@ CREATE TABLE IF NOT EXISTS Hospedagem (
 	Cliente CHAR(14),
 	Quarto VARCHAR(4) NOT NULL,-- Apesar do total de quartos estar marcado em INT, o quarto em si pode ter letras na sua designacao ('B12','B13')
 	Valor NUMERIC(11,3) NOT NULL,-- Aceitamos numeros com tres casas decimais de precisao, num maximo de preço igual a 999 999 999,999, por ser internacional algumas entidades usam a terceira casa decimal para centavos
-	Data_Inicio TIMESTAMP NOT NULL,
+	Data_Inicio TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,-- Caso nao ofereca data de inicio, assumimos que a data e valida naquele exato momento
 	Data_Fim TIMESTAMP NOT NULL,
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Hospedagem PRIMARY KEY(Estadia, Cliente, Quarto),
 	CONSTRAINT FK_HospedagemEstadia FOREIGN KEY (Estadia) REFERENCES Estadia(ID) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_HospedagemCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_HospedagemCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- Uma Hospedagem nao pode existir sem termos tanto Estadia quanto Cliente, logo CASCADE ao perder ou autalizar qualquer um
 	
 	/*    CHECKS    */
-
+	CONSTRAINT CK_Hospedagem CHECK (Data_Inicio < Data_Fim)
+	-- E impossivel a data inicial ser antes da data final
+	
 );
 
 CREATE TABLE IF NOT EXISTS LocalT (
@@ -227,7 +239,6 @@ CREATE TABLE IF NOT EXISTS LocalTipo (
 	CONSTRAINT FK_LocalTipoLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Um Tipo de um Local nao pode existir independente de um Local
 	
-
 	/*    CHECKS    */
 
 );
@@ -335,12 +346,15 @@ CREATE TABLE IF NOT EXISTS Evento (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Evento PRIMARY KEY(LocalT, Data_Inicio),
-	CONSTRAINT FK_EventoLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_EventoLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- Nao existe evento se nao tivermos um local para ele, logo CASCADE
 	
 
 	/*    CHECKS    */
-
+	CONSTRAINT CK_Evento CHECK (Data_Inicio < Data_Fim)
+	-- E impossivel a data inicial ser antes da data final
+	-- ! Por termos uma PK que vai ser referenciada ja com o check, nao precisamos fazer esse check para todas as outras tabelas que vao referenciar esta
+	
 );
 
 CREATE TABLE IF NOT EXISTS EventoCategoria (
@@ -382,7 +396,7 @@ CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
 	Data_Inicio TIMESTAMP,
 	DataA TIMESTAMP,
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
+	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer operacoes com isso mais facilmente, escolhemos o INT
 	Descricao VARCHAR(180),
 	
 
@@ -428,7 +442,7 @@ CREATE TABLE IF NOT EXISTS Guia (
 CREATE TABLE IF NOT EXISTS GuiaTiposAtuacao (
 	/*    ATRIBUTOS    */
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	TiposAtuacao VARCHAR(30),
+	TiposAtuacao VARCHAR(30) DEFAULT 'Turismo',-- Achamos que turismo e uma atuacao suficientemente generica para um guia, entao deixamos como caso DEFAULT
 	
 	/*    KEYS    */
 	CONSTRAINT PK_GuiaTiposAtuacao PRIMARY KEY(Guia, TiposAtuacao),
@@ -458,7 +472,7 @@ CREATE TABLE IF NOT EXISTS Orientacao (
 
 CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
 	/*    ATRIBUTOS    */
-	Data_Avaliacao TIMESTAMP,
+	Data_Avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,-- Assumimos que se nao houver uma data customizada, a avaliacao foi feita no mesmo momento de submissao da tupla
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
@@ -608,7 +622,7 @@ CREATE TABLE IF NOT EXISTS PasseioRota (
 	Local_Inicio INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
 	Local_Final INT,-- Foreign Keys em SERIAL sao na verdade INTs
-	Horario TIME,-- Aceitamos nao ter horario fixo, pode ser rotacional
+	Horario TIME,-- Aceitamos nao ter horario fixo, pode ser rotacional, entao pode ser NULL
 	
 	/*    KEYS    */
 	CONSTRAINT PK_PasseioRota PRIMARY KEY(Local_Inicio, Data_Inicio, Local_Final),

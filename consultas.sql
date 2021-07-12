@@ -25,8 +25,13 @@ SELECT * FROM destino LEFT JOIN destinotags ON (destino.pais = destinotags.pais)
 SELECT aeroporto.CodIATA, aeroporto.nome, aeroporto.pais, COUNT(voo.nro) AS totalvoos
 FROM aeroporto 
 	LEFT JOIN voo ON (aeroporto.CodIATA = voo.Aeroporto_Origem)
-GROUP BY aeroporto.codiata
+GROUP BY aeroporto.codiata, aeroporto.nome, aeroporto.pais
+-- CURIOSIDADE: Descobrimos que o PostgreSQL detecta algumas dependencias funcionais (principalmente PK) e nao demanda que aparecam todas no GROUP BY
 
 
 
 -- Selects mais complexos...
+
+-- Tem um select top na aula DML Parte 2, 31:50 (quantas vezes nosso cliente participou de um evento/ embarcou num aviao/ se hospedou)
+
+-- Exemplo complexo na aula DML Parte 2, 1:02:38

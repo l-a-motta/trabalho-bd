@@ -1,3 +1,5 @@
+-- TODO Mudars as insercoes de data para algo mais padronizado com o TO_DATE('2017-03-15','yyyy/mm/dd')
+-- TODO deixar explicito apos a tabela os campos que estao sendo inseridos public.Destino(Pais, Cidade, etc)
 -- Inserts de Destino
 -- Pais VARCHAR(30), Cidade VARCHAR(30), Descricao VARCHAR(180), Idioma VARCHAR(30) NOT NULL, Clima VARCHAR(30)
 INSERT INTO public.Destino VALUES ('Brasil','Bauru', 'Desc teste 1', 'Português','Temperado');
@@ -121,7 +123,7 @@ INSERT INTO public.LocalT VALUES (DEFAULT, 'Inglaterra','Londres','Westminster',
 -- Inserts de LocalTipo
 INSERT INTO public.LocalTipo VALUES (1, 'Pousada');
 INSERT INTO public.LocalTipo VALUES (1, 'Casa Grande');
-INSERT INTO public.LocalTipo VALUES (1, 'Muito Bonito');
+INSERT INTO public.LocalTipo VALUES (1, 'Estadia');
 INSERT INTO public.LocalTipo VALUES (2, 'Rock');
 INSERT INTO public.LocalTipo VALUES (3, 'Bar');
 INSERT INTO public.LocalTipo VALUES (4, 'Turismo');
@@ -196,7 +198,7 @@ INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-53', 'Tipo 1');-- Guia 
 INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-53', 'Tipo 2');-- Guia 1
 INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-53', 'Tipo 3');-- Guia 1
 INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.234-28', 'Tipo 2');-- Guia 2
-INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-97', 'Tipo 4');-- Guia 3
+INSERT INTO public.GuiaTiposAtuacao VALUES ('111.222.374-97', DEFAULT);-- Guia 3
 
 -- Inserts de Orientacao
 INSERT INTO public.Orientacao VALUES ('111.222.374-53', '111.222.333-45');-- Guia 1 com Cliente 1
