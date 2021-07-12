@@ -27,47 +27,47 @@ INSERT INTO public.Aeroporto VALUES (666, 'Alemanha','Frankfurt','Hauptbahnhof',
 
 -- Inserts de Voo
 -- PK Nro INT, FK Aeroporto_Origem INT NOT NULL, FK Aeroporto_Destino INT NOT NULL, Data_Partida TIMESTAMP NOT NULL, Data_Chegada TIMESTAMP NOT NULL, Portao_Embarque VARCHAR(30) NOT NULL, Portao_Desembarque VARCHAR(30) NOT NULL
-INSERT INTO public.Voo VALUES (101, 111, 222, '2017-03-14', '2017-03-15', 'E126', 'S213');
+INSERT INTO public.Voo VALUES (101, 111, 222, '2017-03-14', '2017-03-15', 'E126', 'S213');-- Voos do aeroporto de Bauru
 INSERT INTO public.Voo VALUES (102, 111, 222, '2017-03-14', '2017-03-15', 'E526', 'S432');
 INSERT INTO public.Voo VALUES (103, 111, 555, '2017-03-14', '2017-03-16', 'E625', 'S251');
 --
-INSERT INTO public.Voo VALUES (201, 222, 111, '2017-03-15', '2017-03-17', 'E413', 'S281');
+INSERT INTO public.Voo VALUES (201, 222, 111, '2017-03-15', '2017-03-17', 'E413', 'S281');-- Voos do aeroporto de Sao Paulo
 INSERT INTO public.Voo VALUES (202, 222, 666, '2017-03-15', '2017-04-10', 'E272', 'S453');
 --
-INSERT INTO public.Voo VALUES (601, 666, 444, '2021-01-04', '2021-01-15', 'E192', 'S261');
+INSERT INTO public.Voo VALUES (601, 666, 444, '2021-01-04', '2021-01-15', 'E192', 'S261');-- Voos do aeroporto de Frankfurt
 INSERT INTO public.Voo VALUES (602, 666, 444, '2021-01-04', '2021-01-15', 'E272', 'S675');
 INSERT INTO public.Voo VALUES (603, 666, 444, '2021-01-21', '2021-01-22', 'E635', 'S291');
 
 -- Inserts de VooAssentos
 -- PK FK Voo INT, PK Assentos VARCHAR(30)
-INSERT INTO public.VooAssentos VALUES (101, 1);
+INSERT INTO public.VooAssentos VALUES (101, 1);-- Os varios assentos do voo 101, de Bauru
 INSERT INTO public.VooAssentos VALUES (101, 2);
 INSERT INTO public.VooAssentos VALUES (101, 3);
 --
-INSERT INTO public.VooAssentos VALUES (102, 1);
+INSERT INTO public.VooAssentos VALUES (102, 1);-- Os varios assentos do voo 102, de Bauru
 INSERT INTO public.VooAssentos VALUES (102, 2);
 INSERT INTO public.VooAssentos VALUES (102, 3);
 --
-INSERT INTO public.VooAssentos VALUES (103, 1);
+INSERT INTO public.VooAssentos VALUES (103, 1);-- Os varios assentos do voo 103, de Bauru
 INSERT INTO public.VooAssentos VALUES (103, 2);
 INSERT INTO public.VooAssentos VALUES (103, 3);
 --
-INSERT INTO public.VooAssentos VALUES (201, 1);
+INSERT INTO public.VooAssentos VALUES (201, 1);-- Os varios assentos do voo 201, de Sao Paulo
 INSERT INTO public.VooAssentos VALUES (201, 2);
 INSERT INTO public.VooAssentos VALUES (201, 3);
 --
-INSERT INTO public.VooAssentos VALUES (202, 1);
+INSERT INTO public.VooAssentos VALUES (202, 1);-- Os varios assentos do voo 202, de Sao Paulo
 INSERT INTO public.VooAssentos VALUES (202, 2);
 INSERT INTO public.VooAssentos VALUES (202, 3);
 --
-INSERT INTO public.VooAssentos VALUES (601, '1A');
+INSERT INTO public.VooAssentos VALUES (601, '1A');-- Os varios assentos do voo 601, de Frankfurt
 INSERT INTO public.VooAssentos VALUES (601, '1B');
 INSERT INTO public.VooAssentos VALUES (601, '2B');
 --
-INSERT INTO public.VooAssentos VALUES (602, 99);
+INSERT INTO public.VooAssentos VALUES (602, 99);-- Os varios assentos do voo 602, de Frankfurt
 INSERT INTO public.VooAssentos VALUES (602, 100);
 --
-INSERT INTO public.VooAssentos VALUES (603, 'A');
+INSERT INTO public.VooAssentos VALUES (603, 'A');-- Os varios assentos do voo 603, de Frankfurt
 INSERT INTO public.VooAssentos VALUES (603, 'B');
 
 -- Inserts de Cliente
@@ -80,8 +80,8 @@ INSERT INTO public.Cliente VALUES ('111.222.333-49', 'Premium', 'José Silva', '
 INSERT INTO public.Cliente VALUES ('111.222.333-50', 'Premium', 'Maria Silva', 'email5@email.com', '55 15 99123-4566', 'Brasil', 'São Paulo', 'Centro', 'Rua 2', '321','17033691', 'Fem', 'Crista', 'ENTP');
 
 -- Inserts de ClienteCondicoesMedicas
-INSERT INTO public.ClienteCondicoesMedicas VALUES ('111.222.333-45', 'Artroscopia, histeroscopia e lamparoscopia');
-INSERT INTO public.ClienteCondicoesMedicas VALUES ('111.222.333-46', 'Deverão viajar acompanhados pelo equipe de saúde ou de uma pessoa conhecedora da doença, previamente avaliada por médico de saúde.');
+INSERT INTO public.ClienteCondicoesMedicas VALUES ('111.222.333-45', 'Artroscopia, histeroscopia e lamparoscopia');-- Cliente Fulano
+INSERT INTO public.ClienteCondicoesMedicas VALUES ('111.222.333-46', 'Deverão viajar acompanhados pelo equipe de saúde ou de uma pessoa conhecedora da doença, previamente avaliada por médico de saúde.');-- Cliente Ciclano
 
 -- Inserts de Embarque
 -- Voo INT,	Cliente CHAR(14), Assento INT,
@@ -96,7 +96,7 @@ INSERT INTO public.Embarque VALUES (601, '1B', '111.222.333-50');
 
 -- Inserts de Estadia
 -- ! AVISO: Eu estou parando de comentar igual acima, com cada atributo, seu tipo, e se eh PK ou FK. Pega muito tempo e nao oferece muita informação util
-ALTER SEQUENCE Estadia_id_seq RESTART WITH 1;
+ALTER SEQUENCE Estadia_id_seq RESTART WITH 1;-- Garantindo que a sequencia nao continue apos resetar a base e reinserir esses dados
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','17033691','Pousada do Canário', 20);
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Brasil','Bauru','Geisel','Rua 1','123','17033690','Casa do José', 2);
 INSERT INTO public.Estadia VALUES (DEFAULT, 'Inglaterra','Londres','Holland Park','Rua 4','654','17033-693','Holland Stay', 120);
@@ -108,7 +108,7 @@ INSERT INTO public.Hospedagem VALUES (1, '111.222.333-45', 'B13', '10199.99','20
 INSERT INTO public.Hospedagem VALUES (1, '111.222.333-47', 'A01', '58999.99','2017-03-15','2017-03-25');
 
 -- Inserts de LocalT
-ALTER SEQUENCE LocalT_id_seq RESTART WITH 1;
+ALTER SEQUENCE LocalT_id_seq RESTART WITH 1;-- Garantindo que a sequencia nao continue apos resetar a base e reinserir esses dados
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','1','17033691','Pousada do Canário');
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','325','2','17033692','Palco Livre do Centrao');
 INSERT INTO public.LocalT VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 99','452','','17033603','Bar do Nóia');
