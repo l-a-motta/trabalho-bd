@@ -6,13 +6,11 @@
 		TODO		Questoes a serem resolvidas
 		!			Avisos importantes
 		//			Questoes que ja foram resolvidas
-		?			Duvidas e outros
+		?			Curiosidades e outros
 */
 
 -- Use a linha comentada abaixo quiser o codigo SQL para dropar todas as tabelas. Basta executar numa query dentro do banco desejado
 -- select 'drop table if exists "' || tablename || '" cascade;' from pg_tables where schemaname = 'public';
-
--- ! PERGUNTA PARA PROF SE VALE A PENA FAZER OS ENDERECOS NUMA TABELA E USAR FK NOS TODOS QUE ESTAO POR AE
 
 CREATE TABLE IF NOT EXISTS Destino (
 	
@@ -72,7 +70,7 @@ CREATE TABLE IF NOT EXISTS Aeroporto (
 CREATE TABLE IF NOT EXISTS Voo (
 	
 	/*    ATRIBUTOS    */
-	Nro INT,-- TODO Deveria ser SERIAL?
+	Nro INT,-- // Deveria ser SERIAL? NAO
 	Aeroporto_Origem INT NOT NULL,
 	Aeroporto_Destino INT NOT NULL,
 	Data_Partida TIMESTAMP NOT NULL,
@@ -98,7 +96,7 @@ CREATE TABLE IF NOT EXISTS Voo (
 CREATE TABLE IF NOT EXISTS VooAssentos (
 
 	/*    ATRIBUTOS    */
-	Voo INT,-- TODO Deveria ser SERIAL?
+	Voo INT,-- // Deveria ser SERIAL? NAO
 	Assentos VARCHAR(4),-- Nome identificador do assento. Nao achamos viavel um Aviao com mais de 9999 assentos
 	
 	/*    KEYS    */
@@ -113,11 +111,11 @@ CREATE TABLE IF NOT EXISTS VooAssentos (
 CREATE TABLE IF NOT EXISTS Cliente (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Tipo VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
+	Tipo VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
 	Telefone VARCHAR(30) NOT NULL,
-	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Pais VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
 	Cidade VARCHAR(30) NOT NULL,
 	Bairro VARCHAR(30) NOT NULL,
 	Rua VARCHAR(30) NOT NULL,
@@ -154,7 +152,7 @@ CREATE TABLE IF NOT EXISTS Embarque (
 	/*    KEYS    */
 	-- Vale notar que Embarque esta conectado a VooAssentos, e nao a Voo em si
 	CONSTRAINT PK_Embarque PRIMARY KEY(Voo, Assento, Cliente),
-	CONSTRAINT FK_EmbarqueVooAssentos FOREIGN KEY(Voo, Assento) REFERENCES VooAssentos(Voo, Assentos) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Falar com a monitora se e valido ter foreign key de foreign key
+	CONSTRAINT FK_EmbarqueVooAssentos FOREIGN KEY(Voo, Assento) REFERENCES VooAssentos(Voo, Assentos) ON DELETE CASCADE ON UPDATE CASCADE,-- ! Falar com a monitora se e valido ter foreign key de foreign key
 	CONSTRAINT FK_EmbarqueCliente FOREIGN KEY(Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Para que ocorra um embarque, tanto um Voo quanto um Cliente precisam necessariamente existir
 
@@ -165,14 +163,15 @@ CREATE TABLE IF NOT EXISTS Embarque (
 CREATE TABLE IF NOT EXISTS Estadia (
 	/*    ATRIBUTOS    */
 	ID SERIAL,
-	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Pais VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
 	Cidade VARCHAR(30) NOT NULL,
 	Bairro VARCHAR(30) NOT NULL,
 	Rua VARCHAR(30) NOT NULL,
 	Numero VARCHAR(30) NOT NULL,
 	CEP CHAR(9) NOT NULL,-- Um CEP tem no maximo nove caracteres (00000-000)
 	Nome VARCHAR(30) NOT NULL,
-	Nro_Quartos INT,-- TODO O que e exatamente isso? Quantos quartos tem no total? Quantos quartos tem disponivel?
+	Nro_Quartos INT,-- // O que e exatamente isso? Quantos quartos tem no total? Quantos quartos tem disponivel? QUARTOS NO TOTAL
+	-- ! FAZER CHECK DEPOIS PARA VER SE TEM QUARTOS DISPONIVEIS (SELECT)
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Estadia PRIMARY KEY(ID),
@@ -209,7 +208,7 @@ CREATE TABLE IF NOT EXISTS Hospedagem (
 CREATE TABLE IF NOT EXISTS LocalT (
 	/*    ATRIBUTOS    */
 	ID SERIAL,
-	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Pais VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
 	Cidade VARCHAR(30) NOT NULL,
 	Bairro VARCHAR(30) NOT NULL,
 	Rua VARCHAR(30) NOT NULL,
@@ -254,9 +253,9 @@ CREATE TABLE IF NOT EXISTS Transporte (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Transporte PRIMARY KEY(Cod_Linha),
-	CONSTRAINT FK_TransporteOrigem FOREIGN KEY (Local_Origem) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_TransporteDestino FOREIGN KEY (Local_Destino) REFERENCES LocalT(ID) ON DELETE SET NULL ON UPDATE CASCADE,--TODO Checar se esse SET NULL faz sentido
-	-- Um transporte sempre demanda uma origem (ele nao existe num void), mas o destino pode ficar marcado sem um local exato
+	CONSTRAINT FK_TransporteOrigem FOREIGN KEY (Local_Origem) REFERENCES LocalT(ID) ON DELETE SET NULL ON UPDATE CASCADE,
+	CONSTRAINT FK_TransporteDestino FOREIGN KEY (Local_Destino) REFERENCES LocalT(ID) ON DELETE SET NULL ON UPDATE CASCADE,
+	-- E interessante mantermos os dados de um Transporte mesmo se perdermos o dado de um Local
 	CONSTRAINT UC_Transporte UNIQUE(Local_Origem, Local_Destino, Horario_Ida, Horario_Chegada),
 
 	/*    CHECKS    */
@@ -284,12 +283,13 @@ CREATE TABLE IF NOT EXISTS Organizador (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	CNPJ CHAR(18),-- Um CNPJ tem no maximo 14 caracteres (XX.XXX.XXX/0001-XX)
-	-- TODO Acho possivel usar CNPJ como PK tambem, ja que uma pessoa fisica pode possuir varios CNPJs, mas ai teria que mudar os inserts e as FKs aqui tambem
-	Tipo VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
+	-- Salvamos mais espaços com um CNPJ como chave secundaria no caso de um organizador nao ter CNPJ
+	-- ! Talvez adicionar uma tabela de CNPJs, multivalorado
+	Tipo VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
 	Telefone VARCHAR(30) NOT NULL,
-	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Pais VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
 	Cidade VARCHAR(30) NOT NULL,
 	Bairro VARCHAR(30) NOT NULL,
 	Rua VARCHAR(30) NOT NULL,
@@ -310,10 +310,10 @@ CREATE TABLE IF NOT EXISTS Organizador (
 CREATE TABLE IF NOT EXISTS OrganizadorTiposAtuacao (
 	/*    ATRIBUTOS    */
 	Organizador CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	TiposAtuacao VARCHAR(30),
+	Tipos_Atuacao VARCHAR(30),
 	
 	/*    KEYS    */
-	CONSTRAINT PK_OrganizadorTiposAtuacao PRIMARY KEY(Organizador, TiposAtuacao),
+	CONSTRAINT PK_Organizador_ PRIMARY KEY(Organizador, Tipos_Atuacao),
 	CONSTRAINT FK_OrganizadorTiposAtuacao FOREIGN KEY (Organizador) REFERENCES Organizador(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	
 
@@ -341,7 +341,8 @@ CREATE TABLE IF NOT EXISTS Evento (
 	Data_Inicio TIMESTAMP,
 	Data_Fim TIMESTAMP NOT NULL,
 	Organizador CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	-- TODO Certeza que organizador pode ser NULL?
+	-- // Certeza que organizador pode ser NULL? SIM
+	-- ! No caso de termos CNPJ multivalorado, temos que verificar se esse atributo e valido (no caso de um CPF sem CNPJ)
 	Descricao VARCHAR(180),
 	
 	/*    KEYS    */
@@ -353,7 +354,7 @@ CREATE TABLE IF NOT EXISTS Evento (
 	/*    CHECKS    */
 	CONSTRAINT CK_Evento CHECK (Data_Inicio < Data_Fim)
 	-- E impossivel a data inicial ser antes da data final
-	-- ! Por termos uma PK que vai ser referenciada ja com o check, nao precisamos fazer esse check para todas as outras tabelas que vao referenciar esta
+	-- Por termos uma PK que vai ser referenciada ja com o check, nao precisamos fazer esse check para todas as outras tabelas que vao referenciar esta
 	
 );
 
@@ -380,9 +381,8 @@ CREATE TABLE IF NOT EXISTS Participacao (
 
 	/*    KEYS    */
 	CONSTRAINT PK_Participacao PRIMARY KEY(Cliente, LocalT, Data_Inicio),
-	CONSTRAINT FK_ParticipacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE SET NULL ON UPDATE CASCADE,--TODO Checar se colocar um SET NULL faria sentido
-	-- Pode ser util guardar as participacoes, mesmo se perdemos os dados de um cliente
-	-- Atualmente, se perdermos os dados de um cliente, removeremos a participacao dele
+	CONSTRAINT FK_ParticipacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE SET NULL ON UPDATE CASCADE,
+	-- Pode ser util guardar as participacoes, mesmo se perdemos os dados de um cliente. Se um cliente for removido, ele nao deixa de ter participado magicamente do um evento
 	CONSTRAINT FK_ParticipacaoEvento FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Nao seria util, no entanto, guardar as participacoes de um local que nao esta mais conosco
 
@@ -415,11 +415,11 @@ CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
 CREATE TABLE IF NOT EXISTS Guia (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Tipo VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
+	Tipo VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
 	Telefone VARCHAR(30) NOT NULL,
-	Pais VARCHAR(30) NOT NULL,-- TODO Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
+	Pais VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes geograficas, Pais, Bairro, Cidade, etc
 	Cidade VARCHAR(30) NOT NULL,
 	Bairro VARCHAR(30) NOT NULL,
 	Rua VARCHAR(30) NOT NULL,
@@ -429,7 +429,7 @@ CREATE TABLE IF NOT EXISTS Guia (
 	Descricao VARCHAR(180),-- Existe muita variacao de telefone no mundo para especificarmos um numero menor
 	Formacao VARCHAR(50) NOT NULL,
 	Pagamento VARCHAR(30) NOT NULL,
-	-- TODO Pagamento é a forma de pagamento, ou o preco estatico do guia? Preco estatico e esquisito
+	-- ! Pagamento é a forma de pagamento, ou o preco estatico do guia? Preco estatico e esquisito FALAR MONITORA
 	MBTI CHAR(4),-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
 
 	/*    KEYS    */
@@ -457,7 +457,6 @@ CREATE TABLE IF NOT EXISTS Orientacao (
 	/*    ATRIBUTOS    */
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	-- TODO Temos um problema de que um Cliente pode spammar avaliacoes se nao tivermos outro dado para associar avaliacaoguia com orientacao, tipo uma data 
 	
 	/*    KEYS    */
 	CONSTRAINT PK_Orientacao PRIMARY KEY(Guia, Cliente),
@@ -473,6 +472,8 @@ CREATE TABLE IF NOT EXISTS Orientacao (
 CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
 	/*    ATRIBUTOS    */
 	Data_Avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,-- Assumimos que se nao houver uma data customizada, a avaliacao foi feita no mesmo momento de submissao da tupla
+	-- // Temos um problema de que um Cliente pode spammar avaliacoes se nao tivermos outro dado para associar avaliacaoguia com orientacao, tipo uma data 
+	-- RESOLVIDO: A Data_Avaliacao e inserida pelo sistema, e faz jus a data que o cliente foi guiado pelo guia. Nao e permitido spam nesse caso.
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
@@ -513,7 +514,7 @@ CREATE TABLE IF NOT EXISTS GastroGuia (
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	
 	/*    KEYS    */
-	CONSTRAINT PK_GastroGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
+	CONSTRAINT PK_GastroGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- Colocamos Guia na chave primaria para podermos ter mais de um guia por evento
 	CONSTRAINT FK_GastroGuiaFestivalGastronomico FOREIGN KEY (LocalT, Data_Inicio) REFERENCES FestivalGastronomico(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT FK_GastroGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o festival, nao faz sentido termos uma tupla de guia para esse festival, CASCADE
@@ -545,7 +546,7 @@ CREATE TABLE IF NOT EXISTS ShowArtistas (
 	
 	
 	/*    KEYS    */
-	CONSTRAINT PK_ShowArtistas PRIMARY KEY(LocalT, Data_Inicio, Artista),-- TODO Vale a pena deixar artista como PK tambem? E se quiser mais de um artista?
+	CONSTRAINT PK_ShowArtistas PRIMARY KEY(LocalT, Data_Inicio, Artista),-- Colocamos Artista na chave primaria para podermos ter mais de um artista por evento
 	CONSTRAINT FK_ShowArtistasShowt FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Showt(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o show, nao faz sentido termos uma tupla de show artista, CASCADE
 	
@@ -594,7 +595,7 @@ CREATE TABLE IF NOT EXISTS EsporteParticipantes (
 	
 	
 	/*    KEYS    */
-	CONSTRAINT PK_EsporteParticipantes PRIMARY KEY(LocalT, Data_Inicio, Participantes),-- TODO Vale a pena deixar Participantes como PK tambem? E se quiser mais de um Participantes?
+	CONSTRAINT PK_EsporteParticipantes PRIMARY KEY(LocalT, Data_Inicio, Participantes),-- Colocamos Participantes na chave primaria para podermos ter mais de um participante por evento
 	CONSTRAINT FK_EsporteParticipantesEsporte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Esporte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o esporte, nao faz sentido termos uma tupla de esporte Participantes, CASCADE
 
@@ -662,7 +663,7 @@ CREATE TABLE IF NOT EXISTS FilmeAtores (
 	Ator VARCHAR(180) NOT NULL,-- A ideia e termos somente os atores mais prominentes (normalmente tres) escritos por extenso, nada muito complexo
 	
 	/*    KEYS    */
-	CONSTRAINT PK_FilmeAtores PRIMARY KEY(LocalT, Data_Inicio, Ator),-- TODO Vale a pena deixar Ator como PK tambem? E se quiser mais de um Ator?
+	CONSTRAINT PK_FilmeAtores PRIMARY KEY(LocalT, Data_Inicio, Ator),-- Colocamos Ator na chave primaria para podermos ter mais de um ator por evento
 	CONSTRAINT FK_FilmeAtoresFilme FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Filme(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o Filme, nao faz sentido termos uma tupla de Filme Ator, CASCADE
 
@@ -710,7 +711,7 @@ CREATE TABLE IF NOT EXISTS ExpoGuia (
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	
 	/*    KEYS    */
-	CONSTRAINT PK_ExpoGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
+	CONSTRAINT PK_ExpoGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- Colocamos Guia na chave primaria para podermos ter mais de um guia por evento
 	CONSTRAINT FK_ExpoGuiaExposicaoArte FOREIGN KEY (LocalT, Data_Inicio) REFERENCES ExposicaoArte(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT FK_ExpoGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o expo, nao faz sentido termos uma tupla de guia para esse expo, CASCADE
@@ -748,7 +749,7 @@ CREATE TABLE IF NOT EXISTS EspetaculoArtistas (
 	Artista VARCHAR(180) NOT NULL,-- A ideia e termos somente os Artista mais prominentes (normalmente tres) escritos por extenso, nada muito complexo
 	
 	/*    KEYS    */
-	CONSTRAINT PK_EspetaculoArtista PRIMARY KEY(LocalT, Data_Inicio, Artista),-- TODO Vale a pena deixar Artista como PK tambem? E se quiser mais de um Artista?
+	CONSTRAINT PK_EspetaculoArtista PRIMARY KEY(LocalT, Data_Inicio, Artista),-- Colocamos artista na chave primaria para podermos ter mais de um artista por evento
 	CONSTRAINT FK_EspetaculoArtistaEspetaculo FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Espetaculo(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o Espetaculo, nao faz sentido termos uma tupla de Espetaculo Artista, CASCADE
 
@@ -779,7 +780,7 @@ CREATE TABLE IF NOT EXISTS ReligioGuia (
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	
 	/*    KEYS    */
-	CONSTRAINT PK_ReligioGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- TODO Vale a pena deixar guia como PK tambem? E se quiser mais de um guia?
+	CONSTRAINT PK_ReligioGuia PRIMARY KEY(LocalT, Data_Inicio, Guia),-- Colocamos Guia na chave primaria para podermos ter mais de um guia por evento
 	CONSTRAINT FK_ReligioGuiaCelebracaoReligiosa FOREIGN KEY (LocalT, Data_Inicio) REFERENCES CelebracaoReligiosa(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT FK_ReligioGuiaGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais a celebracao religio, nao faz sentido termos uma tupla de guia para essa religio, CASCADE
