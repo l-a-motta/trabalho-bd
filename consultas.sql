@@ -44,3 +44,5 @@ GROUP BY aeroporto.codiata, aeroporto.nome, aeroporto.pais
 -- Consulta de quantos clientes estao ocupando quantos quartos
 
 -- Consulta dos guias com o mesmo MBTI que um dado cliente
+
+-- Consulta quartos disponiveis em um dado local

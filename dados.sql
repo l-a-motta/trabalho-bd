@@ -1,4 +1,3 @@
--- TODO deixar explicito apos a tabela os campos que estao sendo inseridos public.Destino(Pais, Cidade, etc)
 -- Inserts de Destino
 -- Pais VARCHAR(30), Cidade VARCHAR(30), Descricao VARCHAR(180), Idioma VARCHAR(30) NOT NULL, Clima VARCHAR(30)
 INSERT INTO public.Destino(Pais, Cidade, Descricao, Idioma, Clima) VALUES ('Brasil','Bauru', 'Desc teste 1', 'Português','Temperado');
@@ -32,7 +31,7 @@ INSERT INTO public.Voo(Nro, Aeroporto_Origem, Aeroporto_Destino, Data_Partida, D
 INSERT INTO public.Voo(Nro, Aeroporto_Origem, Aeroporto_Destino, Data_Partida, Data_Chegada, Portao_Embarque, Portao_Desembarque) VALUES (102, 111, 222, TO_DATE('2017-03-14','yyy/mm/dd'), TO_DATE('2017-03-15','yyy/mm/dd'), 'E526', 'S432');
 INSERT INTO public.Voo(Nro, Aeroporto_Origem, Aeroporto_Destino, Data_Partida, Data_Chegada, Portao_Embarque, Portao_Desembarque) VALUES (103, 111, 555, TO_DATE('2017-03-14','yyy/mm/dd'), TO_DATE('2017-03-16','yyy/mm/dd'), 'E625', 'S251');
 --
-INSERT INTO public.Voo(Nro, Aeroporto_Origem, Aeroporto_Destino, Data_Partida, Data_Chegada, Portao_Embarque, Portao_Desembarque) VALUES (201, 222, 111, '2017-03-15', '2017-03-17', 'E413', 'S281');-- Voos do aeroporto de Sao Paulo, nao e necessario o uso constante to TO_DATE
+INSERT INTO public.Voo(Nro, Aeroporto_Origem, Aeroporto_Destino, Data_Partida, Data_Chegada, Portao_Embarque, Portao_Desembarque) VALUES (201, 222, 111, '2017-03-15', '2017-03-17', 'E413', 'S281');-- Voos do aeroporto de Sao Paulo, nao e necessario o uso do TO_DATE para todas as datas, PostgreSQL se cuida
 INSERT INTO public.Voo(Nro, Aeroporto_Origem, Aeroporto_Destino, Data_Partida, Data_Chegada, Portao_Embarque, Portao_Desembarque) VALUES (202, 222, 666, '2017-03-15', '2017-04-10', 'E272', 'S453');
 --
 INSERT INTO public.Voo(Nro, Aeroporto_Origem, Aeroporto_Destino, Data_Partida, Data_Chegada, Portao_Embarque, Portao_Desembarque) VALUES (601, 666, 444, '2021-01-04', '2021-01-15', 'E192', 'S261');-- Voos do aeroporto de Frankfurt
@@ -95,8 +94,9 @@ INSERT INTO public.Embarque(Voo, Assento, Cliente) VALUES (201, 1, '111.222.333-
 INSERT INTO public.Embarque(Voo, Assento, Cliente) VALUES (601, '1A', '111.222.333-49');
 INSERT INTO public.Embarque(Voo, Assento, Cliente) VALUES (601, '1B', '111.222.333-50');
 
+-- ! AVISO: Eu estou parando de comentar igual acima, com cada atributo, seu tipo, e se eh PK ou FK. Pega muito tempo e nao oferece muita informação util, visto que uma coisa similar ja esta informada no INSERT
+
 -- Inserts de Estadia
--- ! AVISO: Eu estou parando de comentar igual acima, com cada atributo, seu tipo, e se eh PK ou FK. Pega muito tempo e nao oferece muita informação util
 ALTER SEQUENCE Estadia_id_seq RESTART WITH 1;-- Garantindo que a sequencia nao continue apos resetar a base e reinserir esses dados
 INSERT INTO public.Estadia(ID, Pais, Cidade, Bairro, Rua, Numero, CEP, Nome, Nro_Quartos) VALUES (DEFAULT, 'Brasil','São Paulo','Centro ','Rua 2','321','17033691','Pousada do Canário', 20);
 INSERT INTO public.Estadia(ID, Pais, Cidade, Bairro, Rua, Numero, CEP, Nome, Nro_Quartos) VALUES (DEFAULT, 'Brasil','Bauru','Geisel','Rua 1','123','17033690','Casa do José', 2);
@@ -265,6 +265,7 @@ INSERT INTO public.ExposicaoArtistas(LocalT, Data_Inicio, Artista) VALUES (8, '2
 -- Inserts de ExpoGuia
 INSERT INTO public.ExpoGuia(LocalT, Data_Inicio, Guia) VALUES (7, '2017-03-17 13:01:00', '111.222.374-53');-- Guia 1 tambem no evento 7
 INSERT INTO public.ExpoGuia(LocalT, Data_Inicio, Guia) VALUES (8, '2017-03-17 13:01:00', '111.222.234-28');-- Guia 2 tambem no evento 8
+
 
 -- Inserts de Espetaculo
 INSERT INTO public.Espetaculo(LocalT, Data_Inicio, Titulo, Genero, Duracao) VALUES (5, '2017-03-18 13:01:00', 'Romeu e Julieta', 'Teatro', '01:30:00');
