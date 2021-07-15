@@ -241,8 +241,8 @@ INSERT INTO public.EsporteParticipantes(LocalT, Data_Inicio, Participantes) VALU
 
 
 -- Inserts de PasseioTuristicoTour
-INSERT INTO public.PasseioTuristicoTour(LocalT, Data_Inicio, Tipo) VALUES (5, '2017-03-17 13:01:00', 'Passeio de onibus');
-INSERT INTO public.PasseioTuristicoTour(LocalT, Data_Inicio, Tipo) VALUES (6, '2017-03-17 13:01:00', 'Passeio de Limousine');
+INSERT INTO public.PasseioTuristicoTour(LocalT, Data_Inicio, Tipo) VALUES (5, '2017-03-17 13:01:00', 'Passeio de onibus', '111.222.234-28');
+INSERT INTO public.PasseioTuristicoTour(LocalT, Data_Inicio, Tipo) VALUES (6, '2017-03-17 13:01:00', 'Passeio de Limousine', '111.222.374-97');
 -- Inserts de PasseioRota
 INSERT INTO public.PasseioRota(Local_Inicio, Data_Inicio, Local_Final, Horario) VALUES (5, '2017-03-17 13:01:00', 6, '13:01:00');-- O passeio vai do local 5 para o 6
 INSERT INTO public.PasseioRota(Local_Inicio, Data_Inicio, Local_Final, Horario) VALUES (6, '2017-03-17 13:01:00', 5, '13:01:00');-- O passeio vai do local 6 para o 5

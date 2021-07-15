@@ -612,11 +612,15 @@ CREATE TABLE IF NOT EXISTS PasseioTuristicoTour (
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
 	Tipo VARCHAR(180) NOT NULL,
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	
 	/*    KEYS    */
 	CONSTRAINT PK_PasseioTuristicoTour PRIMARY KEY(LocalT, Data_Inicio),
 	CONSTRAINT FK_PasseioTuristicoTour FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	CONSTRAINT FK_PasseioTuristicoTourGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o passeio, nao faz sentido termos uma tupla de guia para esse expo, CASCADE
+
 	
 	/*    CHECKS    */
 
