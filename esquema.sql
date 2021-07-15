@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS Embarque (
 	/*    KEYS    */
 	-- Vale notar que Embarque esta conectado a VooAssentos, e nao a Voo em si
 	CONSTRAINT PK_Embarque PRIMARY KEY(Voo, Assento, Cliente),
-	CONSTRAINT FK_EmbarqueVooAssentos FOREIGN KEY(Voo, Assento) REFERENCES VooAssentos(Voo, Assentos) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Falar com a monitora se e valido ter foreign key de foreign key
+	CONSTRAINT FK_EmbarqueVooAssentos FOREIGN KEY(Voo, Assento) REFERENCES VooAssentos(Voo, Assentos) ON DELETE CASCADE ON UPDATE CASCADE,-- // Falar com a monitora se e valido ter foreign key de foreign key SEM PROBLEMA
 	CONSTRAINT FK_EmbarqueCliente FOREIGN KEY(Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Para que ocorra um embarque, tanto um Voo quanto um Cliente precisam necessariamente existir
 
@@ -283,7 +283,9 @@ CREATE TABLE IF NOT EXISTS Organizador (
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	CNPJ CHAR(18),-- Um CNPJ tem no maximo 14 caracteres (XX.XXX.XXX/0001-XX)
 	-- Salvamos mais espaços com um CNPJ como chave secundaria no caso de um organizador nao ter CNPJ
-	-- TODO Talvez adicionar uma tabela de CNPJs, multivalorado
+	-- ? Outra alternativa: Fazer a entidade Companhia, entidade propria com tabela propria
+	-- ? Teria que evitar o caso de organizador ser somente pessoa fisica, sem CNPJ. É uma opção
+	-- TODO Detalhar mais o tipo de organizador no doc
 	Tipo VARCHAR(30) NOT NULL,
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
@@ -341,9 +343,10 @@ CREATE TABLE IF NOT EXISTS Evento (
 	Data_Fim TIMESTAMP NOT NULL,
 	Organizador CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	-- // Certeza que organizador pode ser NULL? SIM, EVENTO SEM ORGANIZADOR SALVO NO DB
-	-- TODO No caso de termos CNPJ multivalorado, temos que verificar se esse atributo e valido (no caso de um CPF sem CNPJ)
 	Descricao VARCHAR(180),
-	
+	Valor NUMERIC(11,3),-- Aceitamos numeros com tres casas decimais de precisao, num maximo de preço igual a 999 999 999,999. Por ser internacional, algumas entidades usam a terceira casa decimal para centavos
+	-- Pode ser NULL no caso de eventos de graça, sem qualquer tipo de cobrança na sua duração
+
 	/*    KEYS    */
 	CONSTRAINT PK_Evento PRIMARY KEY(LocalT, Data_Inicio),
 	CONSTRAINT FK_EventoLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -402,7 +405,8 @@ CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
 	/*    KEYS    */
 	-- Vale notar que AvaliacaoEvento esta conectada a Participacao, e nao diretamente a Evento
 	CONSTRAINT PK_AvaliacaoEvento PRIMARY KEY(LocalT, Data_Inicio, DataA, Cliente),
-	CONSTRAINT FK_AvaliacaoEventoParticipacao FOREIGN KEY (Cliente, LocalT, Data_Inicio) REFERENCES Participacao(Cliente, LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,-- TODO Se participacao poder ficar NULL, vai dar conflito de semantica aqui visto q precisamos remover a avaliacao se perdermos a participacao
+	CONSTRAINT FK_AvaliacaoEventoParticipacao FOREIGN KEY (Cliente, LocalT, Data_Inicio) REFERENCES Participacao(Cliente, LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,-- // Se participacao poder ficar NULL, vai dar conflito de semantica aqui visto q precisamos remover a avaliacao se perdermos a participacao
+	-- POSSIBILIDADE: Decidimos seguir as novas normas de Lei de Proteção de Dados e remover todas as interações de um usuário do sistema ao perdermos os dados do usuário
 	-- Se a participacao for removida, nao iremos guardar a avaliacao, para manter tudo justo
 	CONSTRAINT FK_AvaliacaoEventoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se um cliente for removido, a mesma logica segue
@@ -428,7 +432,8 @@ CREATE TABLE IF NOT EXISTS Guia (
 	Descricao VARCHAR(180),-- Existe muita variacao de telefone no mundo para especificarmos um numero menor
 	Formacao VARCHAR(50) NOT NULL,
 	Pagamento VARCHAR(30) NOT NULL,
-	-- TODO Pagamento é a forma de pagamento, ou o preco estatico do guia? FALAR MONITORA
+	-- // Pagamento é a forma de pagamento, ou o preco estatico do guia? FALAR MONITORA
+	-- Originalmente, Pagamento referia-se a taxa por hora. No momento, refere-se ao tipo de pagamento
 	MBTI CHAR(4),-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
 
 	/*    KEYS    */
@@ -607,11 +612,15 @@ CREATE TABLE IF NOT EXISTS PasseioTuristicoTour (
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
 	Tipo VARCHAR(180) NOT NULL,
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	
 	/*    KEYS    */
 	CONSTRAINT PK_PasseioTuristicoTour PRIMARY KEY(LocalT, Data_Inicio),
-	CONSTRAINT FK_PasseioTuristicoTour FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_PasseioTuristicoTour FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
+	CONSTRAINT FK_PasseioTuristicoTourGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o passeio, nao faz sentido termos uma tupla de guia para esse expo, CASCADE
+
 	
 	/*    CHECKS    */
 

@@ -158,18 +158,18 @@ INSERT INTO public.OrganizadorRecomendacao(Organizador, Recomendacao) VALUES ('1
 INSERT INTO public.OrganizadorRecomendacao(Organizador, Recomendacao) VALUES ('111.222.334-33', 'Ate que foi dahorinha');
 
 -- Inserts de Evento
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (1, '2017-03-15 13:01:00', '2017-03-15 14:01:00', '111.222.334-11', 'Um belo evento em Brasil, organizado por Empresa Top');-- Evento no Brasil
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (4, '2017-03-16 13:01:00', '2017-03-17 14:01:00', '111.222.334-22', 'Um belo evento em Inglaterra, organizado por Best Company');-- Evento na Inglaterra
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (3, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento em Alemanha, organizado por Sieg Heinz');-- Evento na Alemanha
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (2, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento2 em Alemanha, organizado por Sieg Heinz');-- A partir de aqui criamos mais eventos para usar nas especializacoes. O mesmo organizador esta em todas elas
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (5, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento3 em Alemanha, organizado por Sieg Heinz');
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (6, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento4 em Alemanha, organizado por Sieg Heinz');
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (7, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento5 em Alemanha, organizado por Sieg Heinz');
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (8, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (5, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');-- Mesmo evento no local 5, mas no dia seguinte
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (6, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');-- Mesmo evento no local 6, mas no dia seguinte
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (7, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');-- Mesmo evento no local 7, mas no dia seguinte
-INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao) VALUES (8, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz');-- Mesmo evento no local 8, mas no dia seguinte
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (1, '2017-03-15 13:01:00', '2017-03-15 14:01:00', '111.222.334-11', 'Um belo evento em Brasil, organizado por Empresa Top', '91.99');-- Evento no Brasil
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (4, '2017-03-16 13:01:00', '2017-03-17 14:01:00', '111.222.334-22', 'Um belo evento em Inglaterra, organizado por Best Company', '92.99');-- Evento na Inglaterra
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (3, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento em Alemanha, organizado por Sieg Heinz', '93.99');-- Evento na Alemanha
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (2, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento2 em Alemanha, organizado por Sieg Heinz', '94.99');-- A partir de aqui criamos mais eventos para usar nas especializacoes. O mesmo organizador esta em todas elas
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (5, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento3 em Alemanha, organizado por Sieg Heinz', '95.99');
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (6, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento4 em Alemanha, organizado por Sieg Heinz', '96.99');
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (7, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento5 em Alemanha, organizado por Sieg Heinz', '97.99');
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (8, '2017-03-17 13:01:00', '2017-03-18 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz', '98.99');
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (5, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz', '99.99');-- Mesmo evento no local 5, mas no dia seguinte
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (6, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz', '100.99');-- Mesmo evento no local 6, mas no dia seguinte
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (7, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz', '101.99');-- Mesmo evento no local 7, mas no dia seguinte
+INSERT INTO public.Evento(LocalT, Data_Inicio, Data_Fim, Organizador, Descricao, Valor) VALUES (8, '2017-03-18 13:01:00', '2017-03-19 14:01:00', '111.222.334-33', 'Um belo evento6 em Alemanha, organizado por Sieg Heinz', '102.99');-- Mesmo evento no local 8, mas no dia seguinte
 
 -- Inserts de EventoCategoria
 INSERT INTO public.EventoCategoria(LocalT, Data_Inicio, Categoria) VALUES (1, '2017-03-15 13:01:00', 'Categoria 1');-- Categoria de Evento no Brasil
@@ -241,8 +241,8 @@ INSERT INTO public.EsporteParticipantes(LocalT, Data_Inicio, Participantes) VALU
 
 
 -- Inserts de PasseioTuristicoTour
-INSERT INTO public.PasseioTuristicoTour(LocalT, Data_Inicio, Tipo) VALUES (5, '2017-03-17 13:01:00', 'Passeio de onibus');
-INSERT INTO public.PasseioTuristicoTour(LocalT, Data_Inicio, Tipo) VALUES (6, '2017-03-17 13:01:00', 'Passeio de Limousine');
+INSERT INTO public.PasseioTuristicoTour(LocalT, Data_Inicio, Tipo, Guia) VALUES (5, '2017-03-17 13:01:00', 'Passeio de onibus', '111.222.234-28');
+INSERT INTO public.PasseioTuristicoTour(LocalT, Data_Inicio, Tipo, Guia) VALUES (6, '2017-03-17 13:01:00', 'Passeio de Limousine', '111.222.374-97');
 -- Inserts de PasseioRota
 INSERT INTO public.PasseioRota(Local_Inicio, Data_Inicio, Local_Final, Horario) VALUES (5, '2017-03-17 13:01:00', 6, '13:01:00');-- O passeio vai do local 5 para o 6
 INSERT INTO public.PasseioRota(Local_Inicio, Data_Inicio, Local_Final, Horario) VALUES (6, '2017-03-17 13:01:00', 5, '13:01:00');-- O passeio vai do local 6 para o 5
