@@ -283,11 +283,9 @@ CREATE TABLE IF NOT EXISTS Organizador (
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	CNPJ CHAR(18),-- Um CNPJ tem no maximo 14 caracteres (XX.XXX.XXX/0001-XX)
 	-- Salvamos mais espaços com um CNPJ como chave secundaria no caso de um organizador nao ter CNPJ
-	-- TODO Talvez adicionar uma tabela de CNPJs, multivalorado
-	-- ? No MER, definir conforme foi dito antes de ter um minimo e maximo
-	-- ? Fazer a entidade Companhia, entidade propria com tabela propria
-	-- ? Ver de evitar o caso de organizador pessoa fisica. É uma opção
-	-- ? Detalhar mais o tipo de organizador no doc
+	-- ? Outra alternativa: Fazer a entidade Companhia, entidade propria com tabela propria
+	-- ? Teria que evitar o caso de organizador ser somente pessoa fisica, sem CNPJ. É uma opção
+	-- TODO Detalhar mais o tipo de organizador no doc
 	Tipo VARCHAR(30) NOT NULL,
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
@@ -346,7 +344,9 @@ CREATE TABLE IF NOT EXISTS Evento (
 	Organizador CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	-- // Certeza que organizador pode ser NULL? SIM, EVENTO SEM ORGANIZADOR SALVO NO DB
 	Descricao VARCHAR(180),
-	
+	Valor NUMERIC(11,3),-- Aceitamos numeros com tres casas decimais de precisao, num maximo de preço igual a 999 999 999,999. Por ser internacional, algumas entidades usam a terceira casa decimal para centavos
+	-- Pode ser NULL no caso de eventos de graça, sem qualquer tipo de cobrança na sua duração
+
 	/*    KEYS    */
 	CONSTRAINT PK_Evento PRIMARY KEY(LocalT, Data_Inicio),
 	CONSTRAINT FK_EventoLocal FOREIGN KEY (LocalT) REFERENCES LocalT(ID) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -616,7 +616,7 @@ CREATE TABLE IF NOT EXISTS PasseioTuristicoTour (
 	
 	/*    KEYS    */
 	CONSTRAINT PK_PasseioTuristicoTour PRIMARY KEY(LocalT, Data_Inicio),
-	CONSTRAINT FK_PasseioTuristicoTour FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_PasseioTuristicoTour FOREIGN KEY (LocalT, Data_Inicio) REFERENCES Evento(LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,
 	-- Evento e o evento especifico sao intrinsicamente ligados, sempre deve ser CASCADE
 	CONSTRAINT FK_PasseioTuristicoTourGuia FOREIGN KEY (Guia) REFERENCES Guia(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais o passeio, nao faz sentido termos uma tupla de guia para esse expo, CASCADE
