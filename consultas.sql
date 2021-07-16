@@ -59,10 +59,6 @@ WHERE NOT EXISTS
 GROUP BY C.CPF, C.Nome, E.Voo;
 
 
--- Selecionar os locais sem eventos, para avisa-los (mandar um email) que nao temos eventos associados com eles, logo nenhum cliente vai ter interesse
--- Para fazer isso, basta fazer a juncao externa LEFT e dar um MINUS com a juncao interna INNER. Sobrou os que nao tem juncao
-
-
 -- Consulta de quantos clientes estao ocupando quantos quartos
 SELECT H.Estadia, E.Nome, COUNT(H.Quarto) AS Quantos_Clientes_Aqui
 FROM Hospedagem H
