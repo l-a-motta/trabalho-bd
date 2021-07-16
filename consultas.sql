@@ -46,13 +46,14 @@ HAVING COUNT(*) > 1-- Mais que uma aparição no resultado
 ORDER BY C.CPF;
 
 
+-- SELECT COM DIVISAO
 -- Consulte o nome e CPF de um cliente que comprou todos os assentos disponiveis no voo de codigo 101. Isso seria um caso "Cliente VIP Exclusive"
 SELECT C.CPF, C.Nome, E.Voo AS Voo_Esvaziado_VIP, COUNT(E.Assento) AS Numero_Assentos_Totais
 FROM Cliente C
     INNER JOIN Embarque E ON (E.Cliente = C.CPF)
 WHERE NOT EXISTS
 (
-    (SELECT V.Nro FROM Voo V WHERE V.Nro = 101) -- Resultados do voo 101, para verificar se esse voo eh "VIP Exclusive"
+    (SELECT V.Nro FROM Voo V WHERE V.Nro = 101) -- Resultados do voo 101, para verificar se esse voo eh "VIP Exclusive". Esse WHERE seria definido pela "aplicacao"
     EXCEPT 
     (SELECT E.Voo FROM Embarque E WHERE E.Cliente = C.CPF)-- Resultados dos voos presentes em embarque com Cliente especifico
 )
