@@ -104,13 +104,13 @@ ORDER BY 1;-- Ordena pela primeira coluna, de voo
 SELECT H.Estadia AS ID_Estadia, C.Nome AS Nome_Cliente, C.Email, H.Quarto, H.Valor, H.Data_Inicio, H.Data_Fim
 FROM Hospedagem H 
     INNER JOIN Cliente C ON (H.Cliente = C.CPF)
-WHERE H.Estadia = 1
+WHERE H.Estadia = 1-- Estadia de ID 1
 ORDER BY C.Nome;
 
 
 -- Consulte todos os usuarios e mostre se eles sao guias, clientes ou organizadores
 SELECT C.CPF, C.Nome, 'Cliente' AS Tipo FROM Cliente C
-UNION
+UNION-- Nos usamos varios SELECTS para buscar as informações (garantidas de estarem na mesma formatação) e unimos esses dados com o UNION
 SELECT G.CPF, G.Nome, 'Guia' AS Tipo FROM Guia G
 UNION
 SELECT O.CPF, O.Nome, 'Organizador' AS Tipo FROM Organizador O
