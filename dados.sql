@@ -81,6 +81,8 @@ INSERT INTO public.Cliente(CPF, Nome, Email, Telefone, Pais, Cidade, Bairro, Rua
 
 -- Inserts de ClienteCondicoesMedicas
 INSERT INTO public.ClienteCondicoesMedicas(Cliente, CondicoesMedicas) VALUES ('111.222.333-45', 'Artroscopia, histeroscopia e lamparoscopia');-- Cliente Fulano
+INSERT INTO public.ClienteCondicoesMedicas(Cliente, CondicoesMedicas) VALUES ('111.222.333-45', 'Lamparoscopia');-- Cliente Fulano
+INSERT INTO public.ClienteCondicoesMedicas(Cliente, CondicoesMedicas) VALUES ('111.222.333-45', 'Histeroscopia');-- Cliente Fulano
 INSERT INTO public.ClienteCondicoesMedicas(Cliente, CondicoesMedicas) VALUES ('111.222.333-46', 'Deverão viajar acompanhados pelo equipe de saúde ou de uma pessoa conhecedora da doença, previamente avaliada por médico de saúde.');-- Cliente Ciclano
 
 -- Inserts de Embarque
