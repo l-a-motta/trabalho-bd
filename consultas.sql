@@ -83,7 +83,7 @@ FROM Cliente C
 ORDER BY C.NOME;
 
 
--- Consulta assentos disponiveis em um dado voo.
+-- Consulta assentos disponiveis nos voos
 -- ? Inicialmente usamos:
 -- SELECT V.Voo, V.Assentos 
 -- FROM VooAssentos V
@@ -106,3 +106,21 @@ FROM Hospedagem H
     INNER JOIN Cliente C ON (H.Cliente = C.CPF)
 WHERE H.Estadia = 1
 ORDER BY C.Nome;
+
+
+-- Consulte todos os usuarios e mostre se eles sao guias, clientes ou organizadores
+SELECT C.CPF, C.Nome, 'Cliente' AS Tipo FROM Cliente C
+UNION
+SELECT G.CPF, G.Nome, 'Guia' AS Tipo FROM Guia G
+UNION
+SELECT O.CPF, O.Nome, 'Organizador' AS Tipo FROM Organizador O
+ORDER BY 3;
+
+
+-- Mesma consulta acima, mas contando quantos guias, clientes e organizadores temos no banco
+SELECT 'Cliente' AS Tipo, COUNT(C.CPF) FROM Cliente C
+UNION
+SELECT 'Guia' AS Tipo, COUNT(G.CPF) FROM Guia G
+UNION
+SELECT 'Organizador' AS Tipo, COUNT(O.CPF) FROM Organizador O
+GROUP BY Tipo;
