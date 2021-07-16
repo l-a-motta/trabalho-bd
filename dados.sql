@@ -87,7 +87,7 @@ INSERT INTO public.ClienteCondicoesMedicas(Cliente, CondicoesMedicas) VALUES ('1
 -- Voo INT,	Cliente CHAR(14), Assento INT,
 INSERT INTO public.Embarque(Voo, Assento, Cliente) VALUES (101, 1, '111.222.333-45');
 INSERT INTO public.Embarque(Voo, Assento, Cliente) VALUES (101, 2, '111.222.333-45');-- Mesmo cliente comprando dois assentos em seu nome
-INSERT INTO public.Embarque(Voo, Assento, Cliente) VALUES (101, 3, '111.222.333-47');
+INSERT INTO public.Embarque(Voo, Assento, Cliente) VALUES (101, 3, '111.222.333-45');-- Mesmo cliente comprando o terceiro assento em seu nome, esvaziando os lugares desse voo
 --
 INSERT INTO public.Embarque(Voo, Assento, Cliente) VALUES (201, 1, '111.222.333-48');
 --
@@ -106,7 +106,7 @@ INSERT INTO public.Estadia(ID, Pais, Cidade, Bairro, Rua, Numero, CEP, Nome, Nro
 -- Inserts de Hospedagem
 INSERT INTO public.Hospedagem(Estadia, Cliente, Quarto, Valor, Data_Inicio, Data_Fim) VALUES (1, '111.222.333-45', 'B12', '12399.99','2017-03-15','2017-03-17');
 INSERT INTO public.Hospedagem(Estadia, Cliente, Quarto, Valor, Data_Inicio, Data_Fim) VALUES (1, '111.222.333-45', 'B13', '10199.99','2017-03-15','2017-03-17');-- Mesmo cliente comprando dois quartos diferentes, valor de cada deve ser um SUM para achar o valor total
-INSERT INTO public.Hospedagem(Estadia, Cliente, Quarto, Valor, Data_Inicio, Data_Fim) VALUES (1, '111.222.333-47', 'A01', '58999.99','2017-03-15','2017-03-25');
+INSERT INTO public.Hospedagem(Estadia, Cliente, Quarto, Valor, Data_Inicio, Data_Fim) VALUES (3, '111.222.333-47', 'A01', '3999.99','2017-03-15','2017-03-25');
 
 -- Inserts de LocalT
 ALTER SEQUENCE LocalT_id_seq RESTART WITH 1;-- Garantindo que a sequencia nao continue apos resetar a base e reinserir esses dados
@@ -190,7 +190,7 @@ INSERT INTO public.AvaliacaoEvento(LocalT, Data_Inicio, DataA, Cliente, Estrelas
 -- Inserts de Guia
 INSERT INTO public.Guia(CPF, Tipo, Nome, Email, Telefone, Pais, Cidade, Bairro, Rua, Numero, CEP, Naturalidade, Descricao, Formacao, Pagamento, MBTI) VALUES ('111.222.374-53', 'Turismo Internacional', 'Josefrina de Jesus', 'Josefrina@emailpessoal.com', '55 16 991235875', 'Brasil', 'Bauru', 'São Paulo', 'Rua 645', '12-10', '123456-33', 'Brasileiro', 'Um guia namoral e bacana', 'Formado em Turismo Internacional', 'Dinheiro ou Cartao', 'ENFJ');-- Guia 1
 INSERT INTO public.Guia(CPF, Tipo, Nome, Email, Telefone, Pais, Cidade, Bairro, Rua, Numero, CEP, Naturalidade, Descricao, Formacao, Pagamento, MBTI) VALUES ('111.222.234-28', 'Turismo Local', 'Bob McKenzie', 'Bob@emailpessoal.com', '15 13 991235511', 'Inglaterra','Londres','Greenwich','Rua 56','422','17033-321', 'Ingles', 'Aqui seguimos a tour à risca', 'Formado em Eventos Turisticos', 'Cartao', 'ENTP');-- Guia 2
-INSERT INTO public.Guia(CPF, Tipo, Nome, Email, Telefone, Pais, Cidade, Bairro, Rua, Numero, CEP, Naturalidade, Descricao, Formacao, Pagamento, MBTI) VALUES ('111.222.374-97', 'Qualquer Turismo', 'Finn Müller', 'Finn@emailpessoal.com', '22 16 991235523', 'Alemanha','Frankfurt','Hauptbahnhof','Rua 51','735','17033885', 'Alemão', 'Sem descricao detalhada', 'Formado em Administração', 'Dinheiro', 'ENFP');-- Guia 3
+INSERT INTO public.Guia(CPF, Tipo, Nome, Email, Telefone, Pais, Cidade, Bairro, Rua, Numero, CEP, Naturalidade, Descricao, Formacao, Pagamento, MBTI) VALUES ('111.222.374-97', 'Qualquer Turismo', 'Finn Müller', 'Finn@emailpessoal.com', '22 16 991235523', 'Alemanha','Frankfurt','Hauptbahnhof','Rua 51','735','17033885', 'Alemão', 'Sem descricao detalhada', 'Formado em Administração', 'Dinheiro', 'INTJ');-- Guia 3
 
 -- Inserts de GuiaTiposAtuacao
 INSERT INTO public.GuiaTiposAtuacao(Guia, TiposAtuacao) VALUES ('111.222.374-53', 'Tipo 1');-- Guia 1
@@ -204,10 +204,10 @@ INSERT INTO public.Orientacao(Guia, Cliente) VALUES ('111.222.374-53', '111.222.
 INSERT INTO public.Orientacao(Guia, Cliente) VALUES ('111.222.234-28', '111.222.333-46');-- Guia 2 com Cliente 2
 INSERT INTO public.Orientacao(Guia, Cliente) VALUES ('111.222.374-97', '111.222.333-47');-- Guia 3 com Cliente 3
 
--- Inserts de AvaliacaoGuia
-INSERT INTO public.AvaliacaoGuia(Data_Avaliacao, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-15 23:52:43', '111.222.374-53', '111.222.333-45', 3, 'Guia meio louco' );-- Guia com Cliente 1
-INSERT INTO public.AvaliacaoGuia(Data_Avaliacao, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-16 23:43:41', '111.222.234-28', '111.222.333-46', 4, 'Bom guia' );-- Guia com Cliente 2
-INSERT INTO public.AvaliacaoGuia(Data_Avaliacao, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-15 23:22:46', '111.222.374-97', '111.222.333-47', 1, 'O guia apontou e fugiu' );-- Guia com Cliente 3
+-- Inserts de Servico
+INSERT INTO public.Servico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-15 23:52:43', '111.222.374-53', '111.222.333-45', 3, 'Guia meio louco' );-- Guia com Cliente 1
+INSERT INTO public.Servico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-16 23:43:41', '111.222.234-28', '111.222.333-46', 4, 'Bom guia' );-- Guia com Cliente 2
+INSERT INTO public.Servico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-15 23:22:46', '111.222.374-97', '111.222.333-47', 1, 'O guia apontou e fugiu' );-- Guia com Cliente 3
 
 -- ! INSERTS DE ESPECIALIZACAO DE EVENTO
 
