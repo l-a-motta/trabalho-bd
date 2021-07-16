@@ -111,7 +111,6 @@ CREATE TABLE IF NOT EXISTS VooAssentos (
 CREATE TABLE IF NOT EXISTS Cliente (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Tipo VARCHAR(30) NOT NULL,-- // Tem muitas entradas que repetem essas informacoes pessoais, Tipo, Nome, Email, etc
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
 	Telefone VARCHAR(30) NOT NULL,
@@ -286,7 +285,6 @@ CREATE TABLE IF NOT EXISTS Organizador (
 	-- ? Outra alternativa: Fazer a entidade Companhia, entidade propria com tabela propria
 	-- ? Teria que evitar o caso de organizador ser somente pessoa fisica, sem CNPJ. É uma opção
 	-- TODO Detalhar mais o tipo de organizador no doc
-	Tipo VARCHAR(30) NOT NULL,
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
 	Telefone VARCHAR(30) NOT NULL,
@@ -436,7 +434,6 @@ CREATE TABLE IF NOT EXISTS AvaliacaoParticipacao (
 CREATE TABLE IF NOT EXISTS Guia (
 	/*    ATRIBUTOS    */
 	CPF CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Tipo VARCHAR(30) NOT NULL,
 	Nome VARCHAR(30) NOT NULL,
 	Email VARCHAR(30) NOT NULL,
 	Telefone VARCHAR(30) NOT NULL,
