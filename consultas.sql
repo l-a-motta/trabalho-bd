@@ -34,11 +34,6 @@ GROUP BY aeroporto.codiata, aeroporto.nome, aeroporto.pais;
 
 
 
--- Divisao...
-SELECT * 
-FROM CLIENTE;
-
-
 -- Consulta se algum cliente comprou mais de um assento num dado voo, e retorna o cliente e o voo que ele comprou varios assentos
 SELECT C.CPF, C.Nome, E.Voo, V.Aeroporto_Origem, V.Aeroporto_Destino, COUNT(C.CPF) AS Quantos_Assentos_Comprou
 FROM Cliente C 
@@ -82,6 +77,7 @@ FROM Hospedagem H
     INNER JOIN Cliente C ON (H.Cliente = C.CPF)
 GROUP BY H.Cliente, C.Nome
 ORDER BY H.Cliente;
+
 
 -- Consulta todos os clientes, e mostra os possiveis guias que tem compatibilidade de MBTI (personalidade)
 --? Achamos interessante correlacionar duas tabelas sem relação FK com um LEFT JOIN que ainda sim faz sentido semantico

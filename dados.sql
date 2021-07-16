@@ -182,10 +182,15 @@ INSERT INTO public.Participacao(Cliente, LocalT, Data_Inicio) VALUES ('111.222.3
 INSERT INTO public.Participacao(Cliente, LocalT, Data_Inicio) VALUES ('111.222.333-46', 4, '2017-03-16 13:01:00');
 INSERT INTO public.Participacao(Cliente, LocalT, Data_Inicio) VALUES ('111.222.333-47', 3, '2017-03-17 13:01:00');
 
--- Inserts de AvaliacaoEvento
-INSERT INTO public.AvaliacaoEvento(LocalT, Data_Inicio, DataA, Cliente, Estrelas, Descricao) VALUES (1, '2017-03-15 13:01:00', '2017-03-15 13:31:21', '111.222.333-45', 4, 'Muito bom evento, gostei bastante');
-INSERT INTO public.AvaliacaoEvento(LocalT, Data_Inicio, DataA, Cliente, Estrelas, Descricao) VALUES (4, '2017-03-16 13:01:00', '2017-03-15 13:31:11', '111.222.333-46', 1, 'Não foi la essas coisas. Precisava de mais musica');
-INSERT INTO public.AvaliacaoEvento(LocalT, Data_Inicio, DataA, Cliente, Estrelas, Descricao) VALUES (3, '2017-03-17 13:01:00', '2017-03-15 13:31:43', '111.222.333-47', 5, 'Evento mais perfeito da minha vida');
+-- Inserts de ParticipacaoRegistro
+INSERT INTO public.ParticipacaoRegistro(Cliente, LocalT, Data_Inicio, DataA) VALUES ('111.222.333-45', 1, '2017-03-15 13:01:00', '2017-03-15 13:31:21');
+INSERT INTO public.ParticipacaoRegistro(Cliente, LocalT, Data_Inicio, DataA) VALUES ('111.222.333-46', 4, '2017-03-16 13:01:00', '2017-03-15 13:31:11');
+INSERT INTO public.ParticipacaoRegistro(Cliente, LocalT, Data_Inicio, DataA) VALUES ('111.222.333-47', 3, '2017-03-17 13:01:00', '2017-03-15 13:31:43');
+
+-- Inserts de AvaliacaoParticipacao
+INSERT INTO public.AvaliacaoParticipacao(LocalT, Data_Inicio, DataA, Cliente, Estrelas, Descricao) VALUES (1, '2017-03-15 13:01:00', '2017-03-15 13:31:21', '111.222.333-45', 4, 'Muito bom evento, gostei bastante');
+INSERT INTO public.AvaliacaoParticipacao(LocalT, Data_Inicio, DataA, Cliente, Estrelas, Descricao) VALUES (4, '2017-03-16 13:01:00', '2017-03-15 13:31:11', '111.222.333-46', 1, 'Não foi la essas coisas. Precisava de mais musica');
+INSERT INTO public.AvaliacaoParticipacao(LocalT, Data_Inicio, DataA, Cliente, Estrelas, Descricao) VALUES (3, '2017-03-17 13:01:00', '2017-03-15 13:31:43', '111.222.333-47', 5, 'Evento mais perfeito da minha vida');
 
 -- Inserts de Guia
 INSERT INTO public.Guia(CPF, Tipo, Nome, Email, Telefone, Pais, Cidade, Bairro, Rua, Numero, CEP, Naturalidade, Descricao, Formacao, Pagamento, MBTI) VALUES ('111.222.374-53', 'Turismo Internacional', 'Josefrina de Jesus', 'Josefrina@emailpessoal.com', '55 16 991235875', 'Brasil', 'Bauru', 'São Paulo', 'Rua 645', '12-10', '123456-33', 'Brasileiro', 'Um guia namoral e bacana', 'Formado em Turismo Internacional', 'Dinheiro ou Cartao', 'ENFJ');-- Guia 1
@@ -205,11 +210,18 @@ INSERT INTO public.Orientacao(Guia, Cliente) VALUES ('111.222.234-28', '111.222.
 INSERT INTO public.Orientacao(Guia, Cliente) VALUES ('111.222.374-97', '111.222.333-47');-- Guia 3 com Cliente 3
 
 -- Inserts de Servico
-INSERT INTO public.Servico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-15 23:52:43', '111.222.374-53', '111.222.333-45', 3, 'Guia meio louco' );-- Guia com Cliente 1
-INSERT INTO public.Servico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-16 23:43:41', '111.222.234-28', '111.222.333-46', 4, 'Bom guia' );-- Guia com Cliente 2
-INSERT INTO public.Servico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-15 23:22:46', '111.222.374-97', '111.222.333-47', 1, 'O guia apontou e fugiu' );-- Guia com Cliente 3
+INSERT INTO public.Servico(Dataa, Guia, Cliente, Valor) VALUES ('2017-03-15 23:52:43', '111.222.374-53', '111.222.333-45', '24.99' );-- Guia 1 com Cliente 1
+INSERT INTO public.Servico(Dataa, Guia, Cliente, Valor) VALUES ('2017-03-16 23:43:41', '111.222.234-28', '111.222.333-46', '20.99' );-- Guia 2 com Cliente 2
+INSERT INTO public.Servico(Dataa, Guia, Cliente, Valor) VALUES ('2017-03-15 23:22:46', '111.222.374-97', '111.222.333-47', '29.99' );-- Guia 3 com Cliente 3
+
+-- Inserts de AvaliacaoServico
+INSERT INTO public.AvaliacaoServico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-15 23:52:43', '111.222.374-53', '111.222.333-45', 3, 'Guia meio louco' );-- Aval de Guia 1 por Cliente 1
+INSERT INTO public.AvaliacaoServico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-16 23:43:41', '111.222.234-28', '111.222.333-46', 4, 'Bom guia' );-- Aval de Guia 2 por Cliente 2
+INSERT INTO public.AvaliacaoServico(Dataa, Guia, Cliente, Estrelas, Descricao) VALUES ('2017-03-15 23:22:46', '111.222.374-97', '111.222.333-47', 1, 'O guia apontou e fugiu' );-- Aval de Guia 3 por Cliente 3
+
 
 -- ! INSERTS DE ESPECIALIZACAO DE EVENTO
+
 
 -- Inserts de FestivalGastronomico
 INSERT INTO public.FestivalGastronomico(LocalT, Data_Inicio, Tipo_Comida_Bebida) VALUES (1, '2017-03-15 13:01:00', 'Comidas salgadas');
