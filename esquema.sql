@@ -392,7 +392,25 @@ CREATE TABLE IF NOT EXISTS Participacao (
 
 );
 
-CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
+CREATE TABLE IF NOT EXISTS ParticipacaoRegistro (
+	/*    ATRIBUTOS    */
+	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
+	Data_Inicio TIMESTAMP,
+	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	DataA TIMESTAMP,
+
+	/*    KEYS    */
+	CONSTRAINT PK_ParticipacaoRegistro PRIMARY KEY(Cliente, LocalT, Data_Inicio, DataA),
+	CONSTRAINT FK_ParticipacaoRegistroCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE SET NULL ON UPDATE CASCADE,
+	-- Pode ser util guardar as participacoes, mesmo se perdemos os dados de um cliente. Se um cliente for removido, ele nao deixa de ter participado magicamente do um evento
+	CONSTRAINT FK_ParticipacaoRegistroParticipacao FOREIGN KEY (Cliente, LocalT, Data_Inicio) REFERENCES Participacao(Cliente, LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Nao seria util, no entanto, guardar as participacoes de um local que nao esta mais conosco
+
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS AvaliacaoParticipacao (
 	/*    ATRIBUTOS    */
 	LocalT INT,-- Foreign Keys em SERIAL sao na verdade INTs
 	Data_Inicio TIMESTAMP,
@@ -403,12 +421,12 @@ CREATE TABLE IF NOT EXISTS AvaliacaoEvento (
 	
 
 	/*    KEYS    */
-	-- Vale notar que AvaliacaoEvento esta conectada a Participacao, e nao diretamente a Evento
-	CONSTRAINT PK_AvaliacaoEvento PRIMARY KEY(LocalT, Data_Inicio, DataA, Cliente),
-	CONSTRAINT FK_AvaliacaoEventoParticipacao FOREIGN KEY (Cliente, LocalT, Data_Inicio) REFERENCES Participacao(Cliente, LocalT, Data_Inicio) ON DELETE CASCADE ON UPDATE CASCADE,-- // Se participacao poder ficar NULL, vai dar conflito de semantica aqui visto q precisamos remover a avaliacao se perdermos a participacao
-	-- POSSIBILIDADE: Decidimos seguir as novas normas de Lei de Proteção de Dados e remover todas as interações de um usuário do sistema ao perdermos os dados do usuário
+	-- Vale notar que AvaliacaoParticipacao esta conectada a ParticipacaoRegistro, e nao diretamente a Evento
+	CONSTRAINT PK_AvaliacaoParticipacao PRIMARY KEY(LocalT, Data_Inicio, DataA, Cliente),
+	CONSTRAINT FK_AvaliacaoParticipacaoParticipacao FOREIGN KEY (Cliente, LocalT, Data_Inicio, DataA) REFERENCES ParticipacaoRegistro(Cliente, LocalT, Data_Inicio, DataA) ON DELETE CASCADE ON UPDATE CASCADE,-- // Se participacao poder ficar NULL, vai dar conflito de semantica aqui visto q precisamos remover a avaliacao se perdermos a participacao
+	-- ? Decidimos seguir as novas normas de Lei de Proteção de Dados e remover todas as interações de um usuário do sistema ao perdermos os dados do usuário, logo CASCADE
 	-- Se a participacao for removida, nao iremos guardar a avaliacao, para manter tudo justo
-	CONSTRAINT FK_AvaliacaoEventoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_AvaliacaoParticipacaoCliente FOREIGN KEY (Cliente) REFERENCES Cliente(CPF) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se um cliente for removido, a mesma logica segue
 	
 	/*    CHECKS    */
@@ -433,7 +451,7 @@ CREATE TABLE IF NOT EXISTS Guia (
 	Formacao VARCHAR(50) NOT NULL,
 	Pagamento VARCHAR(30) NOT NULL,
 	-- // Pagamento é a forma de pagamento, ou o preco estatico do guia? FALAR MONITORA
-	-- Originalmente, Pagamento referia-se a taxa por hora. No momento, refere-se ao tipo de pagamento
+	-- Originalmente, Pagamento referia-se a taxa por hora. No momento, refere-se ao tipo de pagamento (Cartao Debito, Dinheiro, etc)
 	MBTI CHAR(4),-- O indice MBTI so precisa de quatro caracteres para ser identificado (AAAA)
 
 	/*    KEYS    */
@@ -480,8 +498,7 @@ CREATE TABLE IF NOT EXISTS Servico (
 	-- RESOLVIDO: A Data eh inserida pelo sistema, e faz jus a data que o cliente foi guiado pelo guia. A aplicacao nao permite spam, nesse caso.
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
-	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
-	Descricao VARCHAR(180),
+	Valor NUMERIC(11,3) NOT NULL,-- Aceitamos numeros com tres casas decimais de precisao, num maximo de preço igual a 999 999 999,999. Por ser internacional, algumas entidades usam a terceira casa decimal para centavos
 	
 	
 	/*    KEYS    */
@@ -489,6 +506,27 @@ CREATE TABLE IF NOT EXISTS Servico (
 	CONSTRAINT PK_Servico PRIMARY KEY(Dataa, Guia, Cliente),
 	CONSTRAINT FK_ServicoOrientacao FOREIGN KEY (Guia, Cliente) REFERENCES Orientacao(Guia, Cliente) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais a orientacao, a avalicao do guia deve ser removida, CASCADE
+	
+	/*    CHECKS    */
+
+);
+
+CREATE TABLE IF NOT EXISTS AvaliacaoServico (
+	/*    ATRIBUTOS    */
+	Dataa TIMESTAMP DEFAULT CURRENT_TIMESTAMP,-- Assumimos que se nao houver uma data customizada, a avaliacao foi feita no mesmo momento de submissao da tupla
+	-- // Temos um problema de que um Cliente pode spammar avaliacoes se nao tivermos outro dado para associar Servico com orientacao, tipo uma data 
+	-- RESOLVIDO: A Data eh inserida pelo sistema, e faz jus a data que o cliente foi guiado pelo guia. A aplicacao nao permite spam, nesse caso.
+	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
+	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
+	Descricao VARCHAR(180),
+	
+	
+	/*    KEYS    */
+	-- Vale notar que AvaliacaoServico esta conectada a Servico
+	CONSTRAINT PK_AvaliacaoServico PRIMARY KEY(Dataa, Guia, Cliente),
+	CONSTRAINT FK_AvaliacaoServicoServico FOREIGN KEY (Dataa, Guia, Cliente) REFERENCES Servico(Dataa, Guia, Cliente) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Se nao tem mais o servico, a avalicao deve ser removida, CASCADE
 	
 	/*    CHECKS    */
 
