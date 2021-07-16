@@ -473,11 +473,11 @@ CREATE TABLE IF NOT EXISTS Orientacao (
 
 );
 
-CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
+CREATE TABLE IF NOT EXISTS Servico (
 	/*    ATRIBUTOS    */
-	Data_Avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,-- Assumimos que se nao houver uma data customizada, a avaliacao foi feita no mesmo momento de submissao da tupla
-	-- // Temos um problema de que um Cliente pode spammar avaliacoes se nao tivermos outro dado para associar avaliacaoguia com orientacao, tipo uma data 
-	-- RESOLVIDO: A Data_Avaliacao eh inserida pelo sistema, e faz jus a data que o cliente foi guiado pelo guia. A aplicacao nao permite spam, nesse caso.
+	Dataa TIMESTAMP DEFAULT CURRENT_TIMESTAMP,-- Assumimos que se nao houver uma data customizada, a avaliacao foi feita no mesmo momento de submissao da tupla
+	-- // Temos um problema de que um Cliente pode spammar avaliacoes se nao tivermos outro dado para associar Servico com orientacao, tipo uma data 
+	-- RESOLVIDO: A Data eh inserida pelo sistema, e faz jus a data que o cliente foi guiado pelo guia. A aplicacao nao permite spam, nesse caso.
 	Guia CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Cliente CHAR(14),-- Um CPF tem no maximo 14 caracteres (123.456.789-09)
 	Estrelas INT NOT NULL,-- So precisamos de um caractere de numero de estrelas, mas para podermos fazer opercoes com isso mais facilmente, escolhemos o INT
@@ -485,9 +485,9 @@ CREATE TABLE IF NOT EXISTS AvaliacaoGuia (
 	
 	
 	/*    KEYS    */
-	-- Vale notar que AvaliacaoGuia esta conectada a Orientacao, e nao diretamente a Guia
-	CONSTRAINT PK_AvaliacaoGuia PRIMARY KEY(Data_Avaliacao, Guia, Cliente),
-	CONSTRAINT FK_AvaliacaoGuiaOrientacao FOREIGN KEY (Guia, Cliente) REFERENCES Orientacao(Guia, Cliente) ON DELETE CASCADE ON UPDATE CASCADE
+	-- Vale notar que Servico esta conectada a Orientacao, e nao diretamente a Guia
+	CONSTRAINT PK_Servico PRIMARY KEY(Dataa, Guia, Cliente),
+	CONSTRAINT FK_ServicoOrientacao FOREIGN KEY (Guia, Cliente) REFERENCES Orientacao(Guia, Cliente) ON DELETE CASCADE ON UPDATE CASCADE
 	-- Se nao tem mais a orientacao, a avalicao do guia deve ser removida, CASCADE
 	
 	/*    CHECKS    */
